@@ -16,9 +16,9 @@ namespace EndPoint.Forms
     public partial class FrmUsers : Form
     {
         private readonly IDatabaseContext database;
-        private readonly IUserShowService userShowService;
+        private readonly IComputerService userShowService;
 
-        public FrmUsers(IUserShowService userShowService)
+        public FrmUsers(IComputerService userShowService)
         {
             InitializeComponent(); ;
             this.userShowService = userShowService;
