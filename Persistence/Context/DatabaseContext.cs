@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Application.Database;
+using ApplicationIT.Database;
 using System.Text;
 using System.Threading.Tasks;
 using Domain.Entities;
@@ -13,7 +13,7 @@ namespace Persistence.Context
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Data Source=.;Initial Catalog=ITSoftWare;Integrated Security=True;");
+            optionsBuilder.UseSqlServer("Data Source=.;Initial Catalog=ITSoftWare;Integrated Security=True;Encrypt=False;");
         }
 
         public DbSet<ComputerHardware> ComputerHardwares {  get; set; }

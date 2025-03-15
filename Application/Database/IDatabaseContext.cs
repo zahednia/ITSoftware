@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Domain.Entities;
 
 
-namespace Application.Database
+namespace ApplicationIT.Database
 {
     public interface IDatabaseContext
     {
