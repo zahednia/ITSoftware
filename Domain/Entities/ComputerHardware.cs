@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Entities
 {
-    public class ComputerHardwares
+    public class ComputerHardware
     {
         public int Id { get; set; }
         public int HardwareID { get; set; }
