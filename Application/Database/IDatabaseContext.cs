@@ -9,7 +9,7 @@ using Domain.Entities;
 
 namespace ApplicationIT.Database
 {
-    public interface IDatabaseContext
+    public interface IDatabaseContext : IDisposable
     {
         public DbSet<ComputerHardware> ComputerHardwares { get; set; }
         public DbSet<Computer> Computers { get; set; }

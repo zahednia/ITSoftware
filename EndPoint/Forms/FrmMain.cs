@@ -29,7 +29,12 @@ namespace EndPoint.Forms
 
             FrmUsers frmUsers = new FrmUsers(serviceAdd);
             frmUsers.ShowDialog();
-            
+
+        }
+
+        private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+
         }
     }
 }

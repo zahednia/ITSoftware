@@ -15,7 +15,10 @@ namespace Persistence.Context
         {
             optionsBuilder.UseSqlServer("Data Source=.;Initial Catalog=ITSoftWare;Integrated Security=True;Encrypt=False;");
         }
-
+        public override void Dispose()
+        {
+            base.Dispose();
+        }
         public DbSet<ComputerHardware> ComputerHardwares {  get; set; }
         public DbSet<Computer> Computers { get; set; }
         public DbSet<Hardware> Hardwares { get; set; }

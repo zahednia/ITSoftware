@@ -17,11 +17,17 @@ namespace EndPoint.Forms
     {
         private readonly IDatabaseContext database;
         private readonly IComputerService userShowService;
+        private IUserShowService? serviceAdd;
 
         public FrmUsers(IComputerService userShowService)
         {
             InitializeComponent(); ;
             this.userShowService = userShowService;
+        }
+
+        public FrmUsers(IUserShowService? serviceAdd)
+        {
+            this.serviceAdd = serviceAdd;
         }
 
         private void SettingGridview(List<UserShowServiceDTO> userShows)
