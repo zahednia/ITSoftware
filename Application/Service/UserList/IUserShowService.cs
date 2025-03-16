@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ApplicationIT.Service.UserService
 {
-    public interface IComputerService
+    public interface IUserShowService
     {
         List<UserShowServiceDTO> Execute(string searchKey = null);
     }

@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using ApplicationIT.Database;
 using ApplicationIT.Service;
+using ApplicationIT.Service.ComputerList;
 using ApplicationIT.Service.UserService;
 
 namespace EndPoint.Forms
@@ -16,16 +17,16 @@ namespace EndPoint.Forms
     public partial class FrmUsers : Form
     {
         private readonly IDatabaseContext database;
-        private readonly IComputerService userShowService;
-        private IUserShowService? serviceAdd;
+        private readonly IUserShowService userShowService;
+        private IComputerList? serviceAdd;
 
-        public FrmUsers(IComputerService userShowService)
+        public FrmUsers(IUserShowService userShowService)
         {
             InitializeComponent(); ;
             this.userShowService = userShowService;
         }
 
-        public FrmUsers(IUserShowService? serviceAdd)
+        public FrmUsers(IComputerList? serviceAdd)
         {
             this.serviceAdd = serviceAdd;
         }
@@ -54,8 +55,8 @@ namespace EndPoint.Forms
         private void BtnSearchUsers_Click(object sender, EventArgs e)
         {
             Cursor = Cursors.WaitCursor;
-            var SearchMabda = userShowService.Execute(txtSearchUsers.Text);
-            SettingGridview(SearchMabda);
+            var Search = userShowService.Execute(txtSearchUsers.Text);
+            SettingGridview(Search);
             Cursor = Cursors.Default;
         }
     }

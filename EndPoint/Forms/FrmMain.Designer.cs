@@ -28,46 +28,45 @@
         /// </summary>
         private void InitializeComponent()
         {
-            TreeNode treeNode4 = new TreeNode("Show List Of User");
-            TreeNode treeNode5 = new TreeNode("Users", new TreeNode[] { treeNode4 });
-            TreeNode treeNode6 = new TreeNode("Cumputers");
-            button1 = new Button();
+            components = new System.ComponentModel.Container();
+            TreeNode treeNode1 = new TreeNode("Show List Of User");
+            TreeNode treeNode2 = new TreeNode("Users", new TreeNode[] { treeNode1 });
+            TreeNode treeNode3 = new TreeNode("Computer List");
+            TreeNode treeNode4 = new TreeNode("Computers", new TreeNode[] { treeNode3 });
             treeView1 = new TreeView();
             menuStrip1 = new MenuStrip();
             userToolStripMenuItem = new ToolStripMenuItem();
-            computerToolStripMenuItem = new ToolStripMenuItem();
-            helpToolStripMenuItem = new ToolStripMenuItem();
-            infoToolStripMenuItem = new ToolStripMenuItem();
             userListToolStripMenuItem = new ToolStripMenuItem();
             userListsWithComputersToolStripMenuItem = new ToolStripMenuItem();
+            computerToolStripMenuItem = new ToolStripMenuItem();
             computerListToolStripMenuItem = new ToolStripMenuItem();
             computerListWithUserToolStripMenuItem = new ToolStripMenuItem();
+            helpToolStripMenuItem = new ToolStripMenuItem();
+            infoToolStripMenuItem = new ToolStripMenuItem();
+            statusStrip1 = new StatusStrip();
+            toolStripStatusLabel1 = new ToolStripStatusLabel();
+            lblTime = new ToolStripStatusLabel();
+            timer1 = new System.Windows.Forms.Timer(components);
             menuStrip1.SuspendLayout();
+            statusStrip1.SuspendLayout();
             SuspendLayout();
-            // 
-            // button1
-            // 
-            button1.Location = new Point(302, 53);
-            button1.Name = "button1";
-            button1.Size = new Size(75, 23);
-            button1.TabIndex = 0;
-            button1.Text = "button1";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
             // 
             // treeView1
             // 
+            treeView1.BorderStyle = BorderStyle.FixedSingle;
             treeView1.Font = new Font("Tahoma", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 178);
             treeView1.ItemHeight = 50;
             treeView1.Location = new Point(0, 27);
             treeView1.Name = "treeView1";
-            treeNode4.Name = "SNDShowUser";
-            treeNode4.Text = "Show List Of User";
-            treeNode5.Name = "NDUsers";
-            treeNode5.Text = "Users";
-            treeNode6.Name = "NDComputers";
-            treeNode6.Text = "Cumputers";
-            treeView1.Nodes.AddRange(new TreeNode[] { treeNode5, treeNode6 });
+            treeNode1.Name = "SNDShowUser";
+            treeNode1.Text = "Show List Of User";
+            treeNode2.Name = "NDUsers";
+            treeNode2.Text = "Users";
+            treeNode3.Name = "SNDComputerList";
+            treeNode3.Text = "Computer List";
+            treeNode4.Name = "NDComputers";
+            treeNode4.Text = "Computers";
+            treeView1.Nodes.AddRange(new TreeNode[] { treeNode2, treeNode4 });
             treeView1.Size = new Size(287, 563);
             treeView1.TabIndex = 1;
             treeView1.AfterSelect += treeView1_AfterSelect;
@@ -89,12 +88,38 @@
             userToolStripMenuItem.Size = new Size(42, 20);
             userToolStripMenuItem.Text = "User";
             // 
+            // userListToolStripMenuItem
+            // 
+            userListToolStripMenuItem.Name = "userListToolStripMenuItem";
+            userListToolStripMenuItem.Size = new Size(213, 22);
+            userListToolStripMenuItem.Text = "User List";
+            userListToolStripMenuItem.Click += userListToolStripMenuItem_Click;
+            // 
+            // userListsWithComputersToolStripMenuItem
+            // 
+            userListsWithComputersToolStripMenuItem.Name = "userListsWithComputersToolStripMenuItem";
+            userListsWithComputersToolStripMenuItem.Size = new Size(213, 22);
+            userListsWithComputersToolStripMenuItem.Text = "User Lists With Computers";
+            // 
             // computerToolStripMenuItem
             // 
             computerToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { computerListToolStripMenuItem, computerListWithUserToolStripMenuItem });
             computerToolStripMenuItem.Name = "computerToolStripMenuItem";
             computerToolStripMenuItem.Size = new Size(73, 20);
             computerToolStripMenuItem.Text = "Computer";
+            // 
+            // computerListToolStripMenuItem
+            // 
+            computerListToolStripMenuItem.Name = "computerListToolStripMenuItem";
+            computerListToolStripMenuItem.Size = new Size(203, 22);
+            computerListToolStripMenuItem.Text = "Computer List";
+            computerListToolStripMenuItem.Click += computerListToolStripMenuItem_Click;
+            // 
+            // computerListWithUserToolStripMenuItem
+            // 
+            computerListWithUserToolStripMenuItem.Name = "computerListWithUserToolStripMenuItem";
+            computerListWithUserToolStripMenuItem.Size = new Size(203, 22);
+            computerListWithUserToolStripMenuItem.Text = "Computer List With User";
             // 
             // helpToolStripMenuItem
             // 
@@ -108,50 +133,53 @@
             infoToolStripMenuItem.Size = new Size(40, 20);
             infoToolStripMenuItem.Text = "Info";
             // 
-            // userListToolStripMenuItem
+            // statusStrip1
             // 
-            userListToolStripMenuItem.Name = "userListToolStripMenuItem";
-            userListToolStripMenuItem.Size = new Size(213, 22);
-            userListToolStripMenuItem.Text = "User List";
+            statusStrip1.Items.AddRange(new ToolStripItem[] { toolStripStatusLabel1, lblTime });
+            statusStrip1.Location = new Point(0, 591);
+            statusStrip1.Name = "statusStrip1";
+            statusStrip1.Size = new Size(937, 22);
+            statusStrip1.TabIndex = 3;
+            statusStrip1.Text = "0";
             // 
-            // userListsWithComputersToolStripMenuItem
+            // toolStripStatusLabel1
             // 
-            userListsWithComputersToolStripMenuItem.Name = "userListsWithComputersToolStripMenuItem";
-            userListsWithComputersToolStripMenuItem.Size = new Size(213, 22);
-            userListsWithComputersToolStripMenuItem.Text = "User Lists With Computers";
+            toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            toolStripStatusLabel1.Size = new Size(40, 17);
+            toolStripStatusLabel1.Text = "Time :";
+            toolStripStatusLabel1.Click += toolStripStatusLabel1_Click;
             // 
-            // computerListToolStripMenuItem
+            // lblTime
             // 
-            computerListToolStripMenuItem.Name = "computerListToolStripMenuItem";
-            computerListToolStripMenuItem.Size = new Size(203, 22);
-            computerListToolStripMenuItem.Text = "Computer List";
+            lblTime.Name = "lblTime";
+            lblTime.Size = new Size(13, 17);
+            lblTime.Text = "0";
+            lblTime.Click += lblTime_Click;
             // 
-            // computerListWithUserToolStripMenuItem
+            // timer1
             // 
-            computerListWithUserToolStripMenuItem.Name = "computerListWithUserToolStripMenuItem";
-            computerListWithUserToolStripMenuItem.Size = new Size(203, 22);
-            computerListWithUserToolStripMenuItem.Text = "Computer List With User";
+            timer1.Tick += timer1_Tick;
             // 
             // FrmMain
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(937, 602);
+            ClientSize = new Size(937, 613);
+            Controls.Add(statusStrip1);
             Controls.Add(treeView1);
-            Controls.Add(button1);
             Controls.Add(menuStrip1);
             MainMenuStrip = menuStrip1;
             Name = "FrmMain";
             Text = "FrmMain";
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
+            statusStrip1.ResumeLayout(false);
+            statusStrip1.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
-
-        private Button button1;
         private TreeView treeView1;
         private MenuStrip menuStrip1;
         private ToolStripMenuItem userToolStripMenuItem;
@@ -162,5 +190,9 @@
         private ToolStripMenuItem userListsWithComputersToolStripMenuItem;
         private ToolStripMenuItem computerListToolStripMenuItem;
         private ToolStripMenuItem computerListWithUserToolStripMenuItem;
+        private StatusStrip statusStrip1;
+        private System.Windows.Forms.Timer timer1;
+        private ToolStripStatusLabel toolStripStatusLabel1;
+        private ToolStripStatusLabel lblTime;
     }
 }
