@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Domain.Entities
 {
-    public class User
+    public class HardwareBrand
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public string LastName { get; set; }
-        public bool IsActive { get; set; }
+        public string HardwareType { get; set; } // مثل "CPU", "RAM", "GPU"
+        public virtual ICollection<HardwareModel> Models { get; set; } = new List<HardwareModel>();
     }
 }

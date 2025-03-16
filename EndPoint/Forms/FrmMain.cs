@@ -1,6 +1,7 @@
 ﻿using ApplicationIT.Database;
 using ApplicationIT.Service.ComputerList;
 using ApplicationIT.Service.UserService;
+using EndPoint.Forms.ComputerDetail;
 using Microsoft.EntityFrameworkCore.Query.Internal;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -90,6 +91,13 @@ namespace EndPoint.Forms
             var computerFrm = Program.ServiceProvider.GetService<IComputerList>();
             FrmComputerList frmComputerList = new FrmComputerList(computerFrm);
             frmComputerList.ShowDialog();
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            var computerFrm = Program.ServiceProvider.GetService<IDatabaseContext>();
+            FrmComputerDetail frmComputerDetail = new FrmComputerDetail(computerFrm);
+            frmComputerDetail.ShowDialog();
         }
     }
 }

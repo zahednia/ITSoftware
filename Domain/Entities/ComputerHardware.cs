@@ -12,7 +12,8 @@ namespace Domain.Entities
         public int HardwareID { get; set; }
         public int ComputerID { get; set; }
         public DateTime CreateAt { get; set; }
-        public bool IsActive { get; set; }
         public DateTime ChangeDate { get; set; }
+        public bool IsActive { get; set; }
+
     }
 }

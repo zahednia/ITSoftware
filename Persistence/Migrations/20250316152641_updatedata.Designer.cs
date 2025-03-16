@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Persistence.Context;
 
@@ -11,9 +12,11 @@ using Persistence.Context;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20250316152641_updatedata")]
+    partial class updatedata
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -74,10 +77,10 @@ namespace Persistence.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("HardwareDetailID")
+                    b.Property<int>("HwdDetailID")
                         .HasColumnType("int");
 
-                    b.Property<int>("HardwareTypeID")
+                    b.Property<int>("HwdTypeID")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -85,7 +88,7 @@ namespace Persistence.Migrations
                     b.ToTable("Hardwares");
                 });
 
-            modelBuilder.Entity("Domain.Entities.HardwareBrand", b =>
+            modelBuilder.Entity("Domain.Entities.HardwareDetail", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -93,20 +96,15 @@ namespace Persistence.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("HardwareType")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Detail")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.ToTable("HardwareBrands");
+                    b.ToTable("HardwareDetails");
                 });
 
-            modelBuilder.Entity("Domain.Entities.HardwareModel", b =>
+            modelBuilder.Entity("Domain.Entities.HardwareType", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -114,18 +112,13 @@ namespace Persistence.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("HardwareBrandId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
+                    b.Property<string>("Hwd")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("HardwareBrandId");
-
-                    b.ToTable("HardwareModels");
+                    b.ToTable("HardwareTypes");
                 });
 
             modelBuilder.Entity("Domain.Entities.User", b =>
@@ -135,6 +128,9 @@ namespace Persistence.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("ComputerId")
+                        .HasColumnType("int");
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
@@ -148,6 +144,8 @@ namespace Persistence.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ComputerId");
 
                     b.ToTable("Users");
                 });
@@ -171,20 +169,15 @@ namespace Persistence.Migrations
                     b.ToTable("UserComputers");
                 });
 
-            modelBuilder.Entity("Domain.Entities.HardwareModel", b =>
+            modelBuilder.Entity("Domain.Entities.User", b =>
                 {
-                    b.HasOne("Domain.Entities.HardwareBrand", "HardwareBrand")
-                        .WithMany("Models")
-                        .HasForeignKey("HardwareBrandId")
+                    b.HasOne("Domain.Entities.Computer", "Computer")
+                        .WithMany()
+                        .HasForeignKey("ComputerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("HardwareBrand");
-                });
-
-            modelBuilder.Entity("Domain.Entities.HardwareBrand", b =>
-                {
-                    b.Navigation("Models");
+                    b.Navigation("Computer");
                 });
 #pragma warning restore 612, 618
         }
