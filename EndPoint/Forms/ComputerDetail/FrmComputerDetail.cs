@@ -30,23 +30,25 @@ namespace EndPoint.Forms.ComputerDetail
 
         private void FrmComputerDetail_Load(object sender, EventArgs e)
         {
-            LoadBrands("CPU", CBCpuBrand);
-            LoadBrands("RAM", CBRamBrand);
-            LoadBrands("GPU", CBGpuBrand);
-            LoadBrands("HDD", CBHddBrand);
+            LoadBrands(1,CBMotherboardBrand);
+            LoadBrands(2, CBCpuBrand);
+            LoadBrands(3, CBRamBrand);
+            LoadBrands(4, CBGpuBrand);
+            LoadBrands(5, CBHddBrand);
 
             // تنظیم رویداد برای تغییر برند و پر کردن مدل‌ها
+            CBMotherboardBrand.SelectedIndexChanged += (s , ev) => LoadModels(CBMotherboardBrand, CBMotherboardDetail);
             CBCpuBrand.SelectedIndexChanged += (s, ev) => LoadModels(CBCpuBrand, CBCpuDetail);
             CBRamBrand.SelectedIndexChanged += (s, ev) => LoadModels(CBRamBrand, CBRamDetail);
             CBHddBrand.SelectedIndexChanged += (s, ev) => LoadModels(CBHddBrand, CBHddDetail);
             CBGpuBrand.SelectedIndexChanged += (s, ev) => LoadModels(CBGpuBrand, CBGpuDetail);
            
          }
-        private void LoadBrands(string hardwareType, ComboBox comboBox)
+        private void LoadBrands(int hardwareType, ComboBox comboBox)
         {
             using (var db = new DatabaseContext()) // همون DbContext خودت
             {
-                var brands = db.HardwareBrands.Where(b => b.HardwareType == hardwareType).ToList();
+                var brands = db.HardwareBrands.Where(b => b.HardwareTypeID == hardwareType).ToList();
 
                 comboBox.DataSource = brands;
                 comboBox.DisplayMember = "Name";

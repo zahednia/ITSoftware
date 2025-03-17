@@ -24,6 +24,7 @@ namespace Persistence.Context
         public DbSet<Hardware> Hardwares { get; set; }
         public DbSet<HardwareBrand> HardwareBrands { get; set; }
         public DbSet<HardwareModel> HardwareModels { get; set; }
+        public DbSet<HardwareType> HardwareTypes { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<UserComputer> UserComputers { get; set; }
     }

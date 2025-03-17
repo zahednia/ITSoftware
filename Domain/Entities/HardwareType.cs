@@ -6,11 +6,9 @@ using System.Threading.Tasks;
 
 namespace Domain.Entities
 {
-    public class Hardware
+    public class HardwareType
     {
         public int Id { get; set; }
-        public int HardwareBrandID { get; set; }
-        public int HardwareModelID { get; set; }
-
+        public string Type { get; set; }
     }
 }

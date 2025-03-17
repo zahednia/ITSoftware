@@ -10,7 +10,7 @@ namespace Domain.Entities
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public string HardwareType { get; set; } // مثل "CPU", "RAM", "GPU"
+        public int HardwareTypeID { get; set; } // مثل "CPU", "RAM", "GPU"
         public virtual ICollection<HardwareModel> Models { get; set; } = new List<HardwareModel>();
     }
 }
