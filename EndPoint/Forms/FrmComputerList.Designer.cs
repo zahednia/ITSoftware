@@ -42,6 +42,7 @@
             DGComputerList.Size = new Size(796, 402);
             DGComputerList.TabIndex = 0;
             DGComputerList.CellContentClick += DGComputerList_CellContentClick;
+            DGComputerList.CellContentDoubleClick += DGComputerList_CellContentDoubleClick;
             // 
             // BtnSearchComputerList
             // 

@@ -1,6 +1,8 @@
 ﻿using ApplicationIT.Database;
 using ApplicationIT.Service.ComputerList;
 using ApplicationIT.Service.UserService;
+using EndPoint.Forms.ComputerDetail;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -50,6 +52,14 @@ namespace EndPoint.Forms
             var Search = computerlist.ComputerLists(textBox1.Text);
             SettingGridview(Search);
             Cursor = Cursors.Default;
+        }
+
+        private void DGComputerList_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            var computerFrm = Program.ServiceProvider.GetService<IDatabaseContext>();
+            var Id = int.Parse(DGComputerList.CurrentRow.Cells[0].Value.ToString());
+            FrmComputerDetail frmComputerDetail = new FrmComputerDetail(computerFrm , Id);
+            frmComputerDetail.ShowDialog();
         }
     }
 }

@@ -15,11 +15,13 @@ namespace EndPoint.Forms.ComputerDetail
     public partial class FrmComputerDetail : Form
     {
         private readonly IDatabaseContext database;
+        private readonly int id;
 
-        public FrmComputerDetail(IDatabaseContext database)
+        public FrmComputerDetail(IDatabaseContext database , int id)
         {
             InitializeComponent();
             this.database = database;
+            this.id = id;
         }
 
 
