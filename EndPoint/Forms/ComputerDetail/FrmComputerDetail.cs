@@ -48,14 +48,11 @@ namespace EndPoint.Forms.ComputerDetail
          }
         private void LoadBrands(int hardwareType, ComboBox comboBox)
         {
-            using (var db = new DatabaseContext()) // همون DbContext خودت
-            {
-                var brands = db.HardwareBrands.Where(b => b.HardwareTypeID == hardwareType).ToList();
-
+                var brands = database.HardwareBrands.Where(b => b.HardwareTypeID == hardwareType).ToList();
                 comboBox.DataSource = brands;
                 comboBox.DisplayMember = "Name";
                 comboBox.ValueMember = "Id";
-            }
+
         }
 
         private void LoadModels(ComboBox brandComboBox, ComboBox modelComboBox)
@@ -63,15 +60,10 @@ namespace EndPoint.Forms.ComputerDetail
             if (brandComboBox.SelectedValue != null)
             {
                 int selectedBrandId = (int)brandComboBox.SelectedValue;
-
-                using (var db = new DatabaseContext()) // همون DbContext خودت
-                {
-                    var models = db.HardwareModels.Where(m => m.HardwareBrandId == selectedBrandId).ToList();
-
+                    var models = database.HardwareModels.Where(m => m.HardwareBrandId == selectedBrandId).ToList();
                     modelComboBox.DataSource = models;
                     modelComboBox.DisplayMember = "Name";
                     modelComboBox.ValueMember = "Id";
-                }
             }
         }
 
