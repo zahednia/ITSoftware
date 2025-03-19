@@ -48,6 +48,7 @@
             lblram = new Label();
             lblHard = new Label();
             lblGpu = new Label();
+            button1 = new Button();
             SuspendLayout();
             // 
             // CBCpuBrand
@@ -221,11 +222,22 @@
             lblGpu.TabIndex = 19;
             lblGpu.Text = "Gpu";
             // 
+            // button1
+            // 
+            button1.Location = new Point(820, 246);
+            button1.Name = "button1";
+            button1.Size = new Size(94, 29);
+            button1.TabIndex = 20;
+            button1.Text = "button1";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
+            // 
             // FrmComputerDetail
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1188, 729);
+            Controls.Add(button1);
             Controls.Add(lblGpu);
             Controls.Add(lblHard);
             Controls.Add(lblram);
@@ -275,5 +287,6 @@
         private Label lblram;
         private Label lblHard;
         private Label lblGpu;
+        private Button button1;
     }
 }

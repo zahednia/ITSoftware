@@ -10,6 +10,8 @@ namespace Domain.Entities
     public class Computer
     {
         public int Id { get; set; }
+        public string Name { get; set; }
         public string? Code { get; set; }
+        public List<ComputerHardware> HardwareComponents { get; set; }
     }
 }

@@ -9,11 +9,11 @@ namespace Domain.Entities
     public class ComputerHardware
     {
         public int Id { get; set; }
-        public int HardwareID { get; set; }
-        public int ComputerID { get; set; }
-        public DateTime CreateAt { get; set; }
-        public DateTime ChangeDate { get; set; }
-        public bool IsActive { get; set; }
+        public int ComputerId { get; set; }
+        public Computer Computer { get; set; }
+        public int HardwareDetailId { get; set; }
+        public HardwareDetail HardwareDetail { get; set; }
+
 
     }
 }

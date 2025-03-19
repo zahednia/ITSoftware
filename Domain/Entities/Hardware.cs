@@ -9,8 +9,8 @@ namespace Domain.Entities
     public class Hardware
     {
         public int Id { get; set; }
-        public int HardwareBrandID { get; set; }
-        public int HardwareModelID { get; set; }
+        public int HardwareTypeId { get; set; }
+        public int HardwareDetailId { get; set; }
 
     }
 }
