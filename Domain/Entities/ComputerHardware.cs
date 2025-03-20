@@ -8,12 +8,9 @@ namespace Domain.Entities
 {
     public class ComputerHardware
     {
-        public int Id { get; set; }
         public int ComputerId { get; set; }
-        public Computer Computer { get; set; }
         public int HardwareDetailId { get; set; }
+        public Computer Computer { get; set; }
         public HardwareDetail HardwareDetail { get; set; }
-
-
     }
 }

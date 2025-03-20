@@ -95,9 +95,9 @@ namespace EndPoint.Forms
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            var computerFrm = Program.ServiceProvider.GetService<IDatabaseContext>();
-            FrmComputerDetail frmComputerDetail = new FrmComputerDetail(computerFrm);
-            frmComputerDetail.ShowDialog();
+            //var computerFrm = Program.ServiceProvider.GetService<IDatabaseContext>();
+            //FrmComputerDetail frmComputerDetail = new FrmComputerDetail(computerFrm);
+            //frmComputerDetail.ShowDialog();
         }
     }
 }

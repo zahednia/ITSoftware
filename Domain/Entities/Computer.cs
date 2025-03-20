@@ -11,7 +11,7 @@ namespace Domain.Entities
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public string? Code { get; set; }
-        public List<ComputerHardware> HardwareComponents { get; set; }
+        public string Code { get; set; }
+        public ICollection<ComputerHardware> HardwareComponents { get; set; }
     }
 }
