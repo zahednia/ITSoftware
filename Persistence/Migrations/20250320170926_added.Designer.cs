@@ -11,8 +11,8 @@ using Persistence.Context;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20250319104255_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20250320170926_added")]
+    partial class added
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -36,7 +36,6 @@ namespace Persistence.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -73,10 +72,9 @@ namespace Persistence.Migrations
                     b.Property<int>("HardwareDetailId")
                         .HasColumnType("int");
 
-                    b.Property<int>("HardwareTypeId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
+
+                    b.HasIndex("HardwareDetailId");
 
                     b.ToTable("Hardwares");
                 });
@@ -100,6 +98,8 @@ namespace Persistence.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ParentId");
 
                     b.ToTable("HardwareDetails");
                 });
@@ -166,13 +166,13 @@ namespace Persistence.Migrations
                     b.HasOne("Domain.Entities.Computer", "Computer")
                         .WithMany("HardwareComponents")
                         .HasForeignKey("ComputerId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("Domain.Entities.HardwareDetail", "HardwareDetail")
                         .WithMany()
                         .HasForeignKey("HardwareDetailId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Computer");
@@ -180,9 +180,34 @@ namespace Persistence.Migrations
                     b.Navigation("HardwareDetail");
                 });
 
+            modelBuilder.Entity("Domain.Entities.Hardware", b =>
+                {
+                    b.HasOne("Domain.Entities.HardwareDetail", "HardwareDetail")
+                        .WithMany()
+                        .HasForeignKey("HardwareDetailId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("HardwareDetail");
+                });
+
+            modelBuilder.Entity("Domain.Entities.HardwareDetail", b =>
+                {
+                    b.HasOne("Domain.Entities.HardwareDetail", "Parent")
+                        .WithMany("Models")
+                        .HasForeignKey("ParentId");
+
+                    b.Navigation("Parent");
+                });
+
             modelBuilder.Entity("Domain.Entities.Computer", b =>
                 {
                     b.Navigation("HardwareComponents");
+                });
+
+            modelBuilder.Entity("Domain.Entities.HardwareDetail", b =>
+                {
+                    b.Navigation("Models");
                 });
 #pragma warning restore 612, 618
         }

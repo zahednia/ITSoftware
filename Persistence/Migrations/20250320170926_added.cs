@@ -5,7 +5,7 @@
 namespace Persistence.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class added : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -16,7 +16,7 @@ namespace Persistence.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Code = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
@@ -30,27 +30,18 @@ namespace Persistence.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     HardwareTypeId = table.Column<int>(type: "int", nullable: false),
-                    ParentId = table.Column<int>(type: "int", nullable: true),
-                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    ParentId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_HardwareDetails", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Hardwares",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    HardwareTypeId = table.Column<int>(type: "int", nullable: false),
-                    HardwareDetailId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Hardwares", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_HardwareDetails_HardwareDetails_ParentId",
+                        column: x => x.ParentId,
+                        principalTable: "HardwareDetails",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -110,10 +101,27 @@ namespace Persistence.Migrations
                         name: "FK_ComputerHardwares_Computers_ComputerId",
                         column: x => x.ComputerId,
                         principalTable: "Computers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_ComputerHardwares_HardwareDetails_HardwareDetailId",
+                        column: x => x.HardwareDetailId,
+                        principalTable: "HardwareDetails",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Hardwares",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    HardwareDetailId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Hardwares", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Hardwares_HardwareDetails_HardwareDetailId",
                         column: x => x.HardwareDetailId,
                         principalTable: "HardwareDetails",
                         principalColumn: "Id",
@@ -123,6 +131,16 @@ namespace Persistence.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_ComputerHardwares_HardwareDetailId",
                 table: "ComputerHardwares",
+                column: "HardwareDetailId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_HardwareDetails_ParentId",
+                table: "HardwareDetails",
+                column: "ParentId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Hardwares_HardwareDetailId",
+                table: "Hardwares",
                 column: "HardwareDetailId");
         }
 

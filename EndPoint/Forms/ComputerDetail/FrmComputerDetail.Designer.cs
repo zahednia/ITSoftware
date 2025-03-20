@@ -1,4 +1,5 @@
-﻿namespace EndPoint.Forms.ComputerDetail
+﻿
+namespace EndPoint.Forms.ComputerDetail
 {
     partial class FrmComputerDetail
     {
@@ -48,8 +49,8 @@
             lblram = new Label();
             lblHard = new Label();
             lblGpu = new Label();
-            button1 = new Button();
             txtComputerName = new TextBox();
+            btnSave = new Button();
             SuspendLayout();
             // 
             // CBCpuBrand
@@ -63,7 +64,7 @@
             // lblId
             // 
             lblId.AutoSize = true;
-            lblId.Location = new Point(42, 49);
+            lblId.Location = new Point(93, 52);
             lblId.Name = "lblId";
             lblId.Size = new Size(24, 20);
             lblId.TabIndex = 1;
@@ -223,16 +224,6 @@
             lblGpu.TabIndex = 19;
             lblGpu.Text = "Gpu";
             // 
-            // button1
-            // 
-            button1.Location = new Point(820, 246);
-            button1.Name = "button1";
-            button1.Size = new Size(94, 29);
-            button1.TabIndex = 20;
-            button1.Text = "button1";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
-            // 
             // txtComputerName
             // 
             txtComputerName.Location = new Point(166, 49);
@@ -240,13 +231,23 @@
             txtComputerName.Size = new Size(125, 27);
             txtComputerName.TabIndex = 21;
             // 
+            // btnSave
+            // 
+            btnSave.Location = new Point(722, 204);
+            btnSave.Name = "btnSave";
+            btnSave.Size = new Size(94, 29);
+            btnSave.TabIndex = 22;
+            btnSave.Text = "btnSave";
+            btnSave.UseVisualStyleBackColor = true;
+            btnSave.Click += btnSave_Click_1;
+            // 
             // FrmComputerDetail
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1188, 729);
+            Controls.Add(btnSave);
             Controls.Add(txtComputerName);
-            Controls.Add(button1);
             Controls.Add(lblGpu);
             Controls.Add(lblHard);
             Controls.Add(lblram);
@@ -274,6 +275,16 @@
             PerformLayout();
         }
 
+        private void label1_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
         #endregion
 
         private ComboBox CBCpuBrand;
@@ -296,7 +307,7 @@
         private Label lblram;
         private Label lblHard;
         private Label lblGpu;
-        private Button button1;
         private TextBox txtComputerName;
+        private Button btnSave;
     }
 }

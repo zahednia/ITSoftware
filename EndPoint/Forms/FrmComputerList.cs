@@ -1,6 +1,8 @@
 ﻿using ApplicationIT.Database;
 using ApplicationIT.Service.ComputerList;
 using ApplicationIT.Service.UserService;
+using EndPoint.Forms.ComputerDetail;
+using Persistence.Context;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,6 +18,7 @@ namespace EndPoint.Forms
     public partial class FrmComputerList : Form
     {
         private readonly IComputerList computerlist;
+        private IDatabaseContext database;
 
         public FrmComputerList(IComputerList computerlist)
         {
@@ -50,6 +53,17 @@ namespace EndPoint.Forms
             var Search = computerlist.ComputerLists(textBox1.Text);
             SettingGridview(Search);
             Cursor = Cursors.Default;
+        }
+
+        private void DGComputerList_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                var computerId = (int)DGComputerList.Rows[e.RowIndex].Cells[0].Value;
+                var dbContext = new DatabaseContext(); // ایجاد نمونه معتبر
+                var editForm = new FrmComputerDetail(dbContext, computerId);
+                editForm.ShowDialog();
+            }
         }
     }
 }

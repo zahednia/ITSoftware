@@ -8,7 +8,7 @@ namespace Persistence.Context
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=.;Database=KouroshCE;Trusted_Connection=True;MultipleActiveResultSets=true;ConnectRetryCount=5;Encrypt=False;");
+            optionsBuilder.UseSqlServer("Server=.;Database=KouroshCEOs;Trusted_Connection=True;MultipleActiveResultSets=true;ConnectRetryCount=5;Encrypt=False;");
         }
 
         public DbSet<ComputerHardware> ComputerHardwares { get; set; }
@@ -22,19 +22,21 @@ namespace Persistence.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // رابطه بین Computer و ComputerHardware
             modelBuilder.Entity<ComputerHardware>()
                 .HasKey(ch => new { ch.ComputerId, ch.HardwareDetailId });
 
             modelBuilder.Entity<ComputerHardware>()
                 .HasOne(ch => ch.Computer)
                 .WithMany(c => c.HardwareComponents)
-                .HasForeignKey(ch => ch.ComputerId);
+                .HasForeignKey(ch => ch.ComputerId)
+                .OnDelete(DeleteBehavior.NoAction); 
 
             modelBuilder.Entity<ComputerHardware>()
                 .HasOne(ch => ch.HardwareDetail)
                 .WithMany()
-                .HasForeignKey(ch => ch.HardwareDetailId);
+                .HasForeignKey(ch => ch.HardwareDetailId)
+                .OnDelete(DeleteBehavior.NoAction);
+
         }
 
     }

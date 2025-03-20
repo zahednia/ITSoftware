@@ -25,31 +25,45 @@ namespace EndPoint.Forms.ComputerDetail
 
         private void LoadExistingComputer()
         {
+            // بررسی معتبر بودن شناسه
+            if (_computerId <= 0 || !database.Computers.Any(c => c.Id == _computerId))
+            {
+                MessageBox.Show("شناسه کامپیوتر نامعتبر است!");
+                return;
+            }
+
+            // بارگذاری اطلاعات کامپیوتر
             var computer = database.Computers
                 .Include(c => c.HardwareComponents)
                 .FirstOrDefault(c => c.Id == _computerId);
 
-            if (computer != null)
+            if (computer == null)
             {
-                txtComputerName.Text = computer.Name;
-                LoadExistingComponents(computer.HardwareComponents);
+                MessageBox.Show("کامپیوتر مورد نظر یافت نشد!");
+                return;
             }
+
+            // نمایش اطلاعات
+            txtComputerName.Text = computer.Name;
+            LoadExistingComponents(computer.HardwareComponents);
         }
 
         private void LoadExistingComponents(IEnumerable<ComputerHardware> components)
         {
+            if (components == null || !components.Any())
+                return;
             foreach (var component in components)
             {
                 var hardware = database.HardwareDetails
-                    .Include(h => h.Parent) // استفاده از Navigation Property به جای ParentId
+                    .Include(h => h.Parent) // استفاده از Navigation Property
                     .FirstOrDefault(h => h.Id == component.HardwareDetailId);
 
-                if (hardware?.Parent != null) // بررسی وجود Parent
+                if (hardware?.Parent != null)
                 {
                     SetComboSelection(
-                        hardware.Parent.HardwareTypeId, // نوع سخت‌افزار از Parent
-                        hardware.Parent.Id, // شناسه برند
-                        hardware.Id // شناسه مدل
+                        hardware.Parent.HardwareTypeId,
+                        hardware.Parent.Id,
+                        hardware.Id
                     );
                 }
             }
@@ -134,17 +148,6 @@ namespace EndPoint.Forms.ComputerDetail
             }
         }
 
-        private void btnSave_Click(object sender, EventArgs e)
-        {
-            if (!ValidateForm()) return;
-
-            if (_computerId > 0)
-                UpdateComputer();
-            else
-                CreateNewComputer();
-
-            Close();
-        }
 
         private void CreateNewComputer()
         {
@@ -215,6 +218,18 @@ namespace EndPoint.Forms.ComputerDetail
         private bool IsComponentSelected(ComboBox comboBox)
         {
             return comboBox.SelectedValue != null && comboBox.SelectedValue is int;
+        }
+
+        private void btnSave_Click_1(object sender, EventArgs e)
+        {
+            if (!ValidateForm()) return;
+
+            if (_computerId > 0)
+                UpdateComputer();
+            else
+                CreateNewComputer();
+
+            Close();
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,11 +10,17 @@ namespace Domain.Entities
     public class HardwareDetail
     {
         public int Id { get; set; }
-        public int HardwareTypeId { get; set; } // نوع سخت‌افزار (مثلاً 1=CPU، 2=Motherboard)
-        public string Title { get; set; } // نام برند یا مدل
+        public string Title { get; set; }
+        public int HardwareTypeId { get; set; }
 
-        // ارتباط با Parent (برند)
-        public int? ParentId { get; set; } // Foreign Key
-        public HardwareDetail Parent { get; set; } // Navigation Property
+        // Foreign Key برای Parent
+        public int? ParentId { get; set; }
+
+        // Navigation Property برای Parent
+        [ForeignKey("ParentId")]
+        public virtual HardwareDetail Parent { get; set; }
+
+        // Navigation Property برای مدل‌های زیرمجموعه
+        public virtual ICollection<HardwareDetail> Models { get; set; }
     }
 }
