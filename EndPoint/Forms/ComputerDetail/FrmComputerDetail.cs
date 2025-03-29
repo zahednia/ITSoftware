@@ -63,7 +63,7 @@ namespace EndPoint.Forms.ComputerDetail
                     SetComboSelection(
                         hardware.Parent.HardwareTypeId,
                         hardware.Parent.Id,
-                        hardware.Id
+                        hardware.Id       
                     );
                 }
             }

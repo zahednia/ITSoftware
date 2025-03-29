@@ -4,6 +4,7 @@ using ApplicationIT.Service.UserService;
 using EndPoint.Forms.ComputerDetail;
 using Microsoft.EntityFrameworkCore.Query.Internal;
 using Microsoft.Extensions.DependencyInjection;
+using Persistence.Context;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -95,9 +96,18 @@ namespace EndPoint.Forms
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            //var computerFrm = Program.ServiceProvider.GetService<IDatabaseContext>();
-            //FrmComputerDetail frmComputerDetail = new FrmComputerDetail(computerFrm);
-            //frmComputerDetail.ShowDialog();
+            int computerId = 0;
+            if (computerId >= 0)
+            {
+                var dbContext = new DatabaseContext(); // ایجاد نمونه معتبر
+                var editForm = new FrmComputerDetail(dbContext, computerId);
+                editForm.ShowDialog();
+            }
+        }
+
+        private void FrmMain_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
