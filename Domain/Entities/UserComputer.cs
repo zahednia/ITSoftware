@@ -10,6 +10,7 @@ namespace Domain.Entities
     {
         public int Id { get; set; }
         public int UserID { get; set; }
+        public Computer Computer { get; set; }
         public int ComputerID { get; set; }
     }
 }

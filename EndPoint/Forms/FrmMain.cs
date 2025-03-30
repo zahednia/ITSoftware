@@ -96,13 +96,13 @@ namespace EndPoint.Forms
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            int computerId = 0;
-            if (computerId >= 0)
-            {
-                var dbContext = new DatabaseContext(); // ایجاد نمونه معتبر
-                var editForm = new FrmComputerDetail(dbContext, computerId);
-                editForm.ShowDialog();
-            }
+            //int computerId = 0;
+            //if (computerId >= 0)
+            //{
+            //    var dbContext = new DatabaseContext(); // ایجاد نمونه معتبر
+            //    var editForm = new FrmComputerDetail(dbContext, computerId);
+            //    editForm.ShowDialog();
+            //}
         }
 
         private void FrmMain_Load(object sender, EventArgs e)
