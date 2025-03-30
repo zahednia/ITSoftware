@@ -96,6 +96,10 @@ namespace EndPoint.Forms
 
         private void button1_Click_1(object sender, EventArgs e)
         {
+            
+            FrmComputerDetails frmComputerDetails = new FrmComputerDetails();
+            frmComputerDetails.ShowDialog();
+            
             //int computerId = 0;
             //if (computerId >= 0)
             //{
