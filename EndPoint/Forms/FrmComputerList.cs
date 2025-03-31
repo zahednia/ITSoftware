@@ -57,13 +57,13 @@ namespace EndPoint.Forms
 
         private void DGComputerList_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0)
-            {
-                var computerId = (int)DGComputerList.Rows[e.RowIndex].Cells[0].Value;
-                var dbContext = new DatabaseContext(); // ایجاد نمونه معتبر
-                var editForm = new FrmComputerDetail(dbContext, computerId);
-                editForm.ShowDialog();
-            }
+            //if (e.RowIndex >= 0)
+            //{
+            //    var computerId = (int)DGComputerList.Rows[e.RowIndex].Cells[0].Value;
+            //    var dbContext = new DatabaseContext(); // ایجاد نمونه معتبر
+            //    var editForm = new FrmComputerDetail(dbContext, computerId);
+            //    editForm.ShowDialog();
+            //}
         }
     }
 }

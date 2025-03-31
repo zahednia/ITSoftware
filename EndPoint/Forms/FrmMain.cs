@@ -1,5 +1,7 @@
 ﻿using ApplicationIT.Database;
 using ApplicationIT.Service.ComputerList;
+using ApplicationIT.Service.HardwareService.HardwareBrand;
+using ApplicationIT.Service.HardwareService.HardwareDetail;
 using ApplicationIT.Service.UserService;
 using EndPoint.Forms.ComputerDetail;
 using Microsoft.EntityFrameworkCore.Query.Internal;
@@ -21,13 +23,15 @@ namespace EndPoint.Forms
     {
         private readonly IDatabaseContext database;
         private readonly IComputerList computerList;
+        private readonly IHardwareBrands hardwareBrands;
 
-        public FrmMain(ApplicationIT.Service.UserService.IUserShowService? serviceGetList, IDatabaseContext database, IComputerList computerList)
+        public FrmMain(ApplicationIT.Service.UserService.IUserShowService? serviceGetList, IDatabaseContext database, IComputerList computerList , IHardwareBrands hardwareBrands)
         {
 
             InitializeComponent();
             this.database = database;
             this.computerList = computerList;
+            this.hardwareBrands = hardwareBrands;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -96,13 +100,18 @@ namespace EndPoint.Forms
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            int computerId = 0;
-            if (computerId >= 0)
-            {
-                var dbContext = new DatabaseContext(); // ایجاد نمونه معتبر
-                var editForm = new FrmComputerDetail(dbContext, computerId);
-                editForm.ShowDialog();
-            }
+            var hardwareDetails = Program.ServiceProvider.GetService<IHardwareDetails>();
+            var hardwareBrands = Program.ServiceProvider.GetService<IHardwareBrands>();
+            FrmComputerDetails frmComputerDetails = new FrmComputerDetails(hardwareBrands , hardwareDetails);
+            frmComputerDetails.ShowDialog();
+            
+            //int computerId = 0;
+            //if (computerId >= 0)
+            //{
+            //    var dbContext = new DatabaseContext(); // ایجاد نمونه معتبر
+            //    var editForm = new FrmComputerDetail(dbContext, computerId);
+            //    editForm.ShowDialog();
+            //}
         }
 
         private void FrmMain_Load(object sender, EventArgs e)
