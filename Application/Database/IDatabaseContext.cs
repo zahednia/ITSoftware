@@ -14,6 +14,7 @@ namespace ApplicationIT.Database
         public DbSet<ComputerHardware> ComputerHardwares { get; set; }
         public DbSet<Computer> Computers { get; set; }
         public DbSet<Hardware> Hardwares { get; set; }
+        public DbSet<HardwareBrand> HardwareBrands { get; set; }
         public DbSet<HardwareType> HardwareTypes { get; set; }
         public DbSet<HardwareDetail> HardwareDetails { get; set; }
         public DbSet<User> Users { get; set; }

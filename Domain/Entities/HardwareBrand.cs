@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 
 namespace Domain.Entities
 {
-    public class HardwareType
+    public class HardwareBrand
     {
         public int Id { get; set; }
-        public string Type { get; set; }
-        public List<HardwareBrand> HardwareBrand { get; set; }
+        public HardwareType hardwareType { get; set; }
+        public int HardwareTypeId { get; set; }
+        public string? Brand { get; set; }
+
         public List<HardwareDetail> HardwareDetail { get; set; }
     }
 }

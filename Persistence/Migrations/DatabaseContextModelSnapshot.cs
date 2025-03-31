@@ -33,7 +33,6 @@ namespace Persistence.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -43,16 +42,21 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Entities.ComputerHardware", b =>
                 {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
                     b.Property<int>("ComputerId")
                         .HasColumnType("int");
 
                     b.Property<int>("HardwareDetailId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Id")
-                        .HasColumnType("int");
+                    b.HasKey("Id");
 
-                    b.HasKey("ComputerId", "HardwareDetailId");
+                    b.HasIndex("ComputerId");
 
                     b.HasIndex("HardwareDetailId");
 
@@ -67,6 +71,9 @@ namespace Persistence.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("HardwareBrandId")
+                        .HasColumnType("int");
+
                     b.Property<int>("HardwareDetailId")
                         .HasColumnType("int");
 
@@ -75,7 +82,34 @@ namespace Persistence.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("HardwareBrandId");
+
+                    b.HasIndex("HardwareDetailId");
+
+                    b.HasIndex("HardwareTypeId");
+
                     b.ToTable("Hardwares");
+                });
+
+            modelBuilder.Entity("Domain.Entities.HardwareBrand", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Brand")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("HardwareTypeId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("HardwareTypeId");
+
+                    b.ToTable("HardwareBrands");
                 });
 
             modelBuilder.Entity("Domain.Entities.HardwareDetail", b =>
@@ -86,17 +120,21 @@ namespace Persistence.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("HardwareTypeId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("ParentId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Title")
+                    b.Property<string>("Detail")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("HardwareBrandId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("HardwareTypeId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("HardwareBrandId");
+
+                    b.HasIndex("HardwareTypeId");
 
                     b.ToTable("HardwareDetails");
                 });
@@ -109,7 +147,8 @@ namespace Persistence.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Title")
+                    b.Property<string>("Type")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -155,13 +194,15 @@ namespace Persistence.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ComputerID");
+
                     b.ToTable("UserComputers");
                 });
 
             modelBuilder.Entity("Domain.Entities.ComputerHardware", b =>
                 {
                     b.HasOne("Domain.Entities.Computer", "Computer")
-                        .WithMany("HardwareComponents")
+                        .WithMany("ComputerHardware")
                         .HasForeignKey("ComputerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -177,9 +218,91 @@ namespace Persistence.Migrations
                     b.Navigation("HardwareDetail");
                 });
 
+            modelBuilder.Entity("Domain.Entities.Hardware", b =>
+                {
+                    b.HasOne("Domain.Entities.HardwareBrand", "HardwareBrand")
+                        .WithMany()
+                        .HasForeignKey("HardwareBrandId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Entities.HardwareDetail", "HardwareDetail")
+                        .WithMany()
+                        .HasForeignKey("HardwareDetailId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Entities.HardwareType", "HardwareType")
+                        .WithMany()
+                        .HasForeignKey("HardwareTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("HardwareBrand");
+
+                    b.Navigation("HardwareDetail");
+
+                    b.Navigation("HardwareType");
+                });
+
+            modelBuilder.Entity("Domain.Entities.HardwareBrand", b =>
+                {
+                    b.HasOne("Domain.Entities.HardwareType", "hardwareType")
+                        .WithMany("HardwareBrand")
+                        .HasForeignKey("HardwareTypeId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("hardwareType");
+                });
+
+            modelBuilder.Entity("Domain.Entities.HardwareDetail", b =>
+                {
+                    b.HasOne("Domain.Entities.HardwareBrand", "HardwareBrand")
+                        .WithMany("HardwareDetail")
+                        .HasForeignKey("HardwareBrandId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Entities.HardwareType", "HardwareType")
+                        .WithMany("HardwareDetail")
+                        .HasForeignKey("HardwareTypeId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("HardwareBrand");
+
+                    b.Navigation("HardwareType");
+                });
+
+            modelBuilder.Entity("Domain.Entities.UserComputer", b =>
+                {
+                    b.HasOne("Domain.Entities.Computer", "Computer")
+                        .WithMany("UserComputer")
+                        .HasForeignKey("ComputerID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Computer");
+                });
+
             modelBuilder.Entity("Domain.Entities.Computer", b =>
                 {
-                    b.Navigation("HardwareComponents");
+                    b.Navigation("ComputerHardware");
+
+                    b.Navigation("UserComputer");
+                });
+
+            modelBuilder.Entity("Domain.Entities.HardwareBrand", b =>
+                {
+                    b.Navigation("HardwareDetail");
+                });
+
+            modelBuilder.Entity("Domain.Entities.HardwareType", b =>
+                {
+                    b.Navigation("HardwareBrand");
+
+                    b.Navigation("HardwareDetail");
                 });
 #pragma warning restore 612, 618
         }

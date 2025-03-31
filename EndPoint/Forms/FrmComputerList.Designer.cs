@@ -37,17 +37,21 @@
             // DGComputerList
             // 
             DGComputerList.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            DGComputerList.Location = new Point(1, 47);
+            DGComputerList.Location = new Point(1, 63);
+            DGComputerList.Margin = new Padding(3, 4, 3, 4);
             DGComputerList.Name = "DGComputerList";
-            DGComputerList.Size = new Size(796, 402);
+            DGComputerList.RowHeadersWidth = 51;
+            DGComputerList.Size = new Size(910, 536);
             DGComputerList.TabIndex = 0;
             DGComputerList.CellContentClick += DGComputerList_CellContentClick;
+            DGComputerList.CellContentDoubleClick += DGComputerList_CellContentDoubleClick;
             // 
             // BtnSearchComputerList
             // 
-            BtnSearchComputerList.Location = new Point(576, 12);
+            BtnSearchComputerList.Location = new Point(658, 16);
+            BtnSearchComputerList.Margin = new Padding(3, 4, 3, 4);
             BtnSearchComputerList.Name = "BtnSearchComputerList";
-            BtnSearchComputerList.Size = new Size(192, 23);
+            BtnSearchComputerList.Size = new Size(219, 31);
             BtnSearchComputerList.TabIndex = 1;
             BtnSearchComputerList.Text = "BtnSearchComputerList";
             BtnSearchComputerList.UseVisualStyleBackColor = true;
@@ -55,19 +59,21 @@
             // 
             // textBox1
             // 
-            textBox1.Location = new Point(12, 12);
+            textBox1.Location = new Point(14, 16);
+            textBox1.Margin = new Padding(3, 4, 3, 4);
             textBox1.Name = "textBox1";
-            textBox1.Size = new Size(549, 23);
+            textBox1.Size = new Size(627, 27);
             textBox1.TabIndex = 2;
             // 
             // FrmComputerList
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(914, 600);
             Controls.Add(textBox1);
             Controls.Add(BtnSearchComputerList);
             Controls.Add(DGComputerList);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "FrmComputerList";
             Text = "FrmComputerList";
             Load += FrmComputerList_Load;
