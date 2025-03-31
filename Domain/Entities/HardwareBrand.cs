@@ -9,8 +9,10 @@ namespace Domain.Entities
     public class HardwareBrand
     {
         public int Id { get; set; }
-        public string Name { get; set; }
-        public int HardwareTypeID { get; set; } // مثل "CPU", "RAM", "GPU"
-        public virtual ICollection<HardwareModel> Models { get; set; } = new List<HardwareModel>();
+        public HardwareType hardwareType { get; set; }
+        public int HardwareTypeId { get; set; }
+        public string? Brand { get; set; }
+
+        public List<HardwareDetail> HardwareDetail { get; set; }
     }
 }

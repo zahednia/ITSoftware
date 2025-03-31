@@ -10,5 +10,7 @@ namespace Domain.Entities
     {
         public int Id { get; set; }
         public string Type { get; set; }
+        public List<HardwareBrand> HardwareBrand { get; set; }
+        public List<HardwareDetail> HardwareDetail { get; set; }
     }
 }

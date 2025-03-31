@@ -189,6 +189,7 @@
             Margin = new Padding(3, 4, 3, 4);
             Name = "FrmMain";
             Text = "FrmMain";
+            Load += FrmMain_Load;
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
             statusStrip1.ResumeLayout(false);

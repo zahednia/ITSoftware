@@ -2,7 +2,7 @@
 using ApplicationIT.Service.ComputerList;
 using ApplicationIT.Service.UserService;
 using EndPoint.Forms.ComputerDetail;
-using Microsoft.Extensions.DependencyInjection;
+using Persistence.Context;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -18,6 +18,7 @@ namespace EndPoint.Forms
     public partial class FrmComputerList : Form
     {
         private readonly IComputerList computerlist;
+        private IDatabaseContext database;
 
         public FrmComputerList(IComputerList computerlist)
         {
@@ -56,10 +57,13 @@ namespace EndPoint.Forms
 
         private void DGComputerList_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            var computerFrm = Program.ServiceProvider.GetService<IDatabaseContext>();
-            var Id = int.Parse(DGComputerList.CurrentRow.Cells[0].Value.ToString());
-            FrmComputerDetail frmComputerDetail = new FrmComputerDetail(computerFrm , Id);
-            frmComputerDetail.ShowDialog();
+            //if (e.RowIndex >= 0)
+            //{
+            //    var computerId = (int)DGComputerList.Rows[e.RowIndex].Cells[0].Value;
+            //    var dbContext = new DatabaseContext(); // ایجاد نمونه معتبر
+            //    var editForm = new FrmComputerDetail(dbContext, computerId);
+            //    editForm.ShowDialog();
+            //}
         }
     }
 }
