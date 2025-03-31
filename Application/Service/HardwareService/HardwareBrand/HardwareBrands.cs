@@ -1,4 +1,5 @@
 ﻿using ApplicationIT.Database;
+using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -17,70 +18,16 @@ namespace ApplicationIT.Service.HardwareService.HardwareBrand
             this.database = database;
         }
 
-        public List<string> GetCpuBrands()
+        public List<string> GetBrands(int hardwareTypeId)
         {
-            var cpuBrands = database.HardwareBrands
-                .Where(b => b.HardwareTypeId == 2)
+            var Brands = database.HardwareBrands
+                .Where(b => b.HardwareTypeId == hardwareTypeId)
                 .Select(b => b.Brand)
                 .Distinct()
                 .ToList();
 
-            return cpuBrands;
+            return Brands;
         }
 
-        public List<string> GetGPUBrands()
-        {
-            var gpuBrands = database.HardwareBrands
-                .Where(b => b.HardwareTypeId == 6)
-                .Select(b => b.Brand)
-                .Distinct()
-                .ToList();
-
-            return gpuBrands;
-        }
-
-        public List<string> GetHDDBrands()
-        {
-            var HDD = database.HardwareBrands
-                .Where(b => b.HardwareTypeId == 4)
-                .Select(b => b.Brand)
-                .Distinct()
-                .ToList();
-
-            return HDD;
-        }
-
-        public List<string> GetMotherboardBrands()
-        {
-            var Board = database.HardwareBrands
-                .Where(b => b.HardwareTypeId == 1)
-                .Select(b => b.Brand)
-                .Distinct()
-                .ToList();
-
-            return Board;
-        }
-
-        public List<string> GetRamBrands()
-        {
-            var ram = database.HardwareBrands
-               .Where(b => b.HardwareTypeId == 3)
-               .Select(b => b.Brand)
-               .Distinct()
-               .ToList();
-
-            return ram;
-        }
-
-        public List<string> GetSSDBrands()
-        {
-            var ssd = database.HardwareBrands
-                .Where(b => b.HardwareTypeId == 5)
-                .Select(b => b.Brand)
-                .Distinct()
-                .ToList();
-
-            return ssd;
-        }
     }
 }
