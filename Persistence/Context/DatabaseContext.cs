@@ -11,7 +11,7 @@ namespace Persistence.Context
             optionsBuilder.UseSqlServer("Server=.;Database=KouroshDBS;Trusted_Connection=True;MultipleActiveResultSets=true;ConnectRetryCount=5;Encrypt=False;");
         }
 
-        public DbSet<ComputerHardware> ComputerHardwares { get; set; }
+        public DbSet<ComputerHardware> ComputerHardwares {  get; set; }
         public DbSet<Computer> Computers { get; set; }
         public DbSet<Hardware> Hardwares { get; set; }
         public DbSet<HardwareBrand> HardwareBrands { get; set; }
