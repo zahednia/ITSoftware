@@ -6,6 +6,7 @@ using Persistence.Context;
 using ApplicationIT.Service.ComputerList;
 using ApplicationIT.Service.HardwareService.HardwareBrand;
 using ApplicationIT.Service.HardwareService.HardwareDetail;
+using ApplicationIT.Service.HardwareService.SaveService;
 namespace EndPoint
 {
     internal static class Program
@@ -19,6 +20,7 @@ namespace EndPoint
             services.AddScoped<IUserShowService, UserShowService>();
             services.AddScoped<IComputerList , ComputerListService>();
             services.AddScoped<IHardwareBrands , HardwareBrands>();
+            services.AddScoped<IComputerHardwareSaveService, ComputerHardwareSaveService>();
             services.AddScoped<IHardwareDetails, HardwareDetails>();
             services.AddTransient<IComputerList, ComputerListService>();
             services.AddTransient<IHardwareBrands, HardwareBrands>();

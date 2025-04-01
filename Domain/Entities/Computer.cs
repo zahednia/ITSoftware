@@ -14,6 +14,6 @@ namespace Domain.Entities
         public string? Code { get; set; }
         
         public List<UserComputer> UserComputer { get; set; }
-        public List<ComputerHardware> ComputerHardware { get; set; }
+        public virtual ICollection<ComputerHardware> HardwareComponents { get; set; }
     }
 }

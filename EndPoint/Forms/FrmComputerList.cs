@@ -1,6 +1,11 @@
 ﻿using ApplicationIT.Database;
 using ApplicationIT.Service.ComputerList;
+using ApplicationIT.Service.HardwareService.HardwareBrand;
+using ApplicationIT.Service.HardwareService.HardwareDetail;
+using ApplicationIT.Service.HardwareService.SaveService;
 using ApplicationIT.Service.UserService;
+using EndPoint.Forms.ComputerDetail;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -51,6 +56,25 @@ namespace EndPoint.Forms
             var Search = computerlist.ComputerLists(textBox1.Text);
             SettingGridview(Search);
             Cursor = Cursors.Default;
+        }
+
+        private void DGComputerList_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void DGComputerList_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                var database = Program.ServiceProvider.GetService<IDatabaseContext>();
+                var hardwareBrands = Program.ServiceProvider.GetService<IHardwareBrands>();
+                var hardwareDetails = Program.ServiceProvider.GetService<IHardwareDetails>();
+                var save = Program.ServiceProvider.GetService<IComputerHardwareSaveService>();
+                int computerId = Convert.ToInt32(DGComputerList.Rows[e.RowIndex].Cells["Id"].Value);
+                var form = new FrmComputerDetails(hardwareBrands, hardwareDetails, computerId, save , database);
+                form.ShowDialog();
+            }
         }
     }
 }

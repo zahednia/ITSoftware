@@ -10,6 +10,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using ApplicationIT.Service.HardwareService.SaveService;
+using Microsoft.EntityFrameworkCore;
+using ApplicationIT.Database;
 
 namespace EndPoint.Forms.ComputerDetail
 {
@@ -19,15 +22,21 @@ namespace EndPoint.Forms.ComputerDetail
         private readonly IHardwareDetails hardwareDetails;
         private readonly Dictionary<System.Windows.Forms.TextBox, int> BrandMap;
         private readonly Dictionary<System.Windows.Forms.TextBox, int> DetailMap;
-        public FrmComputerDetails(IHardwareBrands hardwareBrands , IHardwareDetails hardwareDetails)
+        private readonly int _computerId;
+        private readonly IComputerHardwareSaveService saveService;
+        private readonly IDatabaseContext database;
+
+        public FrmComputerDetails(IHardwareBrands hardwareBrands, IHardwareDetails hardwareDetails, int computerId , IComputerHardwareSaveService saveService , IDatabaseContext database)
         {
             InitializeComponent();
             this.hardwareBrands = hardwareBrands;
             this.hardwareDetails = hardwareDetails;
-
+            _computerId = computerId;
+            this.saveService = saveService;
+            this.database = database;
             DetailMap = new Dictionary<System.Windows.Forms.TextBox, int>
         {
-            { txtCPUDetail, 2 },       // CPU
+            { txtCPUDetail, 2},       // CPU
             //{ txtMotherboardBrand, 1 }, // Motherboard
             //{ txtRAMBrand, 3 },       // RAM
             //{ txtGPUBrand, 4 },       // GPU
@@ -73,10 +82,59 @@ namespace EndPoint.Forms.ComputerDetail
                 DetailAutoComplete(entry.Key, entry.Value);
             }
         }
-        
+
         private void txtName_Click(object sender, EventArgs e)
         {
 
         }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            foreach (var detailEntry in DetailMap)
+            {
+                var detailTextBox = detailEntry.Key;
+                int typeId = detailEntry.Value;
+
+                // پیدا کردن TextBox مربوط به برند با همون TypeId
+                var brandPair = BrandMap.FirstOrDefault(x => x.Value == typeId);
+                var brandTextBox = brandPair.Key;
+
+                if (brandTextBox == null)
+                {
+                    MessageBox.Show($"هیچ TextBox مربوط به HardwareTypeId = {typeId} در BrandMap پیدا نشد.");
+                    continue;
+                }
+
+                if (string.IsNullOrWhiteSpace(detailTextBox.Text) ||
+                    string.IsNullOrWhiteSpace(brandTextBox.Text))
+                {
+                    MessageBox.Show($"فیلد برند یا دیتیل برای HardwareTypeId = {typeId} خالی است.");
+                    continue;
+                }
+
+
+                var hardwareType = database.HardwareTypes.FirstOrDefault(t => t.Id == typeId);
+                if (hardwareType == null)
+                {
+                    MessageBox.Show($"HardwareType با Id {typeId} پیدا نشد.");
+                    continue;
+                }
+
+                var dto = new SaveHardwareToComputerDto
+                {
+                    ComputerId = _computerId,
+                    HardwareType = hardwareType.Type,
+                    HardwareBrand = brandTextBox.Text,
+                    HardwareDetail = detailTextBox.Text
+                };
+
+                saveService.SaveHardwareToComputer(dto);
+            }
+
+            MessageBox.Show("سخت‌افزارهای وارد شده ذخیره شدند.");
+        }
+
+
+
     }
 }

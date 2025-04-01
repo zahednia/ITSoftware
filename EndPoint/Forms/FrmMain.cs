@@ -100,10 +100,10 @@ namespace EndPoint.Forms
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            var hardwareDetails = Program.ServiceProvider.GetService<IHardwareDetails>();
-            var hardwareBrands = Program.ServiceProvider.GetService<IHardwareBrands>();
-            FrmComputerDetails frmComputerDetails = new FrmComputerDetails(hardwareBrands , hardwareDetails);
-            frmComputerDetails.ShowDialog();
+            //var hardwareDetails = Program.ServiceProvider.GetService<IHardwareDetails>();
+            //var hardwareBrands = Program.ServiceProvider.GetService<IHardwareBrands>();
+            //FrmComputerDetails frmComputerDetails = new FrmComputerDetails(hardwareBrands , hardwareDetails);
+            //frmComputerDetails.ShowDialog();
             
             //int computerId = 0;
             //if (computerId >= 0)
