@@ -1,11 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace Persistence.Migrations
 {
     /// <inheritdoc />
-    public partial class Init : Migration
+    public partial class Create : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -117,40 +118,14 @@ namespace Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ComputerHardwares",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ComputerId = table.Column<int>(type: "int", nullable: false),
-                    HardwareDetailId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ComputerHardwares", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_ComputerHardwares_Computers_ComputerId",
-                        column: x => x.ComputerId,
-                        principalTable: "Computers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_ComputerHardwares_HardwareDetails_HardwareDetailId",
-                        column: x => x.HardwareDetailId,
-                        principalTable: "HardwareDetails",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Hardwares",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    HardwareDetailId = table.Column<int>(type: "int", nullable: false),
                     HardwareTypeId = table.Column<int>(type: "int", nullable: false),
-                    HardwareBrandId = table.Column<int>(type: "int", nullable: false)
+                    HardwareBrandId = table.Column<int>(type: "int", nullable: false),
+                    HardwareDetailId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -175,6 +150,41 @@ namespace Persistence.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "ComputerHardwares",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ComputerId = table.Column<int>(type: "int", nullable: false),
+                    HardwareId = table.Column<int>(type: "int", nullable: false),
+                    IsDeactive = table.Column<bool>(type: "bit", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    HardwareDetailId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ComputerHardwares", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ComputerHardwares_Computers_ComputerId",
+                        column: x => x.ComputerId,
+                        principalTable: "Computers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ComputerHardwares_HardwareDetails_HardwareDetailId",
+                        column: x => x.HardwareDetailId,
+                        principalTable: "HardwareDetails",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_ComputerHardwares_Hardwares_HardwareId",
+                        column: x => x.HardwareId,
+                        principalTable: "Hardwares",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_ComputerHardwares_ComputerId",
                 table: "ComputerHardwares",
@@ -184,6 +194,11 @@ namespace Persistence.Migrations
                 name: "IX_ComputerHardwares_HardwareDetailId",
                 table: "ComputerHardwares",
                 column: "HardwareDetailId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ComputerHardwares_HardwareId",
+                table: "ComputerHardwares",
+                column: "HardwareId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_HardwareBrands_HardwareTypeId",
@@ -228,19 +243,19 @@ namespace Persistence.Migrations
                 name: "ComputerHardwares");
 
             migrationBuilder.DropTable(
-                name: "Hardwares");
-
-            migrationBuilder.DropTable(
                 name: "UserComputers");
 
             migrationBuilder.DropTable(
                 name: "Users");
 
             migrationBuilder.DropTable(
-                name: "HardwareDetails");
+                name: "Hardwares");
 
             migrationBuilder.DropTable(
                 name: "Computers");
+
+            migrationBuilder.DropTable(
+                name: "HardwareDetails");
 
             migrationBuilder.DropTable(
                 name: "HardwareBrands");
