@@ -2,7 +2,12 @@
 using ApplicationIT.Service.ComputerList;
 using ApplicationIT.Service.HardwareService.HardwareBrand;
 using ApplicationIT.Service.HardwareService.HardwareDetail;
+using ApplicationIT.Service.HardwareService.HardwareHistory;
+using ApplicationIT.Service.HardwareService.SaveService;
+using ApplicationIT.Service.HardwareService.ShowHardware;
+using ApplicationIT.Service.User.AssignUserToComputer;
 using ApplicationIT.Service.User.ShowUser;
+using ApplicationIT.Service.User.UserComputerHistoryService;
 using EndPoint.Forms.ComputerDetail;
 using Microsoft.EntityFrameworkCore.Query.Internal;
 using Microsoft.Extensions.DependencyInjection;
@@ -25,7 +30,7 @@ namespace EndPoint.Forms
         private readonly IComputerList computerList;
         private readonly IHardwareBrands hardwareBrands;
 
-        public FrmMain(IUserShowService? serviceGetList, IDatabaseContext database, IComputerList computerList , IHardwareBrands hardwareBrands)
+        public FrmMain(IUserShowService? serviceGetList, IDatabaseContext database, IComputerList computerList, IHardwareBrands hardwareBrands)
         {
 
             InitializeComponent();
@@ -71,7 +76,7 @@ namespace EndPoint.Forms
 
         private void lblTime_Click(object sender, EventArgs e)
         {
-            lblTime.Text = DateTime.Now.ToString();
+           
         }
 
         private void computerListToolStripMenuItem_Click(object sender, EventArgs e)
@@ -104,7 +109,7 @@ namespace EndPoint.Forms
             //var hardwareBrands = Program.ServiceProvider.GetService<IHardwareBrands>();
             //FrmComputerDetails frmComputerDetails = new FrmComputerDetails(hardwareBrands , hardwareDetails);
             //frmComputerDetails.ShowDialog();
-            
+
             //int computerId = 0;
             //if (computerId >= 0)
             //{
@@ -116,7 +121,36 @@ namespace EndPoint.Forms
 
         private void FrmMain_Load(object sender, EventArgs e)
         {
+            timer1.Start();
+        }
 
+        private void btnAddComputer_Click(object sender, EventArgs e)
+        {
+            var database = Program.ServiceProvider.GetService<IDatabaseContext>();
+            var hardwareBrands = Program.ServiceProvider.GetService<IHardwareBrands>();
+            var hardwareDetails = Program.ServiceProvider.GetService<IHardwareDetails>();
+            var save = Program.ServiceProvider.GetService<IComputerHardwareSaveService>();
+            var show = Program.ServiceProvider.GetService<IComputerHardwareQueryService>();
+            var history = Program.ServiceProvider.GetService<IComputerHardwareHistoryService>();
+            var User = Program.ServiceProvider.GetService<IUserShowService>();
+            var Assign = Program.ServiceProvider.GetService<IUserComputerAssignService>();
+            var userhistory = Program.ServiceProvider.GetService<IUserHistoryService>();
+            var form = new FrmComputerDetails(hardwareBrands, hardwareDetails, 0, save, database, show, history, User, Assign, userhistory);
+            form.ShowDialog();
+        }
+
+        private void BtnComputerList_Click(object sender, EventArgs e)
+        {
+            var computerFrm = Program.ServiceProvider.GetService<IComputerList>();
+            FrmComputerList frmComputerList = new FrmComputerList(computerFrm);
+            frmComputerList.ShowDialog();
+        }
+
+        private void btnUserList_Click(object sender, EventArgs e)
+        {
+            var serviceAdd = (IUserShowService)Program.ServiceProvider.GetService(typeof(IUserShowService));
+            FrmUsers frmUsers = new FrmUsers(serviceAdd);
+            frmUsers.ShowDialog();
         }
     }
 }
