@@ -15,5 +15,6 @@ namespace Domain.Entities
         
         public List<UserComputer> UserComputer { get; set; }
         public virtual ICollection<ComputerHardware> HardwareComponents { get; set; }
+        public DateTime CreatedAt { get; set; }
     }
 }

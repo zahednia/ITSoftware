@@ -55,6 +55,9 @@
             HHDD = new Label();
             HSSD = new Label();
             HGPU = new Label();
+            txtCode = new TextBox();
+            label7 = new Label();
+            btnSmallSave = new Button();
             SuspendLayout();
             // 
             // txtCPUBrand
@@ -73,7 +76,7 @@
             // 
             // btnSave
             // 
-            btnSave.Location = new Point(638, 77);
+            btnSave.Location = new Point(657, 89);
             btnSave.Name = "btnSave";
             btnSave.Size = new Size(202, 45);
             btnSave.TabIndex = 2;
@@ -282,11 +285,40 @@
             HGPU.Text = "label7";
             HGPU.Click += HGPU_Click;
             // 
+            // txtCode
+            // 
+            txtCode.Location = new Point(290, 33);
+            txtCode.Name = "txtCode";
+            txtCode.Size = new Size(125, 27);
+            txtCode.TabIndex = 27;
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Location = new Point(240, 40);
+            label7.Name = "label7";
+            label7.Size = new Size(48, 20);
+            label7.TabIndex = 28;
+            label7.Text = "CODE";
+            // 
+            // btnSmallSave
+            // 
+            btnSmallSave.Location = new Point(431, 33);
+            btnSmallSave.Name = "btnSmallSave";
+            btnSmallSave.Size = new Size(196, 27);
+            btnSmallSave.TabIndex = 29;
+            btnSmallSave.Text = "Save Name And Code Only";
+            btnSmallSave.UseVisualStyleBackColor = true;
+            btnSmallSave.Click += btnSmallSave_Click;
+            // 
             // FrmComputerDetails
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(871, 503);
+            Controls.Add(btnSmallSave);
+            Controls.Add(label7);
+            Controls.Add(txtCode);
             Controls.Add(HGPU);
             Controls.Add(HSSD);
             Controls.Add(HHDD);
@@ -350,5 +382,8 @@
         private Label HHDD;
         private Label HSSD;
         private Label HGPU;
+        private TextBox txtCode;
+        private Label label7;
+        private Button btnSmallSave;
     }
 }

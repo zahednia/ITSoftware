@@ -31,6 +31,7 @@
             DGComputerList = new DataGridView();
             BtnSearchComputerList = new Button();
             textBox1 = new TextBox();
+            button1 = new Button();
             ((System.ComponentModel.ISupportInitialize)DGComputerList).BeginInit();
             SuspendLayout();
             // 
@@ -49,7 +50,7 @@
             // 
             // BtnSearchComputerList
             // 
-            BtnSearchComputerList.Location = new Point(658, 16);
+            BtnSearchComputerList.Location = new Point(494, 16);
             BtnSearchComputerList.Margin = new Padding(3, 4, 3, 4);
             BtnSearchComputerList.Name = "BtnSearchComputerList";
             BtnSearchComputerList.Size = new Size(219, 31);
@@ -63,14 +64,25 @@
             textBox1.Location = new Point(14, 16);
             textBox1.Margin = new Padding(3, 4, 3, 4);
             textBox1.Name = "textBox1";
-            textBox1.Size = new Size(627, 27);
+            textBox1.Size = new Size(474, 27);
             textBox1.TabIndex = 2;
+            // 
+            // button1
+            // 
+            button1.Location = new Point(719, 17);
+            button1.Name = "button1";
+            button1.Size = new Size(183, 29);
+            button1.TabIndex = 3;
+            button1.Text = "اضافه کردن سیستم جدید";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // FrmComputerList
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(914, 600);
+            Controls.Add(button1);
             Controls.Add(textBox1);
             Controls.Add(BtnSearchComputerList);
             Controls.Add(DGComputerList);
@@ -88,5 +100,6 @@
         private DataGridView DGComputerList;
         private Button BtnSearchComputerList;
         private TextBox textBox1;
+        private Button button1;
     }
 }

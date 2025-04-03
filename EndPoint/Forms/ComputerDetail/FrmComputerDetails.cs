@@ -15,6 +15,7 @@ using Microsoft.EntityFrameworkCore;
 using ApplicationIT.Database;
 using ApplicationIT.Service.HardwareService.ShowHardware;
 using ApplicationIT.Service.HardwareService.HardwareHistory;
+using Domain.Entities;
 
 namespace EndPoint.Forms.ComputerDetail
 {
@@ -25,7 +26,7 @@ namespace EndPoint.Forms.ComputerDetail
         private readonly Dictionary<System.Windows.Forms.TextBox, int> BrandMap;
         private readonly Dictionary<System.Windows.Forms.TextBox, int> DetailMap;
         private readonly Dictionary<Label, int> labelMap;
-        private readonly int _computerId;
+        private int _computerId;
         private readonly IComputerHardwareSaveService saveService;
         private readonly IDatabaseContext database;
         private readonly IComputerHardwareQueryService hardwareQueryService;
@@ -60,7 +61,7 @@ namespace EndPoint.Forms.ComputerDetail
             { txtSSDBrand, 5 }    // HDD/SSD
         };
 
-             labelMap = new Dictionary<Label, int>
+            labelMap = new Dictionary<Label, int>
         {
             { HCPU, 2 },
             { HMotherBoard, 1 },
@@ -108,6 +109,12 @@ namespace EndPoint.Forms.ComputerDetail
                 pair.Key.Visible = count > 0;
             }
 
+            var computer = database.Computers.FirstOrDefault(c => c.Id == _computerId);
+            if (computer != null)
+            {
+                txtCode.Text = computer.Code;
+                txtName.Text = computer.Name;
+            }
             //  گرفتن اطلاعات از دیتابیس
             var hardwareList = hardwareQueryService.GetHardwareListForComputer(_computerId);
 
@@ -162,6 +169,8 @@ namespace EndPoint.Forms.ComputerDetail
                     continue;
                 }
 
+                SaveComputerName();
+                SaveComputerIfNew();
                 var dto = new SaveHardwareToComputerDto
                 {
                     ComputerId = _computerId,
@@ -216,6 +225,48 @@ namespace EndPoint.Forms.ComputerDetail
             var history = historyService.GetHistory(_computerId, 6);
             var frm = new FrmHardwareHistory(history);
             frm.ShowDialog();
+        }
+        private void SaveComputerName()
+        {
+            var computer = database.Computers.FirstOrDefault(c => c.Id == _computerId);
+            if (computer != null)
+            {
+                computer.Name = txtName.Text;
+                computer.Code = txtCode.Text;
+                database.SaveChanges();
+            }
+        }
+
+        private void SaveComputerIfNew()
+        {
+            if (_computerId == 0)
+            {
+                var computer = new Computer
+                {
+                    Name = txtName.Text,
+                    Code = txtCode.Text,
+                    CreatedAt = DateTime.UtcNow
+                };
+                database.Computers.Add(computer);
+                database.SaveChanges();
+
+                _computerId = computer.Id; // خیلی مهم: برای ذخیره قطعات
+            }
+            else
+            {
+                var computer = database.Computers.FirstOrDefault(c => c.Id == _computerId);
+                if (computer != null)
+                {
+                    computer.Name = txtName.Text;
+                    database.SaveChanges();
+                }
+            }
+        }
+
+        private void btnSmallSave_Click(object sender, EventArgs e)
+        {
+            SaveComputerName();
+            MessageBox.Show("نام و کد ذخیره شد");
         }
     }
 }
