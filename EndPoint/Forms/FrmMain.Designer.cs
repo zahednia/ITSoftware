@@ -37,10 +37,8 @@
             menuStrip1 = new MenuStrip();
             userToolStripMenuItem = new ToolStripMenuItem();
             userListToolStripMenuItem = new ToolStripMenuItem();
-            userListsWithComputersToolStripMenuItem = new ToolStripMenuItem();
             computerToolStripMenuItem = new ToolStripMenuItem();
             computerListToolStripMenuItem = new ToolStripMenuItem();
-            computerListWithUserToolStripMenuItem = new ToolStripMenuItem();
             helpToolStripMenuItem = new ToolStripMenuItem();
             infoToolStripMenuItem = new ToolStripMenuItem();
             statusStrip1 = new StatusStrip();
@@ -50,6 +48,7 @@
             btnAddComputer = new Button();
             BtnComputerList = new Button();
             btnUserList = new Button();
+            label1 = new Label();
             menuStrip1.SuspendLayout();
             statusStrip1.SuspendLayout();
             SuspendLayout();
@@ -88,7 +87,7 @@
             // 
             // userToolStripMenuItem
             // 
-            userToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { userListToolStripMenuItem, userListsWithComputersToolStripMenuItem });
+            userToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { userListToolStripMenuItem });
             userToolStripMenuItem.Name = "userToolStripMenuItem";
             userToolStripMenuItem.ShortcutKeyDisplayString = "";
             userToolStripMenuItem.Size = new Size(52, 24);
@@ -97,19 +96,13 @@
             // userListToolStripMenuItem
             // 
             userListToolStripMenuItem.Name = "userListToolStripMenuItem";
-            userListToolStripMenuItem.Size = new Size(264, 26);
+            userListToolStripMenuItem.Size = new Size(224, 26);
             userListToolStripMenuItem.Text = "User List";
             userListToolStripMenuItem.Click += userListToolStripMenuItem_Click;
             // 
-            // userListsWithComputersToolStripMenuItem
-            // 
-            userListsWithComputersToolStripMenuItem.Name = "userListsWithComputersToolStripMenuItem";
-            userListsWithComputersToolStripMenuItem.Size = new Size(264, 26);
-            userListsWithComputersToolStripMenuItem.Text = "User Lists With Computers";
-            // 
             // computerToolStripMenuItem
             // 
-            computerToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { computerListToolStripMenuItem, computerListWithUserToolStripMenuItem });
+            computerToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { computerListToolStripMenuItem });
             computerToolStripMenuItem.Name = "computerToolStripMenuItem";
             computerToolStripMenuItem.Size = new Size(89, 24);
             computerToolStripMenuItem.Text = "Computer";
@@ -117,15 +110,9 @@
             // computerListToolStripMenuItem
             // 
             computerListToolStripMenuItem.Name = "computerListToolStripMenuItem";
-            computerListToolStripMenuItem.Size = new Size(252, 26);
+            computerListToolStripMenuItem.Size = new Size(224, 26);
             computerListToolStripMenuItem.Text = "Computer List";
             computerListToolStripMenuItem.Click += computerListToolStripMenuItem_Click;
-            // 
-            // computerListWithUserToolStripMenuItem
-            // 
-            computerListWithUserToolStripMenuItem.Name = "computerListWithUserToolStripMenuItem";
-            computerListWithUserToolStripMenuItem.Size = new Size(252, 26);
-            computerListWithUserToolStripMenuItem.Text = "Computer List With User";
             // 
             // helpToolStripMenuItem
             // 
@@ -166,6 +153,8 @@
             // 
             // timer1
             // 
+            timer1.Enabled = true;
+            timer1.Interval = 1000;
             timer1.Tick += timer1_Tick;
             // 
             // btnAddComputer
@@ -198,11 +187,22 @@
             btnUserList.UseVisualStyleBackColor = true;
             btnUserList.Click += btnUserList_Click;
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label1.Location = new Point(528, 753);
+            label1.Name = "label1";
+            label1.Size = new Size(407, 20);
+            label1.TabIndex = 8;
+            label1.Text = "Copyright © 2025 Kourosh Zahednia . All rights reserved";
+            // 
             // FrmMain
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1146, 817);
+            Controls.Add(label1);
             Controls.Add(btnUserList);
             Controls.Add(BtnComputerList);
             Controls.Add(btnAddComputer);
@@ -230,9 +230,7 @@
         private ToolStripMenuItem helpToolStripMenuItem;
         private ToolStripMenuItem infoToolStripMenuItem;
         private ToolStripMenuItem userListToolStripMenuItem;
-        private ToolStripMenuItem userListsWithComputersToolStripMenuItem;
         private ToolStripMenuItem computerListToolStripMenuItem;
-        private ToolStripMenuItem computerListWithUserToolStripMenuItem;
         private StatusStrip statusStrip1;
         private System.Windows.Forms.Timer timer1;
         private ToolStripStatusLabel toolStripStatusLabel1;
@@ -240,5 +238,6 @@
         private Button btnAddComputer;
         private Button BtnComputerList;
         private Button btnUserList;
+        private Label label1;
     }
 }

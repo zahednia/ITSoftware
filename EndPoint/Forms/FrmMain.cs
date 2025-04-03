@@ -76,7 +76,7 @@ namespace EndPoint.Forms
 
         private void lblTime_Click(object sender, EventArgs e)
         {
-            lblTime.Text = DateTime.Now.ToString();
+           
         }
 
         private void computerListToolStripMenuItem_Click(object sender, EventArgs e)
@@ -121,7 +121,7 @@ namespace EndPoint.Forms
 
         private void FrmMain_Load(object sender, EventArgs e)
         {
-
+            timer1.Start();
         }
 
         private void btnAddComputer_Click(object sender, EventArgs e)
