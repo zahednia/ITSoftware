@@ -1,5 +1,6 @@
 ﻿using ApplicationIT.Database;
 using Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -72,6 +73,21 @@ namespace ApplicationIT.Service.HardwareService.SaveService
                 _context.Hardwares.Add(hardware);
                 _context.SaveChanges();
             }
+
+            // اول: غیرفعال کردن سخت‌افزارهای قبلی همین نوع (مثلاً CPU)
+            var oldHardwaresToDeactivate = _context.ComputerHardwares
+                .Include(ch => ch.Hardware)
+                .Where(ch => ch.ComputerId == dto.ComputerId &&
+                             ch.Hardware.HardwareTypeId == type.Id &&
+                             ch.IsDeactive == false)
+                .ToList();
+
+            foreach (var old in oldHardwaresToDeactivate)
+            {
+                old.IsDeactive = true;
+                old.UpdatedAt = DateTime.UtcNow;
+            }
+            _context.SaveChanges();
 
             // ساخت ارتباط با کامپیوتر
             var computerHardware = new ComputerHardware

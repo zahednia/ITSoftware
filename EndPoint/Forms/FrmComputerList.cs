@@ -2,7 +2,9 @@
 using ApplicationIT.Service.ComputerList;
 using ApplicationIT.Service.HardwareService.HardwareBrand;
 using ApplicationIT.Service.HardwareService.HardwareDetail;
+using ApplicationIT.Service.HardwareService.HardwareHistory;
 using ApplicationIT.Service.HardwareService.SaveService;
+using ApplicationIT.Service.HardwareService.ShowHardware;
 using ApplicationIT.Service.UserService;
 using EndPoint.Forms.ComputerDetail;
 using Microsoft.Extensions.DependencyInjection;
@@ -71,8 +73,10 @@ namespace EndPoint.Forms
                 var hardwareBrands = Program.ServiceProvider.GetService<IHardwareBrands>();
                 var hardwareDetails = Program.ServiceProvider.GetService<IHardwareDetails>();
                 var save = Program.ServiceProvider.GetService<IComputerHardwareSaveService>();
+                var show = Program.ServiceProvider.GetService<IComputerHardwareQueryService>();
+                var history = Program.ServiceProvider.GetService<IComputerHardwareHistoryService>();
                 int computerId = Convert.ToInt32(DGComputerList.Rows[e.RowIndex].Cells["Id"].Value);
-                var form = new FrmComputerDetails(hardwareBrands, hardwareDetails, computerId, save , database);
+                var form = new FrmComputerDetails(hardwareBrands, hardwareDetails, computerId, save , database , show , history);
                 form.ShowDialog();
             }
         }
