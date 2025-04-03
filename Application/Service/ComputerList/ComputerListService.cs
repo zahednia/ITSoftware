@@ -20,13 +20,14 @@ namespace ApplicationIT.Service.ComputerList
             {
                 ContactQuery = ContactQuery.Where(
                     p =>
-                    p.Code.Contains(searchKey));
+                    p.Code.Contains(searchKey) || p.Name.Contains(searchKey));
             }
 
             var contacts = ContactQuery.Select(p => new ComputerListDTO
             {
                 Id = p.Id,
                 Code = p.Code ,
+                Name = p.Name,
             }).ToList();
             return contacts;
         }

@@ -2,7 +2,9 @@
 using ApplicationIT.Service.ComputerList;
 using ApplicationIT.Service.HardwareService.HardwareBrand;
 using ApplicationIT.Service.HardwareService.HardwareDetail;
+using ApplicationIT.Service.HardwareService.HardwareHistory;
 using ApplicationIT.Service.HardwareService.SaveService;
+using ApplicationIT.Service.HardwareService.ShowHardware;
 using ApplicationIT.Service.UserService;
 using EndPoint.Forms.ComputerDetail;
 using Microsoft.Extensions.DependencyInjection;
@@ -46,6 +48,7 @@ namespace EndPoint.Forms
             DGComputerList.DataSource = computerListDTOs;
             DGComputerList.Columns[0].HeaderText = "ID";
             DGComputerList.Columns[1].HeaderText = "کد کامپیوتر";
+            DGComputerList.Columns[2].HeaderText = "CODE";
             DGComputerList.Columns[0].Width = 40;
             DGComputerList.Columns[1].Width = 229;
         }
@@ -71,10 +74,24 @@ namespace EndPoint.Forms
                 var hardwareBrands = Program.ServiceProvider.GetService<IHardwareBrands>();
                 var hardwareDetails = Program.ServiceProvider.GetService<IHardwareDetails>();
                 var save = Program.ServiceProvider.GetService<IComputerHardwareSaveService>();
+                var show = Program.ServiceProvider.GetService<IComputerHardwareQueryService>();
+                var history = Program.ServiceProvider.GetService<IComputerHardwareHistoryService>();
                 int computerId = Convert.ToInt32(DGComputerList.Rows[e.RowIndex].Cells["Id"].Value);
-                var form = new FrmComputerDetails(hardwareBrands, hardwareDetails, computerId, save , database);
+                var form = new FrmComputerDetails(hardwareBrands, hardwareDetails, computerId, save, database, show, history);
                 form.ShowDialog();
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            var database = Program.ServiceProvider.GetService<IDatabaseContext>();
+            var hardwareBrands = Program.ServiceProvider.GetService<IHardwareBrands>();
+            var hardwareDetails = Program.ServiceProvider.GetService<IHardwareDetails>();
+            var save = Program.ServiceProvider.GetService<IComputerHardwareSaveService>();
+            var show = Program.ServiceProvider.GetService<IComputerHardwareQueryService>();
+            var history = Program.ServiceProvider.GetService<IComputerHardwareHistoryService>();
+            var form = new FrmComputerDetails(hardwareBrands, hardwareDetails, 0, save, database, show, history);
+            form.ShowDialog();
         }
     }
 }

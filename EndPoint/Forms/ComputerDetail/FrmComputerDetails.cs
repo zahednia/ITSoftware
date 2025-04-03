@@ -13,6 +13,9 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using ApplicationIT.Service.HardwareService.SaveService;
 using Microsoft.EntityFrameworkCore;
 using ApplicationIT.Database;
+using ApplicationIT.Service.HardwareService.ShowHardware;
+using ApplicationIT.Service.HardwareService.HardwareHistory;
+using Domain.Entities;
 
 namespace EndPoint.Forms.ComputerDetail
 {
@@ -22,11 +25,14 @@ namespace EndPoint.Forms.ComputerDetail
         private readonly IHardwareDetails hardwareDetails;
         private readonly Dictionary<System.Windows.Forms.TextBox, int> BrandMap;
         private readonly Dictionary<System.Windows.Forms.TextBox, int> DetailMap;
-        private readonly int _computerId;
+        private readonly Dictionary<Label, int> labelMap;
+        private int _computerId;
         private readonly IComputerHardwareSaveService saveService;
         private readonly IDatabaseContext database;
+        private readonly IComputerHardwareQueryService hardwareQueryService;
+        private readonly IComputerHardwareHistoryService historyService;
 
-        public FrmComputerDetails(IHardwareBrands hardwareBrands, IHardwareDetails hardwareDetails, int computerId , IComputerHardwareSaveService saveService , IDatabaseContext database)
+        public FrmComputerDetails(IHardwareBrands hardwareBrands, IHardwareDetails hardwareDetails, int computerId, IComputerHardwareSaveService saveService, IDatabaseContext database, IComputerHardwareQueryService hardwareQueryService, IComputerHardwareHistoryService historyService)
         {
             InitializeComponent();
             this.hardwareBrands = hardwareBrands;
@@ -34,21 +40,35 @@ namespace EndPoint.Forms.ComputerDetail
             _computerId = computerId;
             this.saveService = saveService;
             this.database = database;
+            this.hardwareQueryService = hardwareQueryService;
+            this.historyService = historyService;
             DetailMap = new Dictionary<System.Windows.Forms.TextBox, int>
         {
             { txtCPUDetail, 2},       // CPU
-            //{ txtMotherboardBrand, 1 }, // Motherboard
-            //{ txtRAMBrand, 3 },       // RAM
-            //{ txtGPUBrand, 4 },       // GPU
-            //{ txtStorageBrand, 5 }    // HDD/SSD
+            { txtMotherBoardDetail, 1 }, // Motherboard
+            { txtRamDetail, 3 },       // RAM
+            { txtGPUDetail, 6 },       // GPU
+            { txtHDDDetail, 4 } ,   // HDD/SSD
+            { txtSSDDetail, 5 }    // HDD/SSD
         };
             BrandMap = new Dictionary<System.Windows.Forms.TextBox, int>
         {
-            { txtCPUBrand, 2 },       // CPU
-            //{ txtMotherboardBrand, 1 }, // Motherboard
-            //{ txtRAMBrand, 3 },       // RAM
-            //{ txtGPUBrand, 4 },       // GPU
-            //{ txtStorageBrand, 5 }    // HDD/SSD
+            { txtCPUBrand, 2},       // CPU
+            { txtMotherBoardBrand, 1 }, // Motherboard
+            { txtRamBrand, 3 },       // RAM
+            { txtGPUBrand, 6 },       // GPU
+            { txtHDDBrand, 4 } ,   // HDD/SSD
+            { txtSSDBrand, 5 }    // HDD/SSD
+        };
+
+            labelMap = new Dictionary<Label, int>
+        {
+            { HCPU, 2 },
+            { HMotherBoard, 1 },
+            { HRAM, 3 },
+            { HHDD, 4 },
+            { HSSD, 5 },
+            { HGPU, 6 },
         };
         }
 
@@ -80,6 +100,35 @@ namespace EndPoint.Forms.ComputerDetail
             foreach (var entry in DetailMap)
             {
                 DetailAutoComplete(entry.Key, entry.Value);
+            }
+
+            foreach (var pair in labelMap)
+            {
+                var count = historyService.CountHistory(_computerId, pair.Value);
+                pair.Key.Text = $"سابقه: {count}";
+                pair.Key.Visible = count > 0;
+            }
+
+            var computer = database.Computers.FirstOrDefault(c => c.Id == _computerId);
+            if (computer != null)
+            {
+                txtCode.Text = computer.Code;
+                txtName.Text = computer.Name;
+            }
+            //  گرفتن اطلاعات از دیتابیس
+            var hardwareList = hardwareQueryService.GetHardwareListForComputer(_computerId);
+
+            foreach (var hw in hardwareList)
+            {
+                // پیدا کردن TextBox برند مربوط به این نوع
+                var brandTextBox = BrandMap.FirstOrDefault(x => x.Value == hw.HardwareTypeId).Key;
+                var detailTextBox = DetailMap.FirstOrDefault(x => x.Value == hw.HardwareTypeId).Key;
+
+                if (brandTextBox != null)
+                    brandTextBox.Text = hw.Brand;
+
+                if (detailTextBox != null)
+                    detailTextBox.Text = hw.Detail;
             }
         }
 
@@ -120,6 +169,8 @@ namespace EndPoint.Forms.ComputerDetail
                     continue;
                 }
 
+                SaveComputerName();
+                SaveComputerIfNew();
                 var dto = new SaveHardwareToComputerDto
                 {
                     ComputerId = _computerId,
@@ -134,7 +185,88 @@ namespace EndPoint.Forms.ComputerDetail
             MessageBox.Show("سخت‌افزارهای وارد شده ذخیره شدند.");
         }
 
+        private void HCPU_Click(object sender, EventArgs e)
+        {
+            var history = historyService.GetHistory(_computerId, 2); // 2 = CPU TypeId
+            var frm = new FrmHardwareHistory(history);
+            frm.ShowDialog();
+        }
 
+        private void HMotherBoard_Click(object sender, EventArgs e)
+        {
+            var history = historyService.GetHistory(_computerId, 1);
+            var frm = new FrmHardwareHistory(history);
+            frm.ShowDialog();
+        }
 
+        private void HRAM_Click(object sender, EventArgs e)
+        {
+            var history = historyService.GetHistory(_computerId, 3);
+            var frm = new FrmHardwareHistory(history);
+            frm.ShowDialog();
+        }
+
+        private void HHDD_Click(object sender, EventArgs e)
+        {
+            var history = historyService.GetHistory(_computerId, 4);
+            var frm = new FrmHardwareHistory(history);
+            frm.ShowDialog();
+        }
+
+        private void HSSD_Click(object sender, EventArgs e)
+        {
+            var history = historyService.GetHistory(_computerId, 5);
+            var frm = new FrmHardwareHistory(history);
+            frm.ShowDialog();
+        }
+
+        private void HGPU_Click(object sender, EventArgs e)
+        {
+            var history = historyService.GetHistory(_computerId, 6);
+            var frm = new FrmHardwareHistory(history);
+            frm.ShowDialog();
+        }
+        private void SaveComputerName()
+        {
+            var computer = database.Computers.FirstOrDefault(c => c.Id == _computerId);
+            if (computer != null)
+            {
+                computer.Name = txtName.Text;
+                computer.Code = txtCode.Text;
+                database.SaveChanges();
+            }
+        }
+
+        private void SaveComputerIfNew()
+        {
+            if (_computerId == 0)
+            {
+                var computer = new Computer
+                {
+                    Name = txtName.Text,
+                    Code = txtCode.Text,
+                    CreatedAt = DateTime.UtcNow
+                };
+                database.Computers.Add(computer);
+                database.SaveChanges();
+
+                _computerId = computer.Id; // خیلی مهم: برای ذخیره قطعات
+            }
+            else
+            {
+                var computer = database.Computers.FirstOrDefault(c => c.Id == _computerId);
+                if (computer != null)
+                {
+                    computer.Name = txtName.Text;
+                    database.SaveChanges();
+                }
+            }
+        }
+
+        private void btnSmallSave_Click(object sender, EventArgs e)
+        {
+            SaveComputerName();
+            MessageBox.Show("نام و کد ذخیره شد");
+        }
     }
 }
