@@ -47,7 +47,9 @@
             toolStripStatusLabel1 = new ToolStripStatusLabel();
             lblTime = new ToolStripStatusLabel();
             timer1 = new System.Windows.Forms.Timer(components);
-            button1 = new Button();
+            btnAddComputer = new Button();
+            BtnComputerList = new Button();
+            btnUserList = new Button();
             menuStrip1.SuspendLayout();
             statusStrip1.SuspendLayout();
             SuspendLayout();
@@ -80,7 +82,7 @@
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Padding = new Padding(7, 3, 0, 3);
-            menuStrip1.Size = new Size(1071, 30);
+            menuStrip1.Size = new Size(1146, 30);
             menuStrip1.TabIndex = 2;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -144,7 +146,7 @@
             statusStrip1.Location = new Point(0, 791);
             statusStrip1.Name = "statusStrip1";
             statusStrip1.Padding = new Padding(1, 0, 16, 0);
-            statusStrip1.Size = new Size(1071, 26);
+            statusStrip1.Size = new Size(1146, 26);
             statusStrip1.TabIndex = 3;
             statusStrip1.Text = "0";
             // 
@@ -166,22 +168,44 @@
             // 
             timer1.Tick += timer1_Tick;
             // 
-            // button1
+            // btnAddComputer
             // 
-            button1.Location = new Point(464, 167);
-            button1.Name = "button1";
-            button1.Size = new Size(94, 29);
-            button1.TabIndex = 4;
-            button1.Text = "button1";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click_1;
+            btnAddComputer.Location = new Point(360, 61);
+            btnAddComputer.Name = "btnAddComputer";
+            btnAddComputer.Size = new Size(233, 120);
+            btnAddComputer.TabIndex = 4;
+            btnAddComputer.Text = "Add New Computer";
+            btnAddComputer.UseVisualStyleBackColor = true;
+            btnAddComputer.Click += btnAddComputer_Click;
+            // 
+            // BtnComputerList
+            // 
+            BtnComputerList.Location = new Point(619, 61);
+            BtnComputerList.Name = "BtnComputerList";
+            BtnComputerList.Size = new Size(233, 120);
+            BtnComputerList.TabIndex = 5;
+            BtnComputerList.Text = "Computer List";
+            BtnComputerList.UseVisualStyleBackColor = true;
+            BtnComputerList.Click += BtnComputerList_Click;
+            // 
+            // btnUserList
+            // 
+            btnUserList.Location = new Point(878, 61);
+            btnUserList.Name = "btnUserList";
+            btnUserList.Size = new Size(233, 120);
+            btnUserList.TabIndex = 7;
+            btnUserList.Text = "User List";
+            btnUserList.UseVisualStyleBackColor = true;
+            btnUserList.Click += btnUserList_Click;
             // 
             // FrmMain
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1071, 817);
-            Controls.Add(button1);
+            ClientSize = new Size(1146, 817);
+            Controls.Add(btnUserList);
+            Controls.Add(BtnComputerList);
+            Controls.Add(btnAddComputer);
             Controls.Add(statusStrip1);
             Controls.Add(treeView1);
             Controls.Add(menuStrip1);
@@ -213,6 +237,8 @@
         private System.Windows.Forms.Timer timer1;
         private ToolStripStatusLabel toolStripStatusLabel1;
         private ToolStripStatusLabel lblTime;
-        private Button button1;
+        private Button btnAddComputer;
+        private Button BtnComputerList;
+        private Button btnUserList;
     }
 }

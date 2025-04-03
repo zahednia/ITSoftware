@@ -99,6 +99,7 @@ namespace EndPoint.Forms
             var Assign = Program.ServiceProvider.GetService<IUserComputerAssignService>();
             var userhistory = Program.ServiceProvider.GetService<IUserHistoryService>();
             var form = new FrmComputerDetails(hardwareBrands, hardwareDetails, 0, save, database, show, history, User, Assign, userhistory);
+            form.ShowDialog();
         }
     }
 }
