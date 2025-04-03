@@ -1,5 +1,4 @@
 ﻿using ApplicationIT.Database;
-using ApplicationIT.Service.UserService;
 
 namespace ApplicationIT.Service.ComputerList
 {

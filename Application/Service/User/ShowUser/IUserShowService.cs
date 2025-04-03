@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ApplicationIT.Service.UserService
+namespace ApplicationIT.Service.User.ShowUser
 {
     public interface IUserShowService
     {

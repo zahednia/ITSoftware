@@ -5,7 +5,9 @@ using ApplicationIT.Service.HardwareService.HardwareDetail;
 using ApplicationIT.Service.HardwareService.HardwareHistory;
 using ApplicationIT.Service.HardwareService.SaveService;
 using ApplicationIT.Service.HardwareService.ShowHardware;
-using ApplicationIT.Service.UserService;
+using ApplicationIT.Service.User.AssignUserToComputer;
+using ApplicationIT.Service.User.ShowUser;
+using ApplicationIT.Service.User.UserComputerHistoryService;
 using EndPoint.Forms.ComputerDetail;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -76,8 +78,11 @@ namespace EndPoint.Forms
                 var save = Program.ServiceProvider.GetService<IComputerHardwareSaveService>();
                 var show = Program.ServiceProvider.GetService<IComputerHardwareQueryService>();
                 var history = Program.ServiceProvider.GetService<IComputerHardwareHistoryService>();
+                var User = Program.ServiceProvider.GetService<IUserShowService>();
+                var Assign = Program.ServiceProvider.GetService<IUserComputerAssignService>();
+                var userhistory = Program.ServiceProvider.GetService<IUserHistoryService>();
                 int computerId = Convert.ToInt32(DGComputerList.Rows[e.RowIndex].Cells["Id"].Value);
-                var form = new FrmComputerDetails(hardwareBrands, hardwareDetails, computerId, save, database, show, history);
+                var form = new FrmComputerDetails(hardwareBrands, hardwareDetails, computerId, save, database, show, history, User, Assign , userhistory);
                 form.ShowDialog();
             }
         }
@@ -90,8 +95,10 @@ namespace EndPoint.Forms
             var save = Program.ServiceProvider.GetService<IComputerHardwareSaveService>();
             var show = Program.ServiceProvider.GetService<IComputerHardwareQueryService>();
             var history = Program.ServiceProvider.GetService<IComputerHardwareHistoryService>();
-            var form = new FrmComputerDetails(hardwareBrands, hardwareDetails, 0, save, database, show, history);
-            form.ShowDialog();
+            var User = Program.ServiceProvider.GetService<IUserShowService>();
+            var Assign = Program.ServiceProvider.GetService<IUserComputerAssignService>();
+            var userhistory = Program.ServiceProvider.GetService<IUserHistoryService>();
+            var form = new FrmComputerDetails(hardwareBrands, hardwareDetails, 0, save, database, show, history, User, Assign, userhistory);
         }
     }
 }

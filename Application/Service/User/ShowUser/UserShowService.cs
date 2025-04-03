@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ApplicationIT.Service.UserService
+namespace ApplicationIT.Service.User.ShowUser
 {
     public class UserShowService : IUserShowService
     {
@@ -34,7 +34,10 @@ namespace ApplicationIT.Service.UserService
             {
                 Id = p.Id,
                 FullName = $"{p.Name} {p.LastName}",
+                ComputerCount = database.UserComputers
+                    .Count(uc => uc.UserID == p.Id && !uc.IsDeactive) // فقط فعال‌ها
             }).ToList();
+
             return contacts;
         }
     }
