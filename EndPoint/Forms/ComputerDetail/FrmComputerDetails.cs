@@ -16,6 +16,10 @@ using ApplicationIT.Database;
 using ApplicationIT.Service.HardwareService.ShowHardware;
 using ApplicationIT.Service.HardwareService.HardwareHistory;
 using Domain.Entities;
+using ApplicationIT.Service.User.AssignUserToComputer;
+using ApplicationIT.Service.User.ShowUser;
+using ApplicationIT.Service.User.UserComputerHistory;
+using ApplicationIT.Service.User.UserComputerHistoryService;
 
 namespace EndPoint.Forms.ComputerDetail
 {
@@ -31,8 +35,11 @@ namespace EndPoint.Forms.ComputerDetail
         private readonly IDatabaseContext database;
         private readonly IComputerHardwareQueryService hardwareQueryService;
         private readonly IComputerHardwareHistoryService historyService;
+        private readonly IUserShowService userShowService;
+        private readonly IUserComputerAssignService assignService;
+        private readonly IUserHistoryService userHistoryService;
 
-        public FrmComputerDetails(IHardwareBrands hardwareBrands, IHardwareDetails hardwareDetails, int computerId, IComputerHardwareSaveService saveService, IDatabaseContext database, IComputerHardwareQueryService hardwareQueryService, IComputerHardwareHistoryService historyService)
+        public FrmComputerDetails(IHardwareBrands hardwareBrands, IHardwareDetails hardwareDetails, int computerId, IComputerHardwareSaveService saveService, IDatabaseContext database, IComputerHardwareQueryService hardwareQueryService, IComputerHardwareHistoryService historyService, IUserShowService userShowService, IUserComputerAssignService assignService, IUserHistoryService userHistoryService)
         {
             InitializeComponent();
             this.hardwareBrands = hardwareBrands;
@@ -42,6 +49,9 @@ namespace EndPoint.Forms.ComputerDetail
             this.database = database;
             this.hardwareQueryService = hardwareQueryService;
             this.historyService = historyService;
+            this.userShowService = userShowService;
+            this.assignService = assignService;
+            this.userHistoryService = userHistoryService;
             DetailMap = new Dictionary<System.Windows.Forms.TextBox, int>
         {
             { txtCPUDetail, 2},       // CPU
@@ -93,6 +103,8 @@ namespace EndPoint.Forms.ComputerDetail
 
         private void FrmComputerDetails_Load(object sender, EventArgs e)
         {
+            LoadUsers();
+            LoadUserHistoryCount();
             foreach (var entry in BrandMap)
             {
                 BrandAutoComplete(entry.Key, entry.Value);
@@ -168,7 +180,18 @@ namespace EndPoint.Forms.ComputerDetail
                     MessageBox.Show($"HardwareType با Id {typeId} پیدا نشد.");
                     continue;
                 }
+                if (cmbUsers.SelectedItem != null)
+                {
+                    var selectedUserId = (int)cmbUsers.SelectedValue;
 
+                    var dtoo = new AssignUserToComputerDto
+                    {
+                        ComputerId = _computerId,
+                        UserId = selectedUserId
+                    };
+
+                    assignService.AssignUserToComputer(dtoo);
+                }
                 SaveComputerName();
                 SaveComputerIfNew();
                 var dto = new SaveHardwareToComputerDto
@@ -265,8 +288,58 @@ namespace EndPoint.Forms.ComputerDetail
 
         private void btnSmallSave_Click(object sender, EventArgs e)
         {
+            if (cmbUsers.SelectedItem != null)
+            {
+                var selectedUserId = (int)cmbUsers.SelectedValue;
+
+                var dto = new AssignUserToComputerDto
+                {
+                    ComputerId = _computerId,
+                    UserId = selectedUserId
+                };
+
+                assignService.AssignUserToComputer(dto);
+            }
             SaveComputerName();
             MessageBox.Show("نام و کد ذخیره شد");
+        }
+
+        private void LoadUsers()
+        {
+            var users = userShowService.Execute(); // خروجی: List<UserShowServiceDTO>
+
+            cmbUsers.DisplayMember = "FullName";
+            cmbUsers.ValueMember = "Id";
+            cmbUsers.DataSource = users;
+
+            cmbUsers.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            cmbUsers.AutoCompleteSource = AutoCompleteSource.ListItems;
+
+            if (_computerId > 0)
+            {
+                var userId = database.UserComputers
+                    .Where(x => x.ComputerID == _computerId && !x.IsDeactive)
+                    .Select(x => x.UserID)
+                    .FirstOrDefault();
+
+                if (userId != 0)
+                {
+                    cmbUsers.SelectedValue = userId;
+                }
+            }
+
+        }
+        private void LoadUserHistoryCount()
+        {
+            int count = userHistoryService.CountUserComputerHistory(_computerId);
+            lblUserHistoryCount.Text = $"سابقه کاربران: {count}";
+            lblUserHistoryCount.Visible = count > 0;
+        }
+
+        private void lblUserHistoryCount_Click(object sender, EventArgs e)
+        {
+            var form = new FrmUserHistory(_computerId, userHistoryService);
+            form.ShowDialog();
         }
     }
 }

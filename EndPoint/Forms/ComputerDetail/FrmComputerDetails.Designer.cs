@@ -57,6 +57,8 @@
             HGPU = new Label();
             txtCode = new TextBox();
             label7 = new Label();
+            cmbUsers = new ComboBox();
+            lblUserHistoryCount = new Label();
             btnSmallSave = new Button();
             SuspendLayout();
             // 
@@ -76,7 +78,7 @@
             // 
             // btnSave
             // 
-            btnSave.Location = new Point(657, 89);
+            btnSave.Location = new Point(657, 77);
             btnSave.Name = "btnSave";
             btnSave.Size = new Size(202, 45);
             btnSave.TabIndex = 2;
@@ -301,13 +303,31 @@
             label7.TabIndex = 28;
             label7.Text = "CODE";
             // 
+            // cmbUsers
+            // 
+            cmbUsers.FormattingEnabled = true;
+            cmbUsers.Location = new Point(462, 33);
+            cmbUsers.Name = "cmbUsers";
+            cmbUsers.Size = new Size(166, 28);
+            cmbUsers.TabIndex = 30;
+            // 
+            // lblUserHistoryCount
+            // 
+            lblUserHistoryCount.AutoSize = true;
+            lblUserHistoryCount.Location = new Point(634, 40);
+            lblUserHistoryCount.Name = "lblUserHistoryCount";
+            lblUserHistoryCount.Size = new Size(50, 20);
+            lblUserHistoryCount.TabIndex = 31;
+            lblUserHistoryCount.Text = "label8";
+            lblUserHistoryCount.Click += lblUserHistoryCount_Click;
+            // 
             // btnSmallSave
             // 
-            btnSmallSave.Location = new Point(431, 33);
+            btnSmallSave.Location = new Point(657, 128);
             btnSmallSave.Name = "btnSmallSave";
-            btnSmallSave.Size = new Size(196, 27);
+            btnSmallSave.Size = new Size(202, 27);
             btnSmallSave.TabIndex = 29;
-            btnSmallSave.Text = "Save Name And Code Only";
+            btnSmallSave.Text = "Save Name ,Code , User Only";
             btnSmallSave.UseVisualStyleBackColor = true;
             btnSmallSave.Click += btnSmallSave_Click;
             // 
@@ -316,6 +336,8 @@
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(871, 503);
+            Controls.Add(lblUserHistoryCount);
+            Controls.Add(cmbUsers);
             Controls.Add(btnSmallSave);
             Controls.Add(label7);
             Controls.Add(txtCode);
@@ -384,6 +406,8 @@
         private Label HGPU;
         private TextBox txtCode;
         private Label label7;
+        private ComboBox cmbUsers;
+        private Label lblUserHistoryCount;
         private Button btnSmallSave;
     }
 }

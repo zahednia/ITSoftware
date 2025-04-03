@@ -2,7 +2,7 @@
 using ApplicationIT.Service.ComputerList;
 using ApplicationIT.Service.HardwareService.HardwareBrand;
 using ApplicationIT.Service.HardwareService.HardwareDetail;
-using ApplicationIT.Service.UserService;
+using ApplicationIT.Service.User.ShowUser;
 using EndPoint.Forms.ComputerDetail;
 using Microsoft.EntityFrameworkCore.Query.Internal;
 using Microsoft.Extensions.DependencyInjection;
@@ -25,7 +25,7 @@ namespace EndPoint.Forms
         private readonly IComputerList computerList;
         private readonly IHardwareBrands hardwareBrands;
 
-        public FrmMain(ApplicationIT.Service.UserService.IUserShowService? serviceGetList, IDatabaseContext database, IComputerList computerList , IHardwareBrands hardwareBrands)
+        public FrmMain(IUserShowService? serviceGetList, IDatabaseContext database, IComputerList computerList , IHardwareBrands hardwareBrands)
         {
 
             InitializeComponent();

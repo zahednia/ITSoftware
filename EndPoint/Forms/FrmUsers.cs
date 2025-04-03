@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using ApplicationIT.Database;
 using ApplicationIT.Service;
 using ApplicationIT.Service.ComputerList;
-using ApplicationIT.Service.UserService;
+using ApplicationIT.Service.User.ShowUser;
 
 namespace EndPoint.Forms
 {
@@ -36,6 +36,7 @@ namespace EndPoint.Forms
             DGUsers.DataSource = userShows;
             DGUsers.Columns[0].HeaderText = "ID";
             DGUsers.Columns[1].HeaderText = "نام کامل";
+            DGUsers.Columns[2].HeaderText = "تعداد سیستم‌ها";
             DGUsers.Columns[0].Width = 40;
             DGUsers.Columns[1].Width = 229;
         }

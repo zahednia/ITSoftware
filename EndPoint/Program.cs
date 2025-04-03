@@ -1,6 +1,5 @@
 using EndPoint.Forms;
 using ApplicationIT.Database;
-using ApplicationIT.Service.UserService;
 using Microsoft.Extensions.DependencyInjection;
 using Persistence.Context;
 using ApplicationIT.Service.ComputerList;
@@ -9,6 +8,9 @@ using ApplicationIT.Service.HardwareService.HardwareDetail;
 using ApplicationIT.Service.HardwareService.SaveService;
 using ApplicationIT.Service.HardwareService.ShowHardware;
 using ApplicationIT.Service.HardwareService.HardwareHistory;
+using ApplicationIT.Service.User.AssignUserToComputer;
+using ApplicationIT.Service.User.ShowUser;
+using ApplicationIT.Service.User.UserComputerHistoryService;
 namespace EndPoint
 {
     internal static class Program
@@ -25,7 +27,9 @@ namespace EndPoint
             services.AddScoped<IComputerHardwareSaveService, ComputerHardwareSaveService>();
             services.AddScoped<IComputerHardwareQueryService, ComputerHardwareQueryService>();
             services.AddScoped<IHardwareDetails, HardwareDetails>();
+            services.AddScoped<IUserHistoryService, UserHistoryService>();
             services.AddScoped<IComputerHardwareHistoryService, ComputerHardwareHistoryService>();
+            services.AddScoped<IUserComputerAssignService, UserComputerAssignService>();
             services.AddTransient<IComputerList, ComputerListService>();
             services.AddTransient<IHardwareBrands, HardwareBrands>();
             services.AddTransient<FrmComputerList>();
@@ -42,6 +46,7 @@ namespace EndPoint
             var serviceGetList = (IUserShowService)ServiceProvider.GetService(typeof(IUserShowService));
             var ComputerList = (IComputerList)ServiceProvider.GetService(typeof(IComputerList));
             var HardwareBrands = (IHardwareBrands)ServiceProvider.GetService(typeof(IHardwareBrands));
+
             ApplicationConfiguration.Initialize();
             Application.Run(new FrmMain(serviceGetList , database , ComputerList , HardwareBrands ));
         }
