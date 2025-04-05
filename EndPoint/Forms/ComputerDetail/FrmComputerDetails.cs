@@ -17,7 +17,6 @@ using ApplicationIT.Service.HardwareService.HardwareHistory;
 using Domain.Entities;
 using ApplicationIT.Service.User.AssignUserToComputer;
 using ApplicationIT.Service.User.ShowUser;
-using ApplicationIT.Service.User.UserComputerHistory;
 using ApplicationIT.Service.User.UserComputerHistoryService;
 
 namespace EndPoint.Forms.ComputerDetail
