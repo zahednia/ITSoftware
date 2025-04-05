@@ -153,6 +153,8 @@ namespace EndPoint.Forms.ComputerDetail
         {
             foreach (var detailEntry in DetailMap)
             {
+                SaveComputerName();
+                SaveComputerIfNew();
                 var detailTextBox = detailEntry.Key;
                 int typeId = detailEntry.Value;
 
@@ -192,8 +194,6 @@ namespace EndPoint.Forms.ComputerDetail
 
                     assignService.AssignUserToComputer(dtoo);
                 }
-                SaveComputerName();
-                SaveComputerIfNew();
                 var dto = new SaveHardwareToComputerDto
                 {
                     ComputerId = _computerId,
