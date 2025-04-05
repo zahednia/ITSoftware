@@ -18,7 +18,6 @@ using ApplicationIT.Service.HardwareService.HardwareHistory;
 using Domain.Entities;
 using ApplicationIT.Service.User.AssignUserToComputer;
 using ApplicationIT.Service.User.ShowUser;
-using ApplicationIT.Service.User.UserComputerHistory;
 using ApplicationIT.Service.User.UserComputerHistoryService;
 
 namespace EndPoint.Forms.ComputerDetail
@@ -151,6 +150,7 @@ namespace EndPoint.Forms.ComputerDetail
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+
             foreach (var detailEntry in DetailMap)
             {
                 SaveComputerName();
@@ -182,18 +182,7 @@ namespace EndPoint.Forms.ComputerDetail
                     MessageBox.Show($"HardwareType با Id {typeId} پیدا نشد.");
                     continue;
                 }
-                if (cmbUsers.SelectedItem != null)
-                {
-                    var selectedUserId = (int)cmbUsers.SelectedValue;
 
-                    var dtoo = new AssignUserToComputerDto
-                    {
-                        ComputerId = _computerId,
-                        UserId = selectedUserId
-                    };
-
-                    assignService.AssignUserToComputer(dtoo);
-                }
                 var dto = new SaveHardwareToComputerDto
                 {
                     ComputerId = _computerId,
@@ -205,6 +194,18 @@ namespace EndPoint.Forms.ComputerDetail
                 saveService.SaveHardwareToComputer(dto);
             }
 
+            if (cmbUsers.SelectedItem != null)
+            {
+                var selectedUserId = (int)cmbUsers.SelectedValue;
+
+                var dtoo = new AssignUserToComputerDto
+                {
+                    ComputerId = _computerId,
+                    UserId = selectedUserId
+                };
+
+                assignService.AssignUserToComputer(dtoo);
+            }
             MessageBox.Show("سخت‌افزارهای وارد شده ذخیره شدند.");
         }
 
@@ -281,6 +282,7 @@ namespace EndPoint.Forms.ComputerDetail
                 if (computer != null)
                 {
                     computer.Name = txtName.Text;
+                    computer.Code= txtCode.Text;
                     database.SaveChanges();
                 }
             }
