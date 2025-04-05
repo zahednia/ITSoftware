@@ -1,4 +1,4 @@
-﻿using ApplicationIT.Service.HardwareService.HardwareDetail;
+using ApplicationIT.Service.HardwareService.HardwareDetail;
 using ApplicationIT.Service.HardwareService.HardwareBrand;
 using System;
 using System.Collections.Generic;

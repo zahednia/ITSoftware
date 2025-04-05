@@ -16,8 +16,5 @@ namespace Domain.Entities
         public int HardwareBrandId { get; set; }
         public string Detail { get; set; }
         public DateTime CreatedAt { get; set; }
-
-        public virtual ICollection<ComputerHardware> ComputerHardwares { get; set; }
-
     }
 }
