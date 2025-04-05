@@ -216,14 +216,26 @@ namespace EndPoint.Forms.ComputerDetail
             if (cmbUsers.SelectedItem != null)
             {
                 var selectedUserId = (int)cmbUsers.SelectedValue;
-                var dtoo = new AssignUserToComputerDto
+
+                // کاربر فعلی ذخیره‌شده در دیتابیس رو بگیر
+                var currentUserId = database.UserComputers
+                    .Where(x => x.ComputerID == _computerId && !x.IsDeactive)
+                    .Select(x => x.UserID)
+                    .FirstOrDefault();
+
+                // فقط اگر تغییر کرده بود، سیو کن
+                if (selectedUserId != currentUserId)
                 {
-                    ComputerId = _computerId,
-                    UserId = selectedUserId
-                };
-                assignService.AssignUserToComputer(dtoo);
-                userAssigned = true;
+                    var dtoo = new AssignUserToComputerDto
+                    {
+                        ComputerId = _computerId,
+                        UserId = selectedUserId
+                    };
+                    assignService.AssignUserToComputer(dtoo);
+                    userAssigned = true;
+                }
             }
+
 
             if (hardwareSaved || userAssigned)
             {
