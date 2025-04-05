@@ -12,6 +12,7 @@ namespace Domain.Entities
         public HardwareType hardwareType { get; set; }
         public int HardwareTypeId { get; set; }
         public string? Brand { get; set; }
+        public DateTime CreatedAt { get; set; }
 
         public List<HardwareDetail> HardwareDetail { get; set; }
     }

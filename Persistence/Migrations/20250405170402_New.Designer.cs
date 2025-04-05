@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Persistence.Context;
 
@@ -11,9 +12,11 @@ using Persistence.Context;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20250405170402_New")]
+    partial class New
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -58,6 +61,9 @@ namespace Persistence.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("HardwareDetailId")
+                        .HasColumnType("int");
+
                     b.Property<int>("HardwareId")
                         .HasColumnType("int");
 
@@ -70,6 +76,8 @@ namespace Persistence.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("ComputerId");
+
+                    b.HasIndex("HardwareDetailId");
 
                     b.HasIndex("HardwareId");
 
@@ -237,6 +245,10 @@ namespace Persistence.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Domain.Entities.HardwareDetail", null)
+                        .WithMany("ComputerHardwares")
+                        .HasForeignKey("HardwareDetailId");
+
                     b.HasOne("Domain.Entities.Hardware", "Hardware")
                         .WithMany()
                         .HasForeignKey("HardwareId")
@@ -334,6 +346,11 @@ namespace Persistence.Migrations
             modelBuilder.Entity("Domain.Entities.HardwareBrand", b =>
                 {
                     b.Navigation("HardwareDetail");
+                });
+
+            modelBuilder.Entity("Domain.Entities.HardwareDetail", b =>
+                {
+                    b.Navigation("ComputerHardwares");
                 });
 
             modelBuilder.Entity("Domain.Entities.HardwareType", b =>
