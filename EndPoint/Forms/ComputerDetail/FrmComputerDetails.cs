@@ -18,6 +18,7 @@ using Domain.Entities;
 using ApplicationIT.Service.User.AssignUserToComputer;
 using ApplicationIT.Service.User.ShowUser;
 using ApplicationIT.Service.User.UserComputerHistoryService;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace EndPoint.Forms.ComputerDetail
 {
@@ -325,7 +326,7 @@ namespace EndPoint.Forms.ComputerDetail
 
         private void lblUserHistoryCount_Click(object sender, EventArgs e)
         {
-            var form = new FrmUserHistory(_computerId, userHistoryService);
+            var form = Program.ServiceProvider.GetService<FrmHardwareHistory>();
             form.ShowDialog();
         }
 
@@ -339,8 +340,9 @@ namespace EndPoint.Forms.ComputerDetail
                 return;
             }
 
-            var form = new FrmHardwareHistory(history);
+            var form = Program.ServiceProvider.GetService<FrmHardwareHistory>();
             form.ShowDialog();
+
         }
 
         private void lblHMotherBoard_Click(object sender, EventArgs e)
@@ -379,8 +381,9 @@ namespace EndPoint.Forms.ComputerDetail
 
         private void btnAddHardware_Click(object sender, EventArgs e)
         {
-            FrmHardwareManager frmHardwareManager = new FrmHardwareManager(database);
-            frmHardwareManager.ShowDialog();
+            var form = Program.ServiceProvider.GetService<FrmHardwareManager>();
+            form.ShowDialog();
+
         }
     }
 }
