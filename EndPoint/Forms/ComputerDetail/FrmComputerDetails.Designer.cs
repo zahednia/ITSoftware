@@ -50,7 +50,6 @@ namespace EndPoint.Forms.ComputerDetail
             label7 = new Label();
             cmbUsers = new ComboBox();
             lblUserHistoryCount = new Label();
-            btnSmallSave = new Button();
             CBMotherBoardBrand = new ComboBox();
             CBMotherBoardDetail = new ComboBox();
             CBCPUBrand = new ComboBox();
@@ -74,12 +73,13 @@ namespace EndPoint.Forms.ComputerDetail
             // 
             // btnSave
             // 
+            btnSave.BackColor = Color.FromArgb(192, 255, 192);
             btnSave.Location = new Point(657, 77);
             btnSave.Name = "btnSave";
             btnSave.Size = new Size(202, 45);
             btnSave.TabIndex = 2;
             btnSave.Text = "Save";
-            btnSave.UseVisualStyleBackColor = true;
+            btnSave.UseVisualStyleBackColor = false;
             btnSave.Click += btnSave_Click;
             // 
             // lblName
@@ -228,16 +228,6 @@ namespace EndPoint.Forms.ComputerDetail
             lblUserHistoryCount.TabIndex = 31;
             lblUserHistoryCount.Text = "label8";
             lblUserHistoryCount.Click += lblUserHistoryCount_Click;
-            // 
-            // btnSmallSave
-            // 
-            btnSmallSave.Location = new Point(657, 128);
-            btnSmallSave.Name = "btnSmallSave";
-            btnSmallSave.Size = new Size(202, 27);
-            btnSmallSave.TabIndex = 29;
-            btnSmallSave.Text = "Save Name ,Code , User Only";
-            btnSmallSave.UseVisualStyleBackColor = true;
-            btnSmallSave.Click += btnSmallSave_Click;
             // 
             // CBMotherBoardBrand
             // 
@@ -397,12 +387,13 @@ namespace EndPoint.Forms.ComputerDetail
             // 
             // btnAddHardware
             // 
-            btnAddHardware.Location = new Point(657, 161);
+            btnAddHardware.BackColor = Color.FromArgb(192, 192, 255);
+            btnAddHardware.Location = new Point(657, 128);
             btnAddHardware.Name = "btnAddHardware";
-            btnAddHardware.Size = new Size(196, 29);
+            btnAddHardware.Size = new Size(202, 41);
             btnAddHardware.TabIndex = 42;
             btnAddHardware.Text = "ADD HARDWARE";
-            btnAddHardware.UseVisualStyleBackColor = true;
+            btnAddHardware.UseVisualStyleBackColor = false;
             btnAddHardware.Click += btnAddHardware_Click;
             // 
             // FrmComputerDetails
@@ -431,7 +422,6 @@ namespace EndPoint.Forms.ComputerDetail
             Controls.Add(CBMotherBoardBrand);
             Controls.Add(lblUserHistoryCount);
             Controls.Add(cmbUsers);
-            Controls.Add(btnSmallSave);
             Controls.Add(label7);
             Controls.Add(txtCode);
             Controls.Add(HGPU);
@@ -481,7 +471,6 @@ namespace EndPoint.Forms.ComputerDetail
         private Label label7;
         private ComboBox cmbUsers;
         private Label lblUserHistoryCount;
-        private Button btnSmallSave;
         private ComboBox CBMotherBoardBrand;
         private ComboBox CBMotherBoardDetail;
         private ComboBox CBCPUBrand;

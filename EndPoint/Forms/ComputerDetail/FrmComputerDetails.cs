@@ -250,16 +250,16 @@ namespace EndPoint.Forms.ComputerDetail
 
 
 
-        private void SaveComputerName()
-        {
-            var computer = database.Computers.FirstOrDefault(c => c.Id == _computerId);
-            if (computer != null)
-            {
-                computer.Name = txtName.Text;
-                computer.Code = txtCode.Text;
-                database.SaveChanges();
-            }
-        }
+        //private void SaveComputerName()
+        //{
+        //    var computer = database.Computers.FirstOrDefault(c => c.Id == _computerId);
+        //    if (computer != null)
+        //    {
+        //        computer.Name = txtName.Text;
+        //        computer.Code = txtCode.Text;
+        //        database.SaveChanges();
+        //    }
+        //}
 
         private void SaveComputerIfNew()
         {
@@ -278,21 +278,21 @@ namespace EndPoint.Forms.ComputerDetail
             }
         }
 
-        private void btnSmallSave_Click(object sender, EventArgs e)
-        {
-            if (cmbUsers.SelectedItem != null)
-            {
-                var selectedUserId = (int)cmbUsers.SelectedValue;
-                var dto = new AssignUserToComputerDto
-                {
-                    ComputerId = _computerId,
-                    UserId = selectedUserId
-                };
-                assignService.AssignUserToComputer(dto);
-            }
-            SaveComputerName();
-            MessageBox.Show("نام و کد ذخیره شد");
-        }
+        //private void btnSmallSave_Click(object sender, EventArgs e)
+        //{
+        //    if (cmbUsers.SelectedItem != null)
+        //    {
+        //        var selectedUserId = (int)cmbUsers.SelectedValue;
+        //        var dto = new AssignUserToComputerDto
+        //        {
+        //            ComputerId = _computerId,
+        //            UserId = selectedUserId
+        //        };
+        //        assignService.AssignUserToComputer(dto);
+        //    }
+        //    SaveComputerName();
+        //    MessageBox.Show("نام و کد ذخیره شد");
+        //}
 
         private void LoadUsers()
         {
@@ -326,7 +326,7 @@ namespace EndPoint.Forms.ComputerDetail
 
         private void lblUserHistoryCount_Click(object sender, EventArgs e)
         {
-            var form = Program.ServiceProvider.GetService<FrmHardwareHistory>();
+            var form = new FrmUserHistory(_computerId, userHistoryService);
             form.ShowDialog();
         }
 
@@ -340,8 +340,8 @@ namespace EndPoint.Forms.ComputerDetail
                 return;
             }
 
-            var form = Program.ServiceProvider.GetService<FrmHardwareHistory>();
-            form.ShowDialog();
+            FrmHardwareHistory frmHardwareHistory = new FrmHardwareHistory(history) ;
+            frmHardwareHistory.ShowDialog();
 
         }
 

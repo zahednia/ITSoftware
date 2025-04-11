@@ -76,7 +76,7 @@ namespace EndPoint.Forms
 
         private void lblTime_Click(object sender, EventArgs e)
         {
-           
+
         }
 
         private void computerListToolStripMenuItem_Click(object sender, EventArgs e)
@@ -151,6 +151,11 @@ namespace EndPoint.Forms
             var serviceAdd = (IUserShowService)Program.ServiceProvider.GetService(typeof(IUserShowService));
             FrmUsers frmUsers = new FrmUsers(serviceAdd);
             frmUsers.ShowDialog();
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

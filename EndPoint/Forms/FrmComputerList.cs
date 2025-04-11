@@ -49,10 +49,11 @@ namespace EndPoint.Forms
         {
             DGComputerList.DataSource = computerListDTOs;
             DGComputerList.Columns[0].HeaderText = "ID";
-            DGComputerList.Columns[1].HeaderText = "کد کامپیوتر";
+            DGComputerList.Columns[1].HeaderText = "کامپیوتر";
             DGComputerList.Columns[2].HeaderText = "CODE";
             DGComputerList.Columns[0].Width = 40;
-            DGComputerList.Columns[1].Width = 229;
+            DGComputerList.Columns[1].Width = 500;
+            DGComputerList.Columns[2].Width = 315;
         }
 
         private void BtnSearchComputerList_Click(object sender, EventArgs e)

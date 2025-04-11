@@ -49,8 +49,10 @@
             BtnComputerList = new Button();
             btnUserList = new Button();
             label1 = new Label();
+            pictureBox1 = new PictureBox();
             menuStrip1.SuspendLayout();
             statusStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // treeView1
@@ -96,7 +98,7 @@
             // userListToolStripMenuItem
             // 
             userListToolStripMenuItem.Name = "userListToolStripMenuItem";
-            userListToolStripMenuItem.Size = new Size(224, 26);
+            userListToolStripMenuItem.Size = new Size(147, 26);
             userListToolStripMenuItem.Text = "User List";
             userListToolStripMenuItem.Click += userListToolStripMenuItem_Click;
             // 
@@ -110,7 +112,7 @@
             // computerListToolStripMenuItem
             // 
             computerListToolStripMenuItem.Name = "computerListToolStripMenuItem";
-            computerListToolStripMenuItem.Size = new Size(224, 26);
+            computerListToolStripMenuItem.Size = new Size(184, 26);
             computerListToolStripMenuItem.Text = "Computer List";
             computerListToolStripMenuItem.Click += computerListToolStripMenuItem_Click;
             // 
@@ -159,32 +161,35 @@
             // 
             // btnAddComputer
             // 
-            btnAddComputer.Location = new Point(360, 61);
+            btnAddComputer.BackColor = Color.FromArgb(192, 192, 255);
+            btnAddComputer.Location = new Point(366, 188);
             btnAddComputer.Name = "btnAddComputer";
-            btnAddComputer.Size = new Size(233, 120);
+            btnAddComputer.Size = new Size(232, 120);
             btnAddComputer.TabIndex = 4;
             btnAddComputer.Text = "Add New Computer";
-            btnAddComputer.UseVisualStyleBackColor = true;
+            btnAddComputer.UseVisualStyleBackColor = false;
             btnAddComputer.Click += btnAddComputer_Click;
             // 
             // BtnComputerList
             // 
-            BtnComputerList.Location = new Point(619, 61);
+            BtnComputerList.BackColor = Color.FromArgb(128, 128, 255);
+            BtnComputerList.Location = new Point(604, 188);
             BtnComputerList.Name = "BtnComputerList";
-            BtnComputerList.Size = new Size(233, 120);
+            BtnComputerList.Size = new Size(276, 120);
             BtnComputerList.TabIndex = 5;
             BtnComputerList.Text = "Computer List";
-            BtnComputerList.UseVisualStyleBackColor = true;
+            BtnComputerList.UseVisualStyleBackColor = false;
             BtnComputerList.Click += BtnComputerList_Click;
             // 
             // btnUserList
             // 
-            btnUserList.Location = new Point(878, 61);
+            btnUserList.BackColor = Color.FromArgb(192, 192, 255);
+            btnUserList.Location = new Point(886, 188);
             btnUserList.Name = "btnUserList";
-            btnUserList.Size = new Size(233, 120);
+            btnUserList.Size = new Size(232, 120);
             btnUserList.TabIndex = 7;
             btnUserList.Text = "User List";
-            btnUserList.UseVisualStyleBackColor = true;
+            btnUserList.UseVisualStyleBackColor = false;
             btnUserList.Click += btnUserList_Click;
             // 
             // label1
@@ -197,11 +202,21 @@
             label1.TabIndex = 8;
             label1.Text = "Copyright © 2025 Kourosh Zahednia . All rights reserved";
             // 
+            // pictureBox1
+            // 
+            pictureBox1.Image = Frm.photo_2025_02_13_16_41_28;
+            pictureBox1.Location = new Point(366, 50);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(277, 99);
+            pictureBox1.TabIndex = 9;
+            pictureBox1.TabStop = false;
+            // 
             // FrmMain
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1146, 817);
+            Controls.Add(pictureBox1);
             Controls.Add(label1);
             Controls.Add(btnUserList);
             Controls.Add(BtnComputerList);
@@ -218,6 +233,7 @@
             menuStrip1.PerformLayout();
             statusStrip1.ResumeLayout(false);
             statusStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -239,5 +255,6 @@
         private Button BtnComputerList;
         private Button btnUserList;
         private Label label1;
+        private PictureBox pictureBox1;
     }
 }
