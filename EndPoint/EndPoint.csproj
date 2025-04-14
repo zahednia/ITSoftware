@@ -18,6 +18,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Forms\ComputerDetail\AddHardware\FrmHardwareManager.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Forms\Frm.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
