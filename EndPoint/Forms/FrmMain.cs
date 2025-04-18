@@ -9,6 +9,7 @@ using ApplicationIT.Service.User.AssignUserToComputer;
 using ApplicationIT.Service.User.ShowUser;
 using ApplicationIT.Service.User.UserComputerHistoryService;
 using EndPoint.Forms.ComputerDetail;
+using EndPoint.Forms.ComputerDetail.AddHardware;
 using Microsoft.EntityFrameworkCore.Query.Internal;
 using Microsoft.Extensions.DependencyInjection;
 using Persistence.Context;
@@ -55,6 +56,10 @@ namespace EndPoint.Forms
 
                 case "SNDComputerList":
                     RunFrmComputer();
+                    break;
+                case "NDAddHardware":
+                    var form = Program.ServiceProvider.GetService<FrmHardwareManager>();
+                    form.ShowDialog();
                     break;
             }
         }
@@ -156,6 +161,12 @@ namespace EndPoint.Forms
         private void pictureBox1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void BtnAddHardware_Click(object sender, EventArgs e)
+        {
+            var form = Program.ServiceProvider.GetService<FrmHardwareManager>();
+            form.ShowDialog();
         }
     }
 }

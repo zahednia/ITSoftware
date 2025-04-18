@@ -30,16 +30,19 @@
         {
             components = new System.ComponentModel.Container();
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             DGHardwareList = new DataGridView();
             hardwareBindingSource = new BindingSource(components);
             txtSearch = new TextBox();
             BtnAdd = new Button();
+            sqlDataAdapter1 = new Microsoft.Data.SqlClient.SqlDataAdapter();
             ((System.ComponentModel.ISupportInitialize)DGHardwareList).BeginInit();
             ((System.ComponentModel.ISupportInitialize)hardwareBindingSource).BeginInit();
             SuspendLayout();
             // 
             // DGHardwareList
             // 
+            DGHardwareList.BackgroundColor = SystemColors.Control;
             dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle1.BackColor = SystemColors.Control;
             dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F);
@@ -49,10 +52,18 @@
             dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
             DGHardwareList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             DGHardwareList.ColumnHeadersHeight = 29;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = SystemColors.Window;
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle2.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
+            DGHardwareList.DefaultCellStyle = dataGridViewCellStyle2;
             DGHardwareList.Location = new Point(12, 54);
             DGHardwareList.Name = "DGHardwareList";
             DGHardwareList.RowHeadersWidth = 51;
-            DGHardwareList.Size = new Size(674, 565);
+            DGHardwareList.Size = new Size(691, 565);
             DGHardwareList.TabIndex = 2;
             // 
             // txtSearch
@@ -75,7 +86,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(728, 639);
+            ClientSize = new Size(708, 621);
             Controls.Add(BtnAdd);
             Controls.Add(txtSearch);
             Controls.Add(DGHardwareList);
@@ -94,5 +105,6 @@
         private BindingSource hardwareBindingSource;
         private TextBox txtSearch;
         private Button BtnAdd;
+        private Microsoft.Data.SqlClient.SqlDataAdapter sqlDataAdapter1;
     }
 }
