@@ -1,91 +1,42 @@
 ﻿using ApplicationIT.Database;
 using Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace EndPoint.Forms.ComputerDetail
+namespace EndPoint.Forms.ComputerDetail.AddHardware
 {
     public partial class FrmHardwareManager : Form
     {
+        private int? editId = null;
+
         private readonly IDatabaseContext _db;
-        private int? editingId = null;
 
         public FrmHardwareManager(IDatabaseContext db)
         {
             InitializeComponent();
             _db = db;
-            DGHardwareList.CellContentClick += DGHardwareList_CellContentClick;
-            cmbHardwareType.SelectedIndexChanged += cmbHardwareType_SelectedIndexChanged;
-            cmbBrand.DropDownStyle = ComboBoxStyle.DropDown;
-            cmbBrand.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            cmbBrand.AutoCompleteSource = AutoCompleteSource.ListItems;
-            LoadHardwareTypes();
-            ConfigureGridColumns();
-            LoadHardwareList();
-            DGHardwareList.AllowUserToAddRows = false;
+            Load += FrmHardwareManager_Load;
         }
+
         private void FrmHardwareManager_Load(object sender, EventArgs e)
         {
-            cmbBrand.DropDownStyle = ComboBoxStyle.DropDown;
-            cmbBrand.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            cmbBrand.AutoCompleteSource = AutoCompleteSource.ListItems;
-
-            ConfigureGridColumns(); // تنظیم ساختار گرید (فقط یک‌بار اجرا می‌شه)
-            LoadHardwareTypes();    // لود کردن لیست نوع سخت‌افزارها
-
-            // لود اولیه لیست سخت‌افزارها
-            var data = (from d in _db.HardwareDetails
-                        join b in _db.HardwareBrands on d.HardwareBrandId equals b.Id
-                        join t in _db.HardwareTypes on d.HardwareTypeId equals t.Id
-                        select new
-                        {
-                            d.Id,
-                            Type = t.Type,
-                            Brand = b.Brand,
-                            Detail = d.Detail
-                        }).ToList();
-
-            foreach (var item in data)
-            {
-                DGHardwareList.Rows.Add(item.Id, item.Type, item.Brand, item.Detail);
-            }
-        }
-
-
-        private void LoadHardwareTypes()
-        {
-            var types = _db.HardwareTypes.ToList();
-            cmbHardwareType.DisplayMember = "Type";
-            cmbHardwareType.ValueMember = "Id";
-            cmbHardwareType.DataSource = types;
-        }
-
-        private void LoadBrands(int hardwareTypeId)
-        {
-            var brands = _db.HardwareBrands
-                .Where(x => x.HardwareTypeId == hardwareTypeId)
-                .Select(x => x.Brand)
-                .Distinct()
-                .ToList();
-
-            cmbBrand.Items.Clear();
-            cmbBrand.Items.AddRange(brands.ToArray());
-        }
-
-        private void cmbHardwareType_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (cmbHardwareType.SelectedValue is int selectedTypeId)
-                LoadBrands(selectedTypeId);
+            LoadHardwareList();
+            txtSearch.TextChanged += TxtSearch_TextChanged;
+            BtnAdd.Click += BtnAdd_Click;
+            DGHardwareList.CellContentClick += DGHardwareList_CellContentClick;
         }
 
         private void LoadHardwareList()
         {
-            DGHardwareList.Rows.Clear();
-
-            var data = (from d in _db.HardwareDetails
+            var list = (from d in _db.HardwareDetails
                         join b in _db.HardwareBrands on d.HardwareBrandId equals b.Id
                         join t in _db.HardwareTypes on d.HardwareTypeId equals t.Id
                         select new
@@ -96,120 +47,71 @@ namespace EndPoint.Forms.ComputerDetail
                             Detail = d.Detail
                         }).ToList();
 
-            foreach (var item in data)
-            {
-                DGHardwareList.Rows.Add(item.Id, item.Type, item.Brand, item.Detail);
-            }
-        }
+            hardwareBindingSource.DataSource = list;
 
-        private void ConfigureGridColumns()
-        {
             DGHardwareList.Columns.Clear();
+            DGHardwareList.AutoGenerateColumns = false;
 
-            DGHardwareList.Columns.Add("Id", "Id");
-            DGHardwareList.Columns["Id"].Visible = false;
+            DGHardwareList.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                DataPropertyName = "Id",
+                Name = "Id",
+                Visible = false
+            });
+            DGHardwareList.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                DataPropertyName = "Type",
+                Name = "Type",
+                HeaderText = "نوع سخت‌افزار"
+            });
+            DGHardwareList.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                DataPropertyName = "Brand",
+                Name = "Brand",
+                HeaderText = "برند"
+            });
+            DGHardwareList.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                DataPropertyName = "Detail",
+                Name = "Detail",
+                HeaderText = "مشخصات"
+            });
 
-            DGHardwareList.Columns.Add("Type", "نوع سخت‌افزار");
-            DGHardwareList.Columns.Add("Brand", "برند");
-            DGHardwareList.Columns.Add("Detail", "مشخصات");
-
-            var editBtn = new DataGridViewButtonColumn
+            DGHardwareList.Columns.Add(new DataGridViewButtonColumn
             {
                 Name = "Edit",
+                HeaderText = "",
                 Text = "ویرایش",
                 UseColumnTextForButtonValue = true
-            };
-            DGHardwareList.Columns.Add(editBtn);
+            });
 
-            var deleteBtn = new DataGridViewButtonColumn
+            DGHardwareList.Columns.Add(new DataGridViewButtonColumn
             {
                 Name = "Delete",
+                HeaderText = "",
                 Text = "حذف",
                 UseColumnTextForButtonValue = true
-            };
-            DGHardwareList.Columns.Add(deleteBtn);
+            });
+
+            DGHardwareList.DataSource = hardwareBindingSource;
         }
 
-        private void btnSave_Click(object sender, EventArgs e)
+        private void TxtSearch_TextChanged(object sender, EventArgs e)
         {
-            if (cmbHardwareType.SelectedItem == null || string.IsNullOrWhiteSpace(cmbBrand.Text) || string.IsNullOrWhiteSpace(txtDetail.Text))
-            {
-                MessageBox.Show("لطفاً تمام فیلدها را تکمیل کنید.");
-                return;
-            }
+            string search = txtSearch.Text.ToLower();
+            var filtered = (from d in _db.HardwareDetails
+                            join b in _db.HardwareBrands on d.HardwareBrandId equals b.Id
+                            join t in _db.HardwareTypes on d.HardwareTypeId equals t.Id
+                            where b.Brand.ToLower().Contains(search) || d.Detail.ToLower().Contains(search) || t.Type.ToLower().Contains(search)
+                            select new
+                            {
+                                d.Id,
+                                Type = t.Type,
+                                Brand = b.Brand,
+                                Detail = d.Detail
+                            }).ToList();
 
-            int typeId = (int)cmbHardwareType.SelectedValue;
-            string brandName = cmbBrand.Text.Trim();
-            string detail = txtDetail.Text.Trim();
-
-            var brand = _db.HardwareBrands.FirstOrDefault(x => x.HardwareTypeId == typeId && x.Brand == brandName);
-            if (brand == null)
-            {
-                brand = new HardwareBrand
-                {
-                    Brand = brandName,
-                    HardwareTypeId = typeId,
-                    CreatedAt = DateTime.Now,
-                };
-                _db.HardwareBrands.Add(brand);
-                _db.SaveChanges();
-            }
-
-            int brandId = brand.Id;
-
-            if (editingId.HasValue)
-            {
-                var item = _db.HardwareDetails.FirstOrDefault(x => x.Id == editingId.Value);
-                if (item != null)
-                {
-                    item.Detail = detail;
-                    item.HardwareTypeId = typeId;
-                    item.HardwareBrandId = brandId;
-                    _db.SaveChanges();
-
-                    foreach (DataGridViewRow row in DGHardwareList.Rows)
-                    {
-                        if ((int)row.Cells["Id"].Value == editingId.Value)
-                        {
-                            row.Cells["Type"].Value = _db.HardwareTypes.FirstOrDefault(t => t.Id == typeId)?.Type;
-                            row.Cells["Brand"].Value = brandName;
-                            row.Cells["Detail"].Value = detail;
-                            break;
-                        }
-                    }
-
-                    editingId = null;
-                    MessageBox.Show("ویرایش با موفقیت انجام شد.");
-                    cmbBrand.Text = "";
-                    txtDetail.Clear();
-                    return;
-                }
-            }
-
-            bool exists = _db.HardwareDetails.Any(x => x.Detail == detail && x.HardwareTypeId == typeId && x.HardwareBrandId == brandId);
-            if (exists)
-            {
-                MessageBox.Show("این مشخصات برای این برند و نوع از قبل ثبت شده است.");
-                return;
-            }
-
-            var newDetail = new HardwareDetail
-            {
-                Detail = detail,
-                HardwareTypeId = typeId,
-                HardwareBrandId = brandId,
-                CreatedAt = DateTime.Now,
-            };
-
-            _db.HardwareDetails.Add(newDetail);
-            _db.SaveChanges();
-
-            var typeName = _db.HardwareTypes.FirstOrDefault(t => t.Id == typeId)?.Type;
-            DGHardwareList.Rows.Add(newDetail.Id, typeName, brandName, detail);
-
-            MessageBox.Show("برند و مشخصات با موفقیت ذخیره شدند.");
-            cmbBrand.Text = "";
-            txtDetail.Clear();
+            hardwareBindingSource.DataSource = filtered;
         }
 
         private void DGHardwareList_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -217,38 +119,113 @@ namespace EndPoint.Forms.ComputerDetail
             if (e.RowIndex < 0 || e.ColumnIndex < 0)
                 return;
 
-            var idCell = DGHardwareList.Rows[e.RowIndex].Cells["Id"];
-            if (idCell == null || idCell.Value == null)
-                return; // اگر مقدار نداشت یعنی روی ردیف خالی کلیک شده
+            if (hardwareBindingSource == null || e.RowIndex >= hardwareBindingSource.Count)
+                return;
 
-            int id = (int)idCell.Value;
+            var row = (dynamic)hardwareBindingSource[e.RowIndex];
+            int id = row.Id;
 
+            string columnName = DGHardwareList.Columns[e.ColumnIndex].Name;
 
-            if (DGHardwareList.Columns[e.ColumnIndex].Name == "Delete")
+            if (columnName == "Edit")
             {
-                var item = _db.HardwareDetails.FirstOrDefault(x => x.Id == id);
-                if (item != null)
+        var item = _db.HardwareDetails
+        .Include(x => x.HardwareBrand)
+        .FirstOrDefault(x => x.Id == id);
+                bool isUsed = _db.ComputerHardwares.Any(ch => ch.Hardware.HardwareDetailId == id);
+                if (isUsed)
                 {
-                    var confirm = MessageBox.Show("آیا مطمئن هستید؟", "حذف", MessageBoxButtons.YesNo);
-                    if (confirm == DialogResult.Yes)
+                    MessageBox.Show("این قطعه به یک کامپیوتر متصل است و قابل ویرایش نیست.");
+                    return;
+                }
+                using (var frm = new FrmHardwareEdit(_db, id))
+                {
+                    if (frm.ShowDialog() == DialogResult.OK)
                     {
-                        _db.HardwareDetails.Remove(item);
-                        _db.SaveChanges();
-                        DGHardwareList.Rows.RemoveAt(e.RowIndex);
+                        var updated = _db.HardwareDetails
+                            .Include(x => x.HardwareBrand)
+                            .Include(x => x.HardwareType)
+                            .FirstOrDefault(x => x.Id == id);
+
+                        if (updated != null)
+                        {
+                            hardwareBindingSource[e.RowIndex] = new
+                            {
+                                Id = updated.Id,
+                                Type = updated.HardwareType.Type,
+                                Brand = updated.HardwareBrand.Brand,
+                                Detail = updated.Detail
+                            };
+                        }
                     }
                 }
             }
-            else if (DGHardwareList.Columns[e.ColumnIndex].Name == "Edit")
+            else if (columnName == "Delete")
             {
                 var item = _db.HardwareDetails.FirstOrDefault(x => x.Id == id);
                 if (item != null)
                 {
-                    editingId = item.Id;
-                    cmbHardwareType.SelectedValue = item.HardwareTypeId;
-                    cmbBrand.Text = _db.HardwareBrands.FirstOrDefault(b => b.Id == item.HardwareBrandId)?.Brand;
-                    txtDetail.Text = item.Detail;
+                    // بررسی اتصال به کامپیوتر
+                    bool isUsed = _db.ComputerHardwares.Any(ch => ch.Hardware.HardwareDetailId == id);
+                    if (isUsed)
+                    {
+                        MessageBox.Show("این قطعه به یک کامپیوتر متصل است و نمی‌توان آن را حذف کرد.");
+                        return;
+                    }
+
+                    var confirm = MessageBox.Show("آیا مطمئن هستید؟", "حذف", MessageBoxButtons.YesNo);
+                    if (confirm == DialogResult.Yes)
+                    {
+                        var brandId = item.HardwareBrandId;
+                        _db.HardwareDetails.Remove(item);
+                        _db.SaveChanges();
+
+                        // اگر برند دیگری با این برند وجود ندارد، برند را هم حذف کن
+                        bool hasOther = _db.HardwareDetails.Any(x => x.HardwareBrandId == brandId);
+                        if (!hasOther)
+                        {
+                            var brand = _db.HardwareBrands.FirstOrDefault(x => x.Id == brandId);
+                            if (brand != null)
+                            {
+                                _db.HardwareBrands.Remove(brand);
+                                _db.SaveChanges();
+                            }
+                        }
+
+                        hardwareBindingSource.RemoveAt(e.RowIndex);
+                    }
                 }
             }
+
+        }
+
+        private void BtnAdd_Click(object sender, EventArgs e)
+        {
+            using (var frm = new FrmHardwareEdit(_db))
+            {
+                if (frm.ShowDialog() == DialogResult.OK)
+                {
+                    var addedItem = _db.HardwareDetails
+                        .Include(x => x.HardwareBrand)
+                        .Include(x => x.HardwareType)
+                        .OrderByDescending(x => x.Id)
+                        .FirstOrDefault();
+
+                    if (addedItem != null)
+                        hardwareBindingSource.Add(new
+                        {
+                            Id = addedItem.Id,
+                            Type = addedItem.HardwareType.Type,
+                            Brand = addedItem.HardwareBrand.Brand,
+                            Detail = addedItem.Detail
+                        });
+                }
+            }
+        }
+
+        private void FrmHardwareManager_Load_1(object sender, EventArgs e)
+        {
+
         }
     }
 }

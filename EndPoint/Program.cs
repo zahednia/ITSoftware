@@ -12,6 +12,7 @@ using ApplicationIT.Service.User.AssignUserToComputer;
 using ApplicationIT.Service.User.ShowUser;
 using ApplicationIT.Service.User.UserComputerHistoryService;
 using EndPoint.Forms.ComputerDetail;
+using EndPoint.Forms.ComputerDetail.AddHardware;
 namespace EndPoint
 {
     internal static class Program
@@ -35,8 +36,8 @@ namespace EndPoint
             services.AddTransient<IHardwareBrands, HardwareBrands>();
             services.AddTransient<FrmComputerList>();
             services.AddTransient<FrmComputerDetails>();
-            services.AddTransient<FrmHardwareManager>();
             services.AddTransient<FrmHardwareHistory>();
+            services.AddTransient<FrmHardwareManager>();
             ServiceProvider = services.BuildServiceProvider();
         }
         [STAThread]

@@ -48,21 +48,23 @@
             // 
             txtSearchUsers.Location = new Point(12, 48);
             txtSearchUsers.Name = "txtSearchUsers";
-            txtSearchUsers.Size = new Size(606, 22);
+            txtSearchUsers.Size = new Size(606, 26);
             txtSearchUsers.TabIndex = 1;
+            txtSearchUsers.TextChanged += txtSearchUsers_TextChanged;
             // 
             // DGUsers
             // 
             DGUsers.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             DGUsers.Location = new Point(12, 94);
             DGUsers.Name = "DGUsers";
+            DGUsers.RowHeadersWidth = 51;
             DGUsers.Size = new Size(847, 441);
             DGUsers.TabIndex = 2;
             DGUsers.CellContentClick += DGUsers_CellContentClick;
             // 
             // FrmUsers
             // 
-            AutoScaleDimensions = new SizeF(7F, 14F);
+            AutoScaleDimensions = new SizeF(8F, 18F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(871, 547);
             Controls.Add(DGUsers);

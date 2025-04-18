@@ -19,6 +19,7 @@ using ApplicationIT.Service.User.AssignUserToComputer;
 using ApplicationIT.Service.User.ShowUser;
 using ApplicationIT.Service.User.UserComputerHistoryService;
 using Microsoft.Extensions.DependencyInjection;
+using EndPoint.Forms.ComputerDetail.AddHardware;
 
 namespace EndPoint.Forms.ComputerDetail
 {
@@ -383,7 +384,26 @@ namespace EndPoint.Forms.ComputerDetail
         {
             var form = Program.ServiceProvider.GetService<FrmHardwareManager>();
             form.ShowDialog();
-
+            ReloadHardwareComboBoxes();
         }
+        private void ReloadHardwareComboBoxes()
+        {
+            foreach (var brandEntry in BrandMap)
+            {
+                int typeId = brandEntry.Value;
+                var brands = hardwareBrands.GetBrands(typeId);
+                brandEntry.Key.Items.Clear();
+                brandEntry.Key.Items.AddRange(brands.ToArray());
+            }
+
+            foreach (var detailEntry in DetailMap)
+            {
+                int typeId = detailEntry.Value;
+                var details = hardwareDetails.GetDetail(typeId);
+                detailEntry.Key.Items.Clear();
+                detailEntry.Key.Items.AddRange(details.ToArray());
+            }
+        }
+
     }
 }

@@ -60,5 +60,13 @@ namespace EndPoint.Forms
             SettingGridview(Search);
             Cursor = Cursors.Default;
         }
+
+        private void txtSearchUsers_TextChanged(object sender, EventArgs e)
+        {
+            Cursor = Cursors.WaitCursor;
+            var Search = userShowService.Execute(txtSearchUsers.Text);
+            SettingGridview(Search);
+            Cursor = Cursors.Default;
+        }
     }
 }

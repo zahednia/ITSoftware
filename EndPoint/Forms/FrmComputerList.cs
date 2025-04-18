@@ -83,7 +83,7 @@ namespace EndPoint.Forms
                 var Assign = Program.ServiceProvider.GetService<IUserComputerAssignService>();
                 var userhistory = Program.ServiceProvider.GetService<IUserHistoryService>();
                 int computerId = Convert.ToInt32(DGComputerList.Rows[e.RowIndex].Cells["Id"].Value);
-                var form = new FrmComputerDetails(hardwareBrands, hardwareDetails, computerId, save, database, show, history, User, Assign , userhistory);
+                var form = new FrmComputerDetails(hardwareBrands, hardwareDetails, computerId, save, database, show, history, User, Assign, userhistory);
                 form.ShowDialog();
             }
         }
@@ -101,6 +101,14 @@ namespace EndPoint.Forms
             var userhistory = Program.ServiceProvider.GetService<IUserHistoryService>();
             var form = new FrmComputerDetails(hardwareBrands, hardwareDetails, 0, save, database, show, history, User, Assign, userhistory);
             form.ShowDialog();
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            Cursor = Cursors.WaitCursor;
+            var Search = computerlist.ComputerLists(textBox1.Text);
+            SettingGridview(Search);
+            Cursor = Cursors.Default;
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿
-namespace EndPoint.Forms.ComputerDetail
+﻿namespace EndPoint.Forms.ComputerDetail.AddHardware
 {
     partial class FrmHardwareManager
     {
@@ -29,82 +28,71 @@ namespace EndPoint.Forms.ComputerDetail
         /// </summary>
         private void InitializeComponent()
         {
-            btnSave = new Button();
-            cmbHardwareType = new ComboBox();
-            txtDetail = new TextBox();
-            cmbBrand = new ComboBox();
+            components = new System.ComponentModel.Container();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DGHardwareList = new DataGridView();
+            hardwareBindingSource = new BindingSource(components);
+            txtSearch = new TextBox();
+            BtnAdd = new Button();
             ((System.ComponentModel.ISupportInitialize)DGHardwareList).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)hardwareBindingSource).BeginInit();
             SuspendLayout();
-            // 
-            // btnSave
-            // 
-            btnSave.Location = new Point(598, 44);
-            btnSave.Name = "btnSave";
-            btnSave.Size = new Size(92, 29);
-            btnSave.TabIndex = 0;
-            btnSave.Text = "button1";
-            btnSave.UseVisualStyleBackColor = true;
-            btnSave.Click += btnSave_Click;
-            // 
-            // cmbHardwareType
-            // 
-            cmbHardwareType.FormattingEnabled = true;
-            cmbHardwareType.Location = new Point(24, 45);
-            cmbHardwareType.Name = "cmbHardwareType";
-            cmbHardwareType.Size = new Size(151, 28);
-            cmbHardwareType.TabIndex = 1;
-            // 
-            // txtDetail
-            // 
-            txtDetail.Location = new Point(427, 45);
-            txtDetail.Name = "txtDetail";
-            txtDetail.Size = new Size(163, 27);
-            txtDetail.TabIndex = 3;
-            // 
-            // cmbBrand
-            // 
-            cmbBrand.FormattingEnabled = true;
-            cmbBrand.Location = new Point(310, 45);
-            cmbBrand.Name = "cmbBrand";
-            cmbBrand.Size = new Size(109, 28);
-            cmbBrand.TabIndex = 1;
             // 
             // DGHardwareList
             // 
-            DGHardwareList.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            DGHardwareList.Location = new Point(1, 110);
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = SystemColors.Control;
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            DGHardwareList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            DGHardwareList.ColumnHeadersHeight = 29;
+            DGHardwareList.Location = new Point(12, 54);
             DGHardwareList.Name = "DGHardwareList";
             DGHardwareList.RowHeadersWidth = 51;
-            DGHardwareList.Size = new Size(733, 500);
-            DGHardwareList.TabIndex = 5;
+            DGHardwareList.Size = new Size(674, 565);
+            DGHardwareList.TabIndex = 2;
+            // 
+            // txtSearch
+            // 
+            txtSearch.Location = new Point(12, 8);
+            txtSearch.Multiline = true;
+            txtSearch.Name = "txtSearch";
+            txtSearch.Size = new Size(530, 40);
+            txtSearch.TabIndex = 1;
+            // 
+            // BtnAdd
+            // 
+            BtnAdd.Location = new Point(548, 8);
+            BtnAdd.Name = "BtnAdd";
+            BtnAdd.Size = new Size(155, 40);
+            BtnAdd.TabIndex = 0;
+            BtnAdd.Text = "Add";
             // 
             // FrmHardwareManager
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(736, 616);
+            ClientSize = new Size(728, 639);
+            Controls.Add(BtnAdd);
+            Controls.Add(txtSearch);
             Controls.Add(DGHardwareList);
-            Controls.Add(txtDetail);
-            Controls.Add(cmbBrand);
-            Controls.Add(cmbHardwareType);
-            Controls.Add(btnSave);
             Name = "FrmHardwareManager";
             Text = "FrmHardwareManager";
-            Load += FrmHardwareManager_Load;
+            Load += FrmHardwareManager_Load_1;
             ((System.ComponentModel.ISupportInitialize)DGHardwareList).EndInit();
+            ((System.ComponentModel.ISupportInitialize)hardwareBindingSource).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
-
-
         #endregion
 
-        private Button btnSave;
-        private ComboBox cmbHardwareType;
-        private TextBox txtDetail;
-        private ComboBox cmbBrand;
         private DataGridView DGHardwareList;
+        private BindingSource hardwareBindingSource;
+        private TextBox txtSearch;
+        private Button BtnAdd;
     }
 }
