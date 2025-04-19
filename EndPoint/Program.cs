@@ -1,4 +1,4 @@
-using EndPoint.Forms;
+﻿using EndPoint.Forms;
 using ApplicationIT.Database;
 using Microsoft.Extensions.DependencyInjection;
 using Persistence.Context;
@@ -13,6 +13,7 @@ using ApplicationIT.Service.User.ShowUser;
 using ApplicationIT.Service.User.UserComputerHistoryService;
 using EndPoint.Forms.ComputerDetail;
 using EndPoint.Forms.ComputerDetail.AddHardware;
+using System;
 namespace EndPoint
 {
     internal static class Program
@@ -38,7 +39,11 @@ namespace EndPoint
             services.AddTransient<FrmComputerDetails>();
             services.AddTransient<FrmHardwareHistory>();
             services.AddTransient<FrmHardwareManager>();
+            services.AddTransient<FrmMain>();
             ServiceProvider = services.BuildServiceProvider();
+
+
+
         }
         [STAThread]
         static void Main()
@@ -51,9 +56,9 @@ namespace EndPoint
             var serviceGetList = (IUserShowService)ServiceProvider.GetService(typeof(IUserShowService));
             var ComputerList = (IComputerList)ServiceProvider.GetService(typeof(IComputerList));
             var HardwareBrands = (IHardwareBrands)ServiceProvider.GetService(typeof(IHardwareBrands));
-
             ApplicationConfiguration.Initialize();
-            Application.Run(new FrmMain(serviceGetList , database , ComputerList , HardwareBrands ));
+            Application.Run(ServiceProvider.GetRequiredService<FrmMain>());
+
         }
     }
 }

@@ -58,7 +58,7 @@ namespace EndPoint.Forms
                     RunFrmComputer();
                     break;
                 case "NDAddHardware":
-                    var form = Program.ServiceProvider.GetService<FrmHardwareManager>();
+                    var form = Program.ServiceProvider.GetService<ComputerDetail.AddHardware.FrmHardwareManager>();
                     form.ShowDialog();
                     break;
             }
@@ -165,8 +165,22 @@ namespace EndPoint.Forms
 
         private void BtnAddHardware_Click(object sender, EventArgs e)
         {
-            var form = Program.ServiceProvider.GetService<FrmHardwareManager>();
+            var provider = Program.ServiceProvider;
+            if (provider == null)
+            {
+                MessageBox.Show("ServiceProvider نال است!");
+                return;
+            }
+
+            var form = provider.GetService<FrmHardwareManager>(); // از DI بگیرش نه new کن!
+            if (form == null)
+            {
+                MessageBox.Show("FrmHardwareManager نال است!");
+                return;
+            }
+
             form.ShowDialog();
         }
+
     }
 }

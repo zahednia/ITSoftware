@@ -24,6 +24,12 @@ namespace EndPoint.Forms.ComputerDetail.AddHardware
             InitializeComponent();
             _db = db;
             Load += FrmHardwareManager_Load;
+            if (_db == null)
+                MessageBox.Show("وابستگی _db نال است!");
+
+            // تست BindingSource
+            if (hardwareBindingSource == null)
+                MessageBox.Show("hardwareBindingSource نال است!");
         }
 
         private void FrmHardwareManager_Load(object sender, EventArgs e)
