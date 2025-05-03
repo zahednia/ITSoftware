@@ -19,7 +19,11 @@ namespace ApplicationIT.Database
         public DbSet<HardwareDetail> HardwareDetails { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<UserComputer> UserComputers { get; set; }
-        
+        public DbSet<ChType> ChTypes { get; set; }
+        public DbSet<ChStatus> ChStatuses { get; set; }
+        public DbSet<ChMain> ChMains { get; set; }
+        public DbSet<CheckList> CheckLists { get; set; }
+
         public int SaveChanges();
     }
 }

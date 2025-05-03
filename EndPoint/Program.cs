@@ -41,9 +41,6 @@ namespace EndPoint
             services.AddTransient<FrmHardwareManager>();
             services.AddTransient<FrmMain>();
             ServiceProvider = services.BuildServiceProvider();
-
-
-
         }
         [STAThread]
         static void Main()

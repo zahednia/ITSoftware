@@ -6,11 +6,37 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Persistence.Migrations
 {
     /// <inheritdoc />
-    public partial class Create : Migration
+    public partial class CreateOn : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "ChStatuses",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Status = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ChStatuses", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ChTypes",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Type = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ChTypes", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Computers",
                 columns: table => new
@@ -18,7 +44,8 @@ namespace Persistence.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Code = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Code = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -54,20 +81,21 @@ namespace Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "UserComputers",
+                name: "ChMains",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    UserID = table.Column<int>(type: "int", nullable: false),
-                    ComputerID = table.Column<int>(type: "int", nullable: false)
+                    ComputerId = table.Column<int>(type: "int", nullable: false),
+                    Detail = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UserComputers", x => x.Id);
+                    table.PrimaryKey("PK_ChMains", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_UserComputers_Computers_ComputerID",
-                        column: x => x.ComputerID,
+                        name: "FK_ChMains_Computers_ComputerId",
+                        column: x => x.ComputerId,
                         principalTable: "Computers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -80,7 +108,8 @@ namespace Persistence.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     HardwareTypeId = table.Column<int>(type: "int", nullable: false),
-                    Brand = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Brand = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -93,6 +122,68 @@ namespace Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "UserComputers",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserID = table.Column<int>(type: "int", nullable: false),
+                    ComputerID = table.Column<int>(type: "int", nullable: false),
+                    IsDeactive = table.Column<bool>(type: "bit", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserComputers", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_UserComputers_Computers_ComputerID",
+                        column: x => x.ComputerID,
+                        principalTable: "Computers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_UserComputers_Users_UserID",
+                        column: x => x.UserID,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CheckLists",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ChMainID = table.Column<int>(type: "int", nullable: false),
+                    ChTypeID = table.Column<int>(type: "int", nullable: false),
+                    ChStatusID = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CheckLists", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_CheckLists_ChMains_ChMainID",
+                        column: x => x.ChMainID,
+                        principalTable: "ChMains",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CheckLists_ChStatuses_ChStatusID",
+                        column: x => x.ChStatusID,
+                        principalTable: "ChStatuses",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CheckLists_ChTypes_ChTypeID",
+                        column: x => x.ChTypeID,
+                        principalTable: "ChTypes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "HardwareDetails",
                 columns: table => new
                 {
@@ -100,7 +191,8 @@ namespace Persistence.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     HardwareTypeId = table.Column<int>(type: "int", nullable: false),
                     HardwareBrandId = table.Column<int>(type: "int", nullable: false),
-                    Detail = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Detail = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -160,8 +252,7 @@ namespace Persistence.Migrations
                     HardwareId = table.Column<int>(type: "int", nullable: false),
                     IsDeactive = table.Column<bool>(type: "bit", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    HardwareDetailId = table.Column<int>(type: "int", nullable: true)
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -173,11 +264,6 @@ namespace Persistence.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ComputerHardwares_HardwareDetails_HardwareDetailId",
-                        column: x => x.HardwareDetailId,
-                        principalTable: "HardwareDetails",
-                        principalColumn: "Id");
-                    table.ForeignKey(
                         name: "FK_ComputerHardwares_Hardwares_HardwareId",
                         column: x => x.HardwareId,
                         principalTable: "Hardwares",
@@ -186,14 +272,29 @@ namespace Persistence.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_ComputerHardwares_ComputerId",
-                table: "ComputerHardwares",
+                name: "IX_CheckLists_ChMainID",
+                table: "CheckLists",
+                column: "ChMainID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CheckLists_ChStatusID",
+                table: "CheckLists",
+                column: "ChStatusID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CheckLists_ChTypeID",
+                table: "CheckLists",
+                column: "ChTypeID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ChMains_ComputerId",
+                table: "ChMains",
                 column: "ComputerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ComputerHardwares_HardwareDetailId",
+                name: "IX_ComputerHardwares_ComputerId",
                 table: "ComputerHardwares",
-                column: "HardwareDetailId");
+                column: "ComputerId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ComputerHardwares_HardwareId",
@@ -234,11 +335,19 @@ namespace Persistence.Migrations
                 name: "IX_UserComputers_ComputerID",
                 table: "UserComputers",
                 column: "ComputerID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserComputers_UserID",
+                table: "UserComputers",
+                column: "UserID");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "CheckLists");
+
             migrationBuilder.DropTable(
                 name: "ComputerHardwares");
 
@@ -246,10 +355,19 @@ namespace Persistence.Migrations
                 name: "UserComputers");
 
             migrationBuilder.DropTable(
-                name: "Users");
+                name: "ChMains");
+
+            migrationBuilder.DropTable(
+                name: "ChStatuses");
+
+            migrationBuilder.DropTable(
+                name: "ChTypes");
 
             migrationBuilder.DropTable(
                 name: "Hardwares");
+
+            migrationBuilder.DropTable(
+                name: "Users");
 
             migrationBuilder.DropTable(
                 name: "Computers");

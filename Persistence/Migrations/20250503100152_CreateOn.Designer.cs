@@ -12,8 +12,8 @@ using Persistence.Context;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20250403141254_AddUserNavigationOnComputer")]
-    partial class AddUserNavigationOnComputer
+    [Migration("20250503100152_CreateOn")]
+    partial class CreateOn
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,93 @@ namespace Persistence.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("Domain.Entities.ChMain", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("ComputerId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Detail")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ComputerId");
+
+                    b.ToTable("ChMains");
+                });
+
+            modelBuilder.Entity("Domain.Entities.ChStatus", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ChStatuses");
+                });
+
+            modelBuilder.Entity("Domain.Entities.ChType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ChTypes");
+                });
+
+            modelBuilder.Entity("Domain.Entities.CheckList", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("ChMainID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ChStatusID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ChTypeID")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ChMainID");
+
+                    b.HasIndex("ChStatusID");
+
+                    b.HasIndex("ChTypeID");
+
+                    b.ToTable("CheckLists");
+                });
 
             modelBuilder.Entity("Domain.Entities.Computer", b =>
                 {
@@ -61,9 +148,6 @@ namespace Persistence.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("HardwareDetailId")
-                        .HasColumnType("int");
-
                     b.Property<int>("HardwareId")
                         .HasColumnType("int");
 
@@ -76,8 +160,6 @@ namespace Persistence.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("ComputerId");
-
-                    b.HasIndex("HardwareDetailId");
 
                     b.HasIndex("HardwareId");
 
@@ -123,6 +205,9 @@ namespace Persistence.Migrations
                     b.Property<string>("Brand")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("HardwareTypeId")
                         .HasColumnType("int");
 
@@ -140,6 +225,9 @@ namespace Persistence.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Detail")
                         .IsRequired()
@@ -210,6 +298,15 @@ namespace Persistence.Migrations
                     b.Property<int>("ComputerID")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeactive")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("UserID")
                         .HasColumnType("int");
 
@@ -222,6 +319,44 @@ namespace Persistence.Migrations
                     b.ToTable("UserComputers");
                 });
 
+            modelBuilder.Entity("Domain.Entities.ChMain", b =>
+                {
+                    b.HasOne("Domain.Entities.Computer", "Computer")
+                        .WithMany()
+                        .HasForeignKey("ComputerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Computer");
+                });
+
+            modelBuilder.Entity("Domain.Entities.CheckList", b =>
+                {
+                    b.HasOne("Domain.Entities.ChMain", "ChMain")
+                        .WithMany()
+                        .HasForeignKey("ChMainID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Entities.ChStatus", "ChStatus")
+                        .WithMany()
+                        .HasForeignKey("ChStatusID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Entities.ChType", "ChType")
+                        .WithMany()
+                        .HasForeignKey("ChTypeID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ChMain");
+
+                    b.Navigation("ChStatus");
+
+                    b.Navigation("ChType");
+                });
+
             modelBuilder.Entity("Domain.Entities.ComputerHardware", b =>
                 {
                     b.HasOne("Domain.Entities.Computer", "Computer")
@@ -229,10 +364,6 @@ namespace Persistence.Migrations
                         .HasForeignKey("ComputerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("Domain.Entities.HardwareDetail", null)
-                        .WithMany("ComputerHardwares")
-                        .HasForeignKey("HardwareDetailId");
 
                     b.HasOne("Domain.Entities.Hardware", "Hardware")
                         .WithMany()
@@ -331,11 +462,6 @@ namespace Persistence.Migrations
             modelBuilder.Entity("Domain.Entities.HardwareBrand", b =>
                 {
                     b.Navigation("HardwareDetail");
-                });
-
-            modelBuilder.Entity("Domain.Entities.HardwareDetail", b =>
-                {
-                    b.Navigation("ComputerHardwares");
                 });
 
             modelBuilder.Entity("Domain.Entities.HardwareType", b =>
