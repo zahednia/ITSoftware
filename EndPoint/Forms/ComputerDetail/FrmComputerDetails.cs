@@ -20,6 +20,8 @@ using ApplicationIT.Service.User.ShowUser;
 using ApplicationIT.Service.User.UserComputerHistoryService;
 using Microsoft.Extensions.DependencyInjection;
 using EndPoint.Forms.ComputerDetail.AddHardware;
+using ApplicationIT.Service.CheckListService.CheckListQueryService;
+using EndPoint.Forms.ComputerDetail.CheckList;
 
 namespace EndPoint.Forms.ComputerDetail
 {
@@ -341,7 +343,7 @@ namespace EndPoint.Forms.ComputerDetail
                 return;
             }
 
-            FrmHardwareHistory frmHardwareHistory = new FrmHardwareHistory(history) ;
+            FrmHardwareHistory frmHardwareHistory = new FrmHardwareHistory(history);
             frmHardwareHistory.ShowDialog();
 
         }
@@ -405,5 +407,10 @@ namespace EndPoint.Forms.ComputerDetail
             }
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            FrmCheckList frmCheckList = new FrmCheckList(database , _computerId);
+            frmCheckList.ShowDialog();
+        }
     }
 }

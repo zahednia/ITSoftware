@@ -14,6 +14,9 @@ using ApplicationIT.Service.User.UserComputerHistoryService;
 using EndPoint.Forms.ComputerDetail;
 using EndPoint.Forms.ComputerDetail.AddHardware;
 using System;
+using ApplicationIT.Service.CheckListService.CheckListQueryService;
+using EndPoint.Forms.ComputerDetail.CheckList;
+using ApplicationIT.Service.CheckListService.CheckListCreate;
 namespace EndPoint
 {
     internal static class Program
@@ -33,6 +36,8 @@ namespace EndPoint
             services.AddScoped<IUserHistoryService, UserHistoryService>();
             services.AddScoped<IComputerHardwareHistoryService, ComputerHardwareHistoryService>();
             services.AddScoped<IUserComputerAssignService, UserComputerAssignService>();
+            services.AddScoped<ICheckListQueryService, CheckListQueryService>();
+            services.AddScoped<ICheckListCreateService, CheckListCreateService>();
             services.AddTransient<IComputerList, ComputerListService>();
             services.AddTransient<IHardwareBrands, HardwareBrands>();
             services.AddTransient<FrmComputerList>();
@@ -40,6 +45,8 @@ namespace EndPoint
             services.AddTransient<FrmHardwareHistory>();
             services.AddTransient<FrmHardwareManager>();
             services.AddTransient<FrmMain>();
+            services.AddTransient<FrmCheckList>();
+            services.AddTransient<FrmCheckListItem>();
             ServiceProvider = services.BuildServiceProvider();
         }
         [STAThread]
