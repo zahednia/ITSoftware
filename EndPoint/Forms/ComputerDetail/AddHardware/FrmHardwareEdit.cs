@@ -18,10 +18,26 @@ namespace EndPoint.Forms.ComputerDetail.AddHardware
             _editId = id;
             Load += FrmHardwareEdit_Load;
         }
+        private void LoadBrandsByType(int hardwareTypeId)
+        {
+            var brands = _db.HardwareBrands
+                .Where(x => x.HardwareTypeId == hardwareTypeId)
+                .Select(x => x.Brand)
+                .Distinct()
+                .ToList();
+
+            cmbBrand.DataSource = null;
+            cmbBrand.Items.Clear();
+            cmbBrand.Items.AddRange(brands.ToArray());
+        }
+
 
         private void FrmHardwareEdit_Load(object sender, EventArgs e)
         {
             LoadHardwareTypes();
+            cmbBrand.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            cmbBrand.AutoCompleteSource = AutoCompleteSource.ListItems;
+            cmbBrand.DropDownStyle = ComboBoxStyle.DropDown;
 
             if (_editId.HasValue)
             {
@@ -29,8 +45,9 @@ namespace EndPoint.Forms.ComputerDetail.AddHardware
                 if (item != null)
                 {
                     cmbHardwareType.SelectedValue = item.HardwareTypeId;
-                    txtBrand.Text = _db.HardwareBrands.FirstOrDefault(x => x.Id == item.HardwareBrandId)?.Brand;
                     txtDetail.Text = item.Detail;
+                    LoadBrandsByType(item.HardwareTypeId);
+                    cmbBrand.Text = _db.HardwareBrands.FirstOrDefault(x => x.Id == item.HardwareBrandId)?.Brand;
                 }
             }
         }
@@ -44,14 +61,14 @@ namespace EndPoint.Forms.ComputerDetail.AddHardware
 
         private void btnSave_Click_1(object sender, EventArgs e)
         {
-            if (cmbHardwareType.SelectedItem == null || string.IsNullOrWhiteSpace(txtBrand.Text) || string.IsNullOrWhiteSpace(txtDetail.Text))
+            if (cmbHardwareType.SelectedItem == null || string.IsNullOrWhiteSpace(cmbBrand.Text) || string.IsNullOrWhiteSpace(txtDetail.Text))
             {
                 MessageBox.Show("لطفاً تمام فیلدها را تکمیل کنید.");
                 return;
             }
 
             int typeId = (int)cmbHardwareType.SelectedValue;
-            string brandName = txtBrand.Text.Trim();
+            string brandName = cmbBrand.Text.Trim();
             string detail = txtDetail.Text.Trim();
 
             var brand = _db.HardwareBrands.FirstOrDefault(x => x.HardwareTypeId == typeId && x.Brand == brandName);
@@ -114,6 +131,14 @@ namespace EndPoint.Forms.ComputerDetail.AddHardware
             _db.SaveChanges();
 
             DialogResult = DialogResult.OK;
+        }
+
+        private void cmbHardwareType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmbHardwareType.SelectedValue is int typeId)
+            {
+                LoadBrandsByType(typeId);
+            }
         }
     }
 }

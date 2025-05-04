@@ -31,7 +31,7 @@
             cmbHardwareType = new ComboBox();
             txtDetail = new TextBox();
             btnSave = new Button();
-            txtBrand = new TextBox();
+            cmbBrand = new ComboBox();
             SuspendLayout();
             // 
             // cmbHardwareType
@@ -41,17 +41,18 @@
             cmbHardwareType.Name = "cmbHardwareType";
             cmbHardwareType.Size = new Size(151, 28);
             cmbHardwareType.TabIndex = 0;
+            cmbHardwareType.SelectedIndexChanged += cmbHardwareType_SelectedIndexChanged;
             // 
             // txtDetail
             // 
-            txtDetail.Location = new Point(451, 87);
+            txtDetail.Location = new Point(413, 87);
             txtDetail.Name = "txtDetail";
-            txtDetail.Size = new Size(125, 27);
+            txtDetail.Size = new Size(202, 27);
             txtDetail.TabIndex = 2;
             // 
             // btnSave
             // 
-            btnSave.Location = new Point(635, 89);
+            btnSave.Location = new Point(630, 85);
             btnSave.Name = "btnSave";
             btnSave.Size = new Size(94, 29);
             btnSave.TabIndex = 4;
@@ -59,20 +60,21 @@
             btnSave.UseVisualStyleBackColor = true;
             btnSave.Click += btnSave_Click_1;
             // 
-            // txtBrand
+            // cmbBrand
             // 
-            txtBrand.Location = new Point(278, 87);
-            txtBrand.Name = "txtBrand";
-            txtBrand.Size = new Size(125, 27);
-            txtBrand.TabIndex = 2;
+            cmbBrand.FormattingEnabled = true;
+            cmbBrand.Location = new Point(244, 86);
+            cmbBrand.Name = "cmbBrand";
+            cmbBrand.Size = new Size(151, 28);
+            cmbBrand.TabIndex = 5;
             // 
             // FrmHardwareEdit
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(791, 181);
+            Controls.Add(cmbBrand);
             Controls.Add(btnSave);
-            Controls.Add(txtBrand);
             Controls.Add(txtDetail);
             Controls.Add(cmbHardwareType);
             Name = "FrmHardwareEdit";
@@ -86,6 +88,6 @@
         private ComboBox cmbHardwareType;
         private TextBox txtDetail;
         private Button btnSave;
-        private TextBox txtBrand;
+        private ComboBox cmbBrand;
     }
 }
