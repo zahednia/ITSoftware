@@ -37,7 +37,7 @@
             // cmbHardwareType
             // 
             cmbHardwareType.FormattingEnabled = true;
-            cmbHardwareType.Location = new Point(42, 87);
+            cmbHardwareType.Location = new Point(42, 86);
             cmbHardwareType.Name = "cmbHardwareType";
             cmbHardwareType.Size = new Size(151, 28);
             cmbHardwareType.TabIndex = 0;

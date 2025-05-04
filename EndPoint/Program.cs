@@ -17,6 +17,7 @@ using System;
 using ApplicationIT.Service.CheckListService.CheckListQueryService;
 using EndPoint.Forms.ComputerDetail.CheckList;
 using ApplicationIT.Service.CheckListService.CheckListCreate;
+using ApplicationIT.Service.CheckListService.ChecklistGrid;
 namespace EndPoint
 {
     internal static class Program
@@ -38,6 +39,7 @@ namespace EndPoint
             services.AddScoped<IUserComputerAssignService, UserComputerAssignService>();
             services.AddScoped<ICheckListQueryService, CheckListQueryService>();
             services.AddScoped<ICheckListCreateService, CheckListCreateService>();
+            services.AddScoped<ICheckListGridService, CheckListGridService>();
             services.AddTransient<IComputerList, ComputerListService>();
             services.AddTransient<IHardwareBrands, HardwareBrands>();
             services.AddTransient<FrmComputerList>();
