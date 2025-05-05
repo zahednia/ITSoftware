@@ -50,7 +50,6 @@
             txtSearch.Name = "txtSearch";
             txtSearch.Size = new Size(532, 23);
             txtSearch.TabIndex = 1;
-            txtSearch.TextChanged += this.txtSearch_TextChanged;
             // 
             // FrmTimeSheet
             // 
