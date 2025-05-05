@@ -55,7 +55,6 @@ namespace ApplicationIT.Service.CheckListService.ChecklistGrid
         {
             var item = items.FirstOrDefault(x => x.ChTypeID == chTypeId);
             if (item == null) return "-";
-
             return _context.ChStatuses.FirstOrDefault(s => s.Id == item.ChStatusID)?.Status ?? "-";
         }
     }
