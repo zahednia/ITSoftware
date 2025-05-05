@@ -10,6 +10,7 @@ using ApplicationIT.Service.User.ShowUser;
 using ApplicationIT.Service.User.UserComputerHistoryService;
 using EndPoint.Forms.ComputerDetail;
 using EndPoint.Forms.ComputerDetail.AddHardware;
+using EndPoint.Forms.ComputerDetail.TimeSheet;
 using Microsoft.EntityFrameworkCore.Query.Internal;
 using Microsoft.Extensions.DependencyInjection;
 using Persistence.Context;
@@ -182,5 +183,10 @@ namespace EndPoint.Forms
             form.ShowDialog();
         }
 
+        private void BtnTimeSheet_Click(object sender, EventArgs e)
+        {
+            var form = Program.ServiceProvider.GetService<FrmTimeSheet>();
+            form.ShowDialog();
+        }
     }
 }

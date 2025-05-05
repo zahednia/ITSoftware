@@ -18,6 +18,7 @@ using ApplicationIT.Service.CheckListService.CheckListQueryService;
 using EndPoint.Forms.ComputerDetail.CheckList;
 using ApplicationIT.Service.CheckListService.CheckListCreate;
 using ApplicationIT.Service.CheckListService.ChecklistGrid;
+using EndPoint.Forms.ComputerDetail.TimeSheet;
 namespace EndPoint
 {
     internal static class Program
@@ -49,6 +50,8 @@ namespace EndPoint
             services.AddTransient<FrmMain>();
             services.AddTransient<FrmCheckList>();
             services.AddTransient<FrmCheckListItem>();
+            services.AddTransient<FrmTimeSheet>();
+            services.AddTransient<FrmAddTimeSheet>();
             ServiceProvider = services.BuildServiceProvider();
         }
         [STAThread]

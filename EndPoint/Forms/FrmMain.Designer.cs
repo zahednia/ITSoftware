@@ -238,6 +238,7 @@
             BtnTimeSheet.TabIndex = 11;
             BtnTimeSheet.Text = "button1";
             BtnTimeSheet.UseVisualStyleBackColor = true;
+            BtnTimeSheet.Click += BtnTimeSheet_Click;
             // 
             // FrmMain
             // 
