@@ -54,7 +54,7 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold);
-            label1.Location = new Point(125, 61);
+            label1.Location = new Point(107, 57);
             label1.Name = "label1";
             label1.Size = new Size(50, 25);
             label1.TabIndex = 0;
@@ -64,7 +64,7 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold);
-            label2.Location = new Point(348, 61);
+            label2.Location = new Point(330, 57);
             label2.Name = "label2";
             label2.Size = new Size(100, 25);
             label2.TabIndex = 1;
@@ -74,7 +74,7 @@
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold);
-            label3.Location = new Point(645, 63);
+            label3.Location = new Point(627, 59);
             label3.Name = "label3";
             label3.Size = new Size(86, 25);
             label3.TabIndex = 2;
@@ -84,7 +84,7 @@
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold);
-            label4.Location = new Point(123, 148);
+            label4.Location = new Point(105, 144);
             label4.Name = "label4";
             label4.Size = new Size(52, 25);
             label4.TabIndex = 3;
@@ -94,7 +94,7 @@
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold);
-            label5.Location = new Point(348, 148);
+            label5.Location = new Point(330, 144);
             label5.Name = "label5";
             label5.Size = new Size(100, 25);
             label5.TabIndex = 4;
@@ -104,7 +104,7 @@
             // 
             label6.AutoSize = true;
             label6.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold);
-            label6.Location = new Point(645, 148);
+            label6.Location = new Point(627, 144);
             label6.Name = "label6";
             label6.Size = new Size(37, 25);
             label6.TabIndex = 5;
@@ -114,7 +114,7 @@
             // 
             label7.AutoSize = true;
             label7.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold);
-            label7.Location = new Point(125, 232);
+            label7.Location = new Point(107, 228);
             label7.Name = "label7";
             label7.Size = new Size(38, 25);
             label7.TabIndex = 6;
@@ -141,7 +141,7 @@
             // CBFan
             // 
             CBFan.FormattingEnabled = true;
-            CBFan.Location = new Point(189, 63);
+            CBFan.Location = new Point(171, 59);
             CBFan.Name = "CBFan";
             CBFan.Size = new Size(121, 23);
             CBFan.TabIndex = 9;
@@ -149,7 +149,7 @@
             // CBHardDisk
             // 
             CBHardDisk.FormattingEnabled = true;
-            CBHardDisk.Location = new Point(461, 63);
+            CBHardDisk.Location = new Point(443, 59);
             CBHardDisk.Name = "CBHardDisk";
             CBHardDisk.Size = new Size(121, 23);
             CBHardDisk.TabIndex = 9;
@@ -157,7 +157,7 @@
             // CBMonitor
             // 
             CBMonitor.FormattingEnabled = true;
-            CBMonitor.Location = new Point(737, 63);
+            CBMonitor.Location = new Point(719, 59);
             CBMonitor.Name = "CBMonitor";
             CBMonitor.Size = new Size(121, 23);
             CBMonitor.TabIndex = 9;
@@ -165,7 +165,7 @@
             // CBCase
             // 
             CBCase.FormattingEnabled = true;
-            CBCase.Location = new Point(189, 148);
+            CBCase.Location = new Point(171, 144);
             CBCase.Name = "CBCase";
             CBCase.Size = new Size(121, 23);
             CBCase.TabIndex = 9;
@@ -173,7 +173,7 @@
             // CBAnti
             // 
             CBAnti.FormattingEnabled = true;
-            CBAnti.Location = new Point(461, 148);
+            CBAnti.Location = new Point(443, 144);
             CBAnti.Name = "CBAnti";
             CBAnti.Size = new Size(121, 23);
             CBAnti.TabIndex = 9;
@@ -181,7 +181,7 @@
             // CBOs
             // 
             CBOs.FormattingEnabled = true;
-            CBOs.Location = new Point(737, 150);
+            CBOs.Location = new Point(719, 146);
             CBOs.Name = "CBOs";
             CBOs.Size = new Size(121, 23);
             CBOs.TabIndex = 9;
@@ -189,7 +189,7 @@
             // CBCD
             // 
             CBCD.FormattingEnabled = true;
-            CBCD.Location = new Point(189, 232);
+            CBCD.Location = new Point(171, 228);
             CBCD.Name = "CBCD";
             CBCD.Size = new Size(121, 23);
             CBCD.TabIndex = 9;
@@ -197,7 +197,7 @@
             // CBSurveyor
             // 
             CBSurveyor.FormattingEnabled = true;
-            CBSurveyor.Location = new Point(461, 230);
+            CBSurveyor.Location = new Point(443, 226);
             CBSurveyor.Name = "CBSurveyor";
             CBSurveyor.Size = new Size(121, 23);
             CBSurveyor.TabIndex = 9;
@@ -206,7 +206,7 @@
             // 
             label10.AutoSize = true;
             label10.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold);
-            label10.Location = new Point(348, 230);
+            label10.Location = new Point(330, 226);
             label10.Name = "label10";
             label10.Size = new Size(93, 25);
             label10.TabIndex = 7;
@@ -222,12 +222,14 @@
             // 
             // BtnSave
             // 
+            BtnSave.BackColor = Color.FromArgb(192, 255, 192);
+            BtnSave.ForeColor = SystemColors.ControlText;
             BtnSave.Location = new Point(645, 313);
             BtnSave.Name = "BtnSave";
             BtnSave.Size = new Size(195, 62);
             BtnSave.TabIndex = 11;
             BtnSave.Text = "SAVE";
-            BtnSave.UseVisualStyleBackColor = true;
+            BtnSave.UseVisualStyleBackColor = false;
             BtnSave.Click += BtnSave_Click;
             // 
             // FrmCheckListItem

@@ -23,6 +23,7 @@ namespace Persistence.Context
         public DbSet<ChStatus> ChStatuses { get; set; }
         public DbSet<ChMain> ChMains { get; set; }
         public DbSet<CheckList> CheckLists { get; set; }
+        public DbSet<Timesheet> Timesheets { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

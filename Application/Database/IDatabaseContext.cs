@@ -23,6 +23,7 @@ namespace ApplicationIT.Database
         public DbSet<ChStatus> ChStatuses { get; set; }
         public DbSet<ChMain> ChMains { get; set; }
         public DbSet<CheckList> CheckLists { get; set; }
+        public DbSet<Timesheet> Timesheets { get; set; }
 
         public int SaveChanges();
     }

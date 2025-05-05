@@ -36,33 +36,31 @@
             // DGItems
             // 
             DGItems.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            DGItems.Location = new Point(7, 88);
-            DGItems.Margin = new Padding(3, 4, 3, 4);
+            DGItems.Location = new Point(6, 66);
             DGItems.Name = "DGItems";
             DGItems.RowHeadersWidth = 51;
-            DGItems.Size = new Size(898, 508);
+            DGItems.Size = new Size(786, 381);
             DGItems.TabIndex = 0;
             DGItems.CellContentClick += DGItems_CellContentClick;
             // 
             // btnAddItem
             // 
-            btnAddItem.Location = new Point(699, 28);
-            btnAddItem.Margin = new Padding(3, 4, 3, 4);
+            btnAddItem.BackColor = Color.FromArgb(192, 255, 192);
+            btnAddItem.Location = new Point(6, 12);
             btnAddItem.Name = "btnAddItem";
-            btnAddItem.Size = new Size(155, 31);
+            btnAddItem.Size = new Size(180, 39);
             btnAddItem.TabIndex = 1;
             btnAddItem.Text = "Add ITEM";
-            btnAddItem.UseVisualStyleBackColor = true;
+            btnAddItem.UseVisualStyleBackColor = false;
             btnAddItem.Click += btnAddItem_Click;
             // 
             // FrmCheckList
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(919, 612);
+            ClientSize = new Size(804, 459);
             Controls.Add(btnAddItem);
             Controls.Add(DGItems);
-            Margin = new Padding(3, 4, 3, 4);
             Name = "FrmCheckList";
             Text = "FrmCheckList";
             Load += FrmCheckList_Load;
