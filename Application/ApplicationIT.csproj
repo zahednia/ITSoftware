@@ -23,4 +23,8 @@
     <ProjectReference Include="..\Domain\Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Service\HardwareService\TimeSheet\" />
+  </ItemGroup>
+
 </Project>
