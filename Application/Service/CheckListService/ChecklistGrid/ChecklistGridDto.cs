@@ -8,6 +8,7 @@ namespace ApplicationIT.Service.CheckListService.CheckListView
 {
     public class ChecklistGridDto
     {
+        public DateTime date { get; set; }
         public string FAN { get; set; }
         public string HARD { get; set; }
         public string MONITOR { get; set; }
@@ -16,7 +17,6 @@ namespace ApplicationIT.Service.CheckListService.CheckListView
         public string OS { get; set; }
         public string CD { get; set; }
         public string Detail { get; set; }
-        public DateTime date { get; set; }
     }
 
 

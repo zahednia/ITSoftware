@@ -34,6 +34,7 @@ namespace ApplicationIT.Service.CheckListService.ChecklistGrid
 
                 var view = new ChecklistGridDto
                 {
+                    date = main.CreatedAt,
                     FAN = GetStatus(items, 1),
                     HARD = GetStatus(items, 2),
                     MONITOR = GetStatus(items, 3),
@@ -42,7 +43,6 @@ namespace ApplicationIT.Service.CheckListService.ChecklistGrid
                     OS = GetStatus(items, 6),
                     CD = GetStatus(items, 7),
                     Detail = main.Detail,
-                    date = main.CreatedAt,
                 };
 
                 result.Add(view);
