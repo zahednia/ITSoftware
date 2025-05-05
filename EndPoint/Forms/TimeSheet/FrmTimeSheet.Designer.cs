@@ -31,6 +31,7 @@
             components = new System.ComponentModel.Container();
             bindingSource1 = new BindingSource(components);
             DGTimeSheet = new DataGridView();
+            txtSearch = new TextBox();
             ((System.ComponentModel.ISupportInitialize)bindingSource1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)DGTimeSheet).BeginInit();
             SuspendLayout();
@@ -38,28 +39,38 @@
             // DGTimeSheet
             // 
             DGTimeSheet.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            DGTimeSheet.Dock = DockStyle.Fill;
-            DGTimeSheet.Location = new Point(0, 0);
+            DGTimeSheet.Location = new Point(0, 63);
             DGTimeSheet.Name = "DGTimeSheet";
-            DGTimeSheet.Size = new Size(800, 450);
+            DGTimeSheet.Size = new Size(800, 387);
             DGTimeSheet.TabIndex = 0;
+            // 
+            // txtSearch
+            // 
+            txtSearch.Location = new Point(12, 21);
+            txtSearch.Name = "txtSearch";
+            txtSearch.Size = new Size(532, 23);
+            txtSearch.TabIndex = 1;
+            txtSearch.TextChanged += this.txtSearch_TextChanged;
             // 
             // FrmTimeSheet
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(txtSearch);
             Controls.Add(DGTimeSheet);
             Name = "FrmTimeSheet";
             Text = "FrmTimeSheet";
             ((System.ComponentModel.ISupportInitialize)bindingSource1).EndInit();
             ((System.ComponentModel.ISupportInitialize)DGTimeSheet).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
 
         private BindingSource bindingSource1;
         private DataGridView DGTimeSheet;
+        private TextBox txtSearch;
     }
 }
