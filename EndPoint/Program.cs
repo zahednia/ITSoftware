@@ -21,6 +21,7 @@ using ApplicationIT.Service.CheckListService.ChecklistGrid;
 using EndPoint.Forms.ComputerDetail.TimeSheet;
 using ApplicationIT.Service.TimeSheet.TimeSheetUser;
 using ApplicationIT.Service.TimeSheet.TimeSheetSave;
+using ApplicationIT.Service.TimeSheet.TimesheetReminder;
 namespace EndPoint
 {
     internal static class Program
@@ -45,6 +46,7 @@ namespace EndPoint
             services.AddScoped<ICheckListGridService, CheckListGridService>();
             services.AddScoped<ITimesheetQueryService, TimesheetQueryService>();
             services.AddScoped<ITimesheetCreateService, TimesheetCreateService>();
+            services.AddScoped<ITimesheetReminderService, TimesheetReminderService>();
             services.AddTransient<IComputerList, ComputerListService>();
             services.AddTransient<IHardwareBrands, HardwareBrands>();
             services.AddTransient<FrmComputerList>();

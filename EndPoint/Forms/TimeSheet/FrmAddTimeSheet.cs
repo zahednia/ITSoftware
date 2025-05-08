@@ -27,29 +27,6 @@ namespace EndPoint.Forms.ComputerDetail.TimeSheet
         }
 
 
-
-        private void BtnSave_Click(object sender, EventArgs e)
-        {
-            var persian = new System.Globalization.PersianCalendar();
-            try
-            {
-                DateTime miladi = persian.ToDateTime(DateTime.Now.Year,
-                    (int)nudMonth.Value,
-                    (int)nudDay.Value,
-                    0, 0, 0, 0);
-
-                var service = Program.ServiceProvider.GetService<ITimesheetCreateService>();
-                service.Save(_userId, miladi, true);
-
-                MessageBox.Show("تاریخ ثبت شد ✅");
-                DialogResult = DialogResult.OK;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("خطا در تاریخ: " + ex.Message);
-            }
-        }
-
         private void FrmAddTimeSheet_Load(object sender, EventArgs e)
         {
             label1.Text = _fullName;
@@ -69,7 +46,12 @@ namespace EndPoint.Forms.ComputerDetail.TimeSheet
             var persian = new System.Globalization.PersianCalendar();
             try
             {
-                DateTime miladi = persian.ToDateTime(DateTime.Now.Year,
+                // گرفتن تاریخ امروز به شمسی
+                var today = DateTime.Now;
+                int persianYear = persian.GetYear(today);
+
+                // ساخت تاریخ دقیق شمسی از سال فعلی و ماه و روز انتخابی
+                DateTime miladi = persian.ToDateTime(persianYear,
                     (int)nudMonth.Value,
                     (int)nudDay.Value,
                     0, 0, 0, 0);
@@ -77,13 +59,14 @@ namespace EndPoint.Forms.ComputerDetail.TimeSheet
                 var service = Program.ServiceProvider.GetService<ITimesheetCreateService>();
                 service.Save(_userId, miladi, true);
 
-                MessageBox.Show("تاریخ ثبت شد ✅");
+                MessageBox.Show("✅ تاریخ بازدید با موفقیت ثبت شد.");
                 DialogResult = DialogResult.OK;
             }
             catch (Exception ex)
             {
-                MessageBox.Show("خطا در تاریخ: " + ex.Message);
+                MessageBox.Show("خطا در ثبت تاریخ: " + ex.Message);
             }
+
         }
     }
 }
