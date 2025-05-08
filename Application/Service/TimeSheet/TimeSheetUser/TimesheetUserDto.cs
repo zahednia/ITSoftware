@@ -13,7 +13,6 @@ namespace ApplicationIT.Service.TimeSheet.TimeSheetUser
         public string ComputerName { get; set; }
         public string AssignedUserName { get; set; } // فقط برای نمایش
         public DateTime? LastVisitDate { get; set; }
-        public bool? IsDone { get; set; }
         public string ShamsiDate
         {
             get
@@ -27,6 +26,7 @@ namespace ApplicationIT.Service.TimeSheet.TimeSheetUser
                 return "-";
             }
         }
+        public bool? IsDone { get; set; }
     }
 
 }
