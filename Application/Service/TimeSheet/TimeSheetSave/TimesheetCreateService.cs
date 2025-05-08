@@ -18,13 +18,29 @@ namespace ApplicationIT.Service.TimeSheet.TimeSheetSave
             _context = context;
         }
 
-        public void Save(int userId, DateTime date, bool isDone)
+        public void Save(int computerId, DateTime date, bool isDone)
         {
+                var activeUserId = _context.UserComputers
+        .Where(x => x.ComputerID == computerId && !x.IsDeactive)
+        .Select(x => x.UserID)
+        .FirstOrDefault();
+            DateTime visitDay = date.Date;
+            DateTime checklistDeadline = visitDay.AddDays(1); 
+
+            bool checklistIsDone = _context.CheckLists
+                .Any(x =>
+                    x.ChMain.ComputerId == computerId &&
+                    x.ChMain.CreatedAt >= visitDay &&
+                    x.ChMain.CreatedAt < checklistDeadline
+                );
+
+
             var timesheet = new Timesheet
             {
-                UserId = userId,
+                ComputerId = computerId,
+                UserId = activeUserId,
                 Date = date,
-                IsDone = isDone
+                IsDone = checklistIsDone
             };
 
             _context.Timesheets.Add(timesheet);

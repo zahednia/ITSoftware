@@ -60,10 +60,11 @@ namespace EndPoint.Forms.ComputerDetail.TimeSheet
         {
             if (e.ColumnIndex == DGTimeSheet.Columns["ثبت"].Index && e.RowIndex >= 0)
             {
-                var userId = (int)DGTimeSheet.Rows[e.RowIndex].Cells["UserId"].Value;
-                var fullName = DGTimeSheet.Rows[e.RowIndex].Cells["FullName"].Value.ToString();
+                var computerId = (int)DGTimeSheet.Rows[e.RowIndex].Cells["ComputerId"].Value;
+                var fullName = DGTimeSheet.Rows[e.RowIndex].Cells["AssignedUserName"].Value?.ToString();
 
-                var form = new FrmAddTimeSheet(userId, fullName);
+
+                var form = new FrmAddTimeSheet(computerId, fullName);
                 if (form.ShowDialog() == DialogResult.OK)
                 {
                     LoadData(txtSearch.Text.Trim());

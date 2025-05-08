@@ -8,6 +8,6 @@ namespace ApplicationIT.Service.TimeSheet.TimeSheetSave
 {
     public interface ITimesheetCreateService
     {
-        void Save(int userId, DateTime date, bool isDone);
+        void Save(int computerId, DateTime date, bool isDone);
     }
 }

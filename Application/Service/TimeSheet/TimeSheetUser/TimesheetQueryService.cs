@@ -19,30 +19,34 @@ namespace ApplicationIT.Service.TimeSheet.TimeSheetUser
 
         public List<TimesheetUserDto> GetUsersWithTimesheet(string searchTerm = "")
         {
-            var users = _context.Users
-                .AsNoTracking()
-                .Where(x => x.Name.Contains(searchTerm) || x.LastName.Contains(searchTerm))
-                .Select(u => new TimesheetUserDto
+            var list = _context.Computers
+                .Where(c => c.Name.Contains(searchTerm))
+                .Select(c => new TimesheetUserDto
                 {
-                    UserId = u.Id,
-                    FullName = u.Name + " " + u.LastName,
+                    ComputerId = c.Id,
+                    ComputerName = c.Name,
+
+                    // کاربر فعلی
+                    AssignedUserName = _context.UserComputers
+                        .Where(uc => uc.ComputerID == c.Id && !uc.IsDeactive)
+                        .Select(uc => uc.User.Name + " " + uc.User.LastName)
+                        .FirstOrDefault(),
+
                     LastVisitDate = _context.Timesheets
-                        .AsNoTracking() // اینم خیلی مهمه 👈
-                        .Where(t => t.UserId == u.Id)
-                        .OrderByDescending(t => t.Id)
+                        .Where(t => t.ComputerId == c.Id)
+                        .OrderByDescending(t => t.Date)
                         .Select(t => (DateTime?)t.Date)
                         .FirstOrDefault(),
+
                     IsDone = _context.Timesheets
-                        .AsNoTracking()
-                        .Where(t => t.UserId == u.Id)
+                        .Where(t => t.ComputerId == c.Id)
                         .OrderByDescending(t => t.Date)
                         .Select(t => (bool?)t.IsDone)
                         .FirstOrDefault()
                 })
                 .ToList();
 
-
-            return users;
+            return list;
         }
     }
 

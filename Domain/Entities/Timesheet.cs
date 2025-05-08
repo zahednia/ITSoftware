@@ -13,6 +13,10 @@ namespace Domain.Entities
         [Key]
         public int Id { get; set; }
 
+        [ForeignKey("ComputerId")]
+        public Computer Computer { get; set; }
+        public int ComputerId { get; set; }
+
         [ForeignKey("UserId")]
         public User User { get; set; }
         public int UserId { get; set; }

@@ -15,14 +15,14 @@ namespace EndPoint.Forms.ComputerDetail.TimeSheet
 {
     public partial class FrmAddTimeSheet : Form
     {
-        private readonly int _userId;
+        private readonly int computerId;
         private readonly string _fullName;
         private Button btnSave;
 
-        public FrmAddTimeSheet(int userId, string fullName)
+        public FrmAddTimeSheet(int computerId, string fullName)
         {
             InitializeComponent();
-            _userId = userId;
+            this.computerId = computerId;
             _fullName = fullName;
         }
 
@@ -57,17 +57,17 @@ namespace EndPoint.Forms.ComputerDetail.TimeSheet
                     0, 0, 0, 0);
 
                 var service = Program.ServiceProvider.GetService<ITimesheetCreateService>();
-                service.Save(_userId, miladi, true);
+                service.Save(computerId, miladi, true);
 
                 MessageBox.Show("✅ تاریخ بازدید با موفقیت ثبت شد.");
                 DialogResult = DialogResult.OK;
-            }
+        }
             catch (Exception ex)
             {
                 MessageBox.Show("خطا در ثبت تاریخ: " + ex.Message);
             }
 
-        }
+}
     }
 }
 
