@@ -25,7 +25,7 @@ namespace ApplicationIT.Service.TimeSheet.TimeSheetSave
         .Select(x => x.UserID)
         .FirstOrDefault();
             DateTime visitDay = date.Date;
-            DateTime checklistDeadline = visitDay.AddDays(1); 
+            DateTime checklistDeadline = visitDay.AddDays(30); 
 
             bool checklistIsDone = _context.CheckLists
                 .Any(x =>
