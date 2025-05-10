@@ -34,13 +34,13 @@ namespace ApplicationIT.Service.TimeSheet.TimeSheetUser
 
                     LastVisitDate = _context.Timesheets
                         .Where(t => t.ComputerId == c.Id)
-                        .OrderByDescending(t => t.Date)
+                        .OrderByDescending(t => t.Id)
                         .Select(t => (DateTime?)t.Date)
                         .FirstOrDefault(),
 
                     IsDone = _context.Timesheets
                         .Where(t => t.ComputerId == c.Id)
-                        .OrderByDescending(t => t.Date)
+                        .OrderByDescending(t => t.Id)
                         .Select(t => (bool?)t.IsDone)
                         .FirstOrDefault()
                 })
