@@ -1,0 +1,1 @@
+This application allows individuals working in helpdesk or related fields to store and manage information about their systems. It also enables them to generate reports and fill out relevant checklists during periodic or annual inspections.
