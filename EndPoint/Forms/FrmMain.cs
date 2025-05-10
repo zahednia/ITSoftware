@@ -5,7 +5,6 @@ using ApplicationIT.Service.HardwareService.HardwareDetail;
 using ApplicationIT.Service.HardwareService.HardwareHistory;
 using ApplicationIT.Service.HardwareService.SaveService;
 using ApplicationIT.Service.HardwareService.ShowHardware;
-using ApplicationIT.Service.TimeSheet.TimesheetReminder;
 using ApplicationIT.Service.User.AssignUserToComputer;
 using ApplicationIT.Service.User.ShowUser;
 using ApplicationIT.Service.User.UserComputerHistoryService;
@@ -129,19 +128,6 @@ namespace EndPoint.Forms
         private void FrmMain_Load(object sender, EventArgs e)
         {
             timer1.Start();
-            notifyIcon1.Icon = SystemIcons.Information;
-            notifyIcon1.Visible = true;
-
-            var reminderService = Program.ServiceProvider.GetService<ITimesheetReminderService>();
-            var reminders = reminderService.GetUpcomingReminders(10);
-
-            if (reminders.Any())
-            {
-                string message = string.Join(Environment.NewLine, reminders);
-                notifyIcon1.BalloonTipTitle = "یادآور بازدید دوره‌ای";
-                notifyIcon1.BalloonTipText = message;
-                notifyIcon1.ShowBalloonTip(10000);
-            }
         }
 
         private void btnAddComputer_Click(object sender, EventArgs e)
