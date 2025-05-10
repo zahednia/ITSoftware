@@ -32,51 +32,90 @@
             txtDetail = new TextBox();
             btnSave = new Button();
             cmbBrand = new ComboBox();
+            label1 = new Label();
+            label2 = new Label();
+            label3 = new Label();
             SuspendLayout();
             // 
             // cmbHardwareType
             // 
             cmbHardwareType.FormattingEnabled = true;
-            cmbHardwareType.Location = new Point(42, 86);
+            cmbHardwareType.Location = new Point(93, 45);
+            cmbHardwareType.Margin = new Padding(3, 2, 3, 2);
             cmbHardwareType.Name = "cmbHardwareType";
-            cmbHardwareType.Size = new Size(151, 28);
+            cmbHardwareType.Size = new Size(133, 23);
             cmbHardwareType.TabIndex = 0;
             cmbHardwareType.SelectedIndexChanged += cmbHardwareType_SelectedIndexChanged;
             // 
             // txtDetail
             // 
-            txtDetail.Location = new Point(413, 87);
+            txtDetail.Location = new Point(92, 148);
+            txtDetail.Margin = new Padding(3, 2, 3, 2);
             txtDetail.Name = "txtDetail";
-            txtDetail.Size = new Size(202, 27);
+            txtDetail.Size = new Size(134, 23);
             txtDetail.TabIndex = 2;
             // 
             // btnSave
             // 
-            btnSave.Location = new Point(630, 85);
+            btnSave.BackColor = Color.FromArgb(192, 255, 192);
+            btnSave.Location = new Point(92, 205);
+            btnSave.Margin = new Padding(3, 2, 3, 2);
             btnSave.Name = "btnSave";
-            btnSave.Size = new Size(94, 29);
+            btnSave.Size = new Size(119, 44);
             btnSave.TabIndex = 4;
-            btnSave.Text = "button1";
-            btnSave.UseVisualStyleBackColor = true;
+            btnSave.Text = "Save";
+            btnSave.UseVisualStyleBackColor = false;
             btnSave.Click += btnSave_Click_1;
             // 
             // cmbBrand
             // 
             cmbBrand.FormattingEnabled = true;
-            cmbBrand.Location = new Point(244, 86);
+            cmbBrand.Location = new Point(93, 96);
+            cmbBrand.Margin = new Padding(3, 2, 3, 2);
             cmbBrand.Name = "cmbBrand";
-            cmbBrand.Size = new Size(151, 28);
+            cmbBrand.Size = new Size(133, 23);
             cmbBrand.TabIndex = 5;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(39, 48);
+            label1.Name = "label1";
+            label1.Size = new Size(33, 15);
+            label1.TabIndex = 6;
+            label1.Text = "Type";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(39, 99);
+            label2.Name = "label2";
+            label2.Size = new Size(38, 15);
+            label2.TabIndex = 7;
+            label2.Text = "Brand";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(39, 151);
+            label3.Name = "label3";
+            label3.Size = new Size(37, 15);
+            label3.TabIndex = 8;
+            label3.Text = "Detail";
             // 
             // FrmHardwareEdit
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(791, 181);
+            ClientSize = new Size(321, 282);
+            Controls.Add(label3);
+            Controls.Add(label2);
+            Controls.Add(label1);
             Controls.Add(cmbBrand);
             Controls.Add(btnSave);
             Controls.Add(txtDetail);
             Controls.Add(cmbHardwareType);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "FrmHardwareEdit";
             Text = "FrmHardwareEdit";
             ResumeLayout(false);
@@ -89,5 +128,8 @@
         private TextBox txtDetail;
         private Button btnSave;
         private ComboBox cmbBrand;
+        private Label label1;
+        private Label label2;
+        private Label label3;
     }
 }

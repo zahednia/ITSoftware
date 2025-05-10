@@ -36,17 +36,17 @@
             // DGItems
             // 
             DGItems.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            DGItems.Location = new Point(6, 66);
+            DGItems.Location = new Point(0, 55);
             DGItems.Name = "DGItems";
             DGItems.RowHeadersWidth = 51;
-            DGItems.Size = new Size(786, 381);
+            DGItems.Size = new Size(804, 404);
             DGItems.TabIndex = 0;
             DGItems.CellContentClick += DGItems_CellContentClick;
             // 
             // btnAddItem
             // 
             btnAddItem.BackColor = Color.FromArgb(192, 255, 192);
-            btnAddItem.Location = new Point(6, 12);
+            btnAddItem.Location = new Point(312, 10);
             btnAddItem.Name = "btnAddItem";
             btnAddItem.Size = new Size(180, 39);
             btnAddItem.TabIndex = 1;
