@@ -11,6 +11,7 @@ using ApplicationIT.Service.User.UserComputerHistoryService;
 using EndPoint.Forms.ComputerDetail;
 using EndPoint.Forms.ComputerDetail.AddHardware;
 using EndPoint.Forms.ComputerDetail.TimeSheet;
+using EndPoint.Forms.HelpInfo;
 using Microsoft.EntityFrameworkCore.Query.Internal;
 using Microsoft.Extensions.DependencyInjection;
 using Persistence.Context;
@@ -191,6 +192,18 @@ namespace EndPoint.Forms
         {
             var form = Program.ServiceProvider.GetService<FrmTimeSheet>();
             form.ShowDialog();
+        }
+
+        private void TSMTimeSheet_Click(object sender, EventArgs e)
+        {
+            var form = Program.ServiceProvider.GetService<FrmTimeSheet>();
+            form.ShowDialog();
+        }
+
+        private void devInfoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var Info = Program.ServiceProvider.GetService<FrmInfo>();
+            Info.ShowDialog();
         }
     }
 }

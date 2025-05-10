@@ -29,19 +29,20 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            TreeNode treeNode1 = new TreeNode("Show List Of User");
-            TreeNode treeNode2 = new TreeNode("Users", new TreeNode[] { treeNode1 });
-            TreeNode treeNode3 = new TreeNode("Computer List");
-            TreeNode treeNode4 = new TreeNode("Add Hardware");
-            TreeNode treeNode5 = new TreeNode("Computers", new TreeNode[] { treeNode3, treeNode4 });
-            TreeNode treeNode6 = new TreeNode("TimeSheet");
-            TreeNode treeNode7 = new TreeNode("Periodic visit", new TreeNode[] { treeNode6 });
+            TreeNode treeNode8 = new TreeNode("Show List Of User");
+            TreeNode treeNode9 = new TreeNode("Users", new TreeNode[] { treeNode8 });
+            TreeNode treeNode10 = new TreeNode("Computer List");
+            TreeNode treeNode11 = new TreeNode("Add Hardware");
+            TreeNode treeNode12 = new TreeNode("Computers", new TreeNode[] { treeNode10, treeNode11 });
+            TreeNode treeNode13 = new TreeNode("TimeSheet");
+            TreeNode treeNode14 = new TreeNode("Periodic visit", new TreeNode[] { treeNode13 });
             treeView1 = new TreeView();
             menuStrip1 = new MenuStrip();
             userToolStripMenuItem = new ToolStripMenuItem();
             userListToolStripMenuItem = new ToolStripMenuItem();
             computerToolStripMenuItem = new ToolStripMenuItem();
             computerListToolStripMenuItem = new ToolStripMenuItem();
+            TSMTimeSheet = new ToolStripMenuItem();
             helpToolStripMenuItem = new ToolStripMenuItem();
             infoToolStripMenuItem = new ToolStripMenuItem();
             statusStrip1 = new StatusStrip();
@@ -56,6 +57,7 @@
             BtnAddHardware = new Button();
             BtnTimeSheet = new Button();
             notifyIcon1 = new NotifyIcon(components);
+            devInfoToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -68,22 +70,22 @@
             treeView1.ItemHeight = 50;
             treeView1.Location = new Point(0, 25);
             treeView1.Name = "treeView1";
-            treeNode1.Name = "SNDShowUser";
-            treeNode1.Text = "Show List Of User";
-            treeNode2.Name = "NDUsers";
-            treeNode2.Text = "Users";
-            treeNode3.Name = "SNDComputerList";
-            treeNode3.Text = "Computer List";
-            treeNode4.BackColor = Color.FromArgb(192, 192, 255);
-            treeNode4.Name = "NDAddHardware";
-            treeNode4.Text = "Add Hardware";
-            treeNode5.Name = "NDComputers";
-            treeNode5.Text = "Computers";
-            treeNode6.Name = "SNDTimeSheet";
-            treeNode6.Text = "TimeSheet";
-            treeNode7.Name = "NDBazdid";
-            treeNode7.Text = "Periodic visit";
-            treeView1.Nodes.AddRange(new TreeNode[] { treeNode2, treeNode5, treeNode7 });
+            treeNode8.Name = "SNDShowUser";
+            treeNode8.Text = "Show List Of User";
+            treeNode9.Name = "NDUsers";
+            treeNode9.Text = "Users";
+            treeNode10.Name = "SNDComputerList";
+            treeNode10.Text = "Computer List";
+            treeNode11.BackColor = Color.FromArgb(192, 192, 255);
+            treeNode11.Name = "NDAddHardware";
+            treeNode11.Text = "Add Hardware";
+            treeNode12.Name = "NDComputers";
+            treeNode12.Text = "Computers";
+            treeNode13.Name = "SNDTimeSheet";
+            treeNode13.Text = "TimeSheet";
+            treeNode14.Name = "NDBazdid";
+            treeNode14.Text = "Periodic visit";
+            treeView1.Nodes.AddRange(new TreeNode[] { treeNode9, treeNode12, treeNode14 });
             treeView1.Size = new Size(287, 526);
             treeView1.TabIndex = 1;
             treeView1.AfterSelect += treeView1_AfterSelect;
@@ -115,7 +117,7 @@
             // 
             // computerToolStripMenuItem
             // 
-            computerToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { computerListToolStripMenuItem });
+            computerToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { computerListToolStripMenuItem, TSMTimeSheet });
             computerToolStripMenuItem.Name = "computerToolStripMenuItem";
             computerToolStripMenuItem.Size = new Size(73, 20);
             computerToolStripMenuItem.Text = "Computer";
@@ -123,9 +125,16 @@
             // computerListToolStripMenuItem
             // 
             computerListToolStripMenuItem.Name = "computerListToolStripMenuItem";
-            computerListToolStripMenuItem.Size = new Size(149, 22);
+            computerListToolStripMenuItem.Size = new Size(180, 22);
             computerListToolStripMenuItem.Text = "Computer List";
             computerListToolStripMenuItem.Click += computerListToolStripMenuItem_Click;
+            // 
+            // TSMTimeSheet
+            // 
+            TSMTimeSheet.Name = "TSMTimeSheet";
+            TSMTimeSheet.Size = new Size(180, 22);
+            TSMTimeSheet.Text = "TimeSheet";
+            TSMTimeSheet.Click += TSMTimeSheet_Click;
             // 
             // helpToolStripMenuItem
             // 
@@ -135,6 +144,7 @@
             // 
             // infoToolStripMenuItem
             // 
+            infoToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { devInfoToolStripMenuItem });
             infoToolStripMenuItem.Name = "infoToolStripMenuItem";
             infoToolStripMenuItem.Size = new Size(40, 20);
             infoToolStripMenuItem.Text = "Info";
@@ -253,6 +263,13 @@
             notifyIcon1.Text = "notifyIcon1";
             notifyIcon1.Visible = true;
             // 
+            // devInfoToolStripMenuItem
+            // 
+            devInfoToolStripMenuItem.Name = "devInfoToolStripMenuItem";
+            devInfoToolStripMenuItem.Size = new Size(180, 22);
+            devInfoToolStripMenuItem.Text = "Dev Info";
+            devInfoToolStripMenuItem.Click += devInfoToolStripMenuItem_Click;
+            // 
             // FrmMain
             // 
             AutoScaleDimensions = new SizeF(7F, 14F);
@@ -304,5 +321,7 @@
         private Button BtnAddHardware;
         private Button BtnTimeSheet;
         private NotifyIcon notifyIcon1;
+        private ToolStripMenuItem TSMTimeSheet;
+        private ToolStripMenuItem devInfoToolStripMenuItem;
     }
 }
