@@ -59,8 +59,12 @@ namespace EndPoint.Forms
                     RunFrmComputer();
                     break;
                 case "NDAddHardware":
-                    var form = Program.ServiceProvider.GetService<ComputerDetail.AddHardware.FrmHardwareManager>();
+                    var form = Program.ServiceProvider.GetService<FrmHardwareManager>();
                     form.ShowDialog();
+                    break;
+                case "SNDTimeSheet":
+                    var timeSheet = Program.ServiceProvider.GetService<FrmTimeSheet>();
+                    timeSheet.ShowDialog();
                     break;
             }
         }

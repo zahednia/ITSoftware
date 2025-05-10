@@ -34,6 +34,8 @@
             TreeNode treeNode3 = new TreeNode("Computer List");
             TreeNode treeNode4 = new TreeNode("Add Hardware");
             TreeNode treeNode5 = new TreeNode("Computers", new TreeNode[] { treeNode3, treeNode4 });
+            TreeNode treeNode6 = new TreeNode("TimeSheet");
+            TreeNode treeNode7 = new TreeNode("Periodic visit", new TreeNode[] { treeNode6 });
             treeView1 = new TreeView();
             menuStrip1 = new MenuStrip();
             userToolStripMenuItem = new ToolStripMenuItem();
@@ -77,7 +79,11 @@
             treeNode4.Text = "Add Hardware";
             treeNode5.Name = "NDComputers";
             treeNode5.Text = "Computers";
-            treeView1.Nodes.AddRange(new TreeNode[] { treeNode2, treeNode5 });
+            treeNode6.Name = "SNDTimeSheet";
+            treeNode6.Text = "TimeSheet";
+            treeNode7.Name = "NDBazdid";
+            treeNode7.Text = "Periodic visit";
+            treeView1.Nodes.AddRange(new TreeNode[] { treeNode2, treeNode5, treeNode7 });
             treeView1.Size = new Size(287, 526);
             treeView1.TabIndex = 1;
             treeView1.AfterSelect += treeView1_AfterSelect;
@@ -222,7 +228,7 @@
             // BtnAddHardware
             // 
             BtnAddHardware.BackColor = Color.FromArgb(192, 192, 255);
-            BtnAddHardware.Location = new Point(320, 238);
+            BtnAddHardware.Location = new Point(320, 244);
             BtnAddHardware.Margin = new Padding(3, 2, 3, 2);
             BtnAddHardware.Name = "BtnAddHardware";
             BtnAddHardware.Size = new Size(451, 84);
@@ -234,7 +240,7 @@
             // BtnTimeSheet
             // 
             BtnTimeSheet.BackColor = Color.FromArgb(192, 192, 255);
-            BtnTimeSheet.Location = new Point(782, 243);
+            BtnTimeSheet.Location = new Point(782, 249);
             BtnTimeSheet.Name = "BtnTimeSheet";
             BtnTimeSheet.Size = new Size(209, 79);
             BtnTimeSheet.TabIndex = 11;
