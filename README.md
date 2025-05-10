@@ -114,6 +114,11 @@ This project uses `CommunityToolkit.WinUI.Notifications` to display native toast
 - 🔔 Alerts are triggered for upcoming scheduled inspections  
 - ✅ Additional notifications can be configured for overdue visits, missing checklists, etc.  
 - 🧩 You can fully customize the toast with app icon, expiration, sound, and click actions
+
+## Screenshots
+
+![App Screenshot](https://github.com/zahednia/ITSoftware/blob/master/Screensho.png)
+
 ## 📃 License
 
 [MIT License](https://github.com/zahednia/ITSoftware?tab=MIT-1-ov-file#readme). Copyright (c) 2025 Kourosh Zahednia 
