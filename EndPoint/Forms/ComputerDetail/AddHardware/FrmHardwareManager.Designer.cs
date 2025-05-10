@@ -45,7 +45,7 @@
             DGHardwareList.BackgroundColor = SystemColors.Control;
             dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle1.BackColor = SystemColors.Control;
-            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
             dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
@@ -54,17 +54,17 @@
             DGHardwareList.ColumnHeadersHeight = 29;
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle2.BackColor = SystemColors.Window;
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             dataGridViewCellStyle2.ForeColor = SystemColors.ControlText;
             dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
             dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
             DGHardwareList.DefaultCellStyle = dataGridViewCellStyle2;
-            DGHardwareList.Location = new Point(10, 40);
+            DGHardwareList.Location = new Point(10, 37);
             DGHardwareList.Margin = new Padding(3, 2, 3, 2);
             DGHardwareList.Name = "DGHardwareList";
             DGHardwareList.RowHeadersWidth = 51;
-            DGHardwareList.Size = new Size(605, 424);
+            DGHardwareList.Size = new Size(605, 396);
             DGHardwareList.TabIndex = 2;
             // 
             // txtSearch
@@ -73,7 +73,7 @@
             txtSearch.Margin = new Padding(3, 2, 3, 2);
             txtSearch.Multiline = true;
             txtSearch.Name = "txtSearch";
-            txtSearch.Size = new Size(464, 31);
+            txtSearch.Size = new Size(464, 29);
             txtSearch.TabIndex = 1;
             // 
             // BtnAdd
@@ -82,19 +82,20 @@
             BtnAdd.Location = new Point(480, 6);
             BtnAdd.Margin = new Padding(3, 2, 3, 2);
             BtnAdd.Name = "BtnAdd";
-            BtnAdd.Size = new Size(136, 30);
+            BtnAdd.Size = new Size(136, 28);
             BtnAdd.TabIndex = 0;
             BtnAdd.Text = "Add";
             BtnAdd.UseVisualStyleBackColor = false;
             // 
             // FrmHardwareManager
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(7F, 14F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(620, 466);
+            ClientSize = new Size(620, 435);
             Controls.Add(BtnAdd);
             Controls.Add(txtSearch);
             Controls.Add(DGHardwareList);
+            Font = new Font("Tahoma", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             Margin = new Padding(3, 2, 3, 2);
             Name = "FrmHardwareManager";
             Text = "FrmHardwareManager";

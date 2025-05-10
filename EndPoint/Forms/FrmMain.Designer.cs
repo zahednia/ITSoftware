@@ -64,7 +64,7 @@
             treeView1.BorderStyle = BorderStyle.FixedSingle;
             treeView1.Font = new Font("Tahoma", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 178);
             treeView1.ItemHeight = 50;
-            treeView1.Location = new Point(0, 27);
+            treeView1.Location = new Point(0, 25);
             treeView1.Name = "treeView1";
             treeNode1.Name = "SNDShowUser";
             treeNode1.Text = "Show List Of User";
@@ -78,7 +78,7 @@
             treeNode5.Name = "NDComputers";
             treeNode5.Text = "Computers";
             treeView1.Nodes.AddRange(new TreeNode[] { treeNode2, treeNode5 });
-            treeView1.Size = new Size(287, 563);
+            treeView1.Size = new Size(287, 526);
             treeView1.TabIndex = 1;
             treeView1.AfterSelect += treeView1_AfterSelect;
             // 
@@ -137,7 +137,7 @@
             // 
             statusStrip1.ImageScalingSize = new Size(20, 20);
             statusStrip1.Items.AddRange(new ToolStripItem[] { toolStripStatusLabel1, lblTime });
-            statusStrip1.Location = new Point(0, 591);
+            statusStrip1.Location = new Point(0, 550);
             statusStrip1.Name = "statusStrip1";
             statusStrip1.Size = new Size(1003, 22);
             statusStrip1.TabIndex = 3;
@@ -166,10 +166,10 @@
             // btnAddComputer
             // 
             btnAddComputer.BackColor = Color.FromArgb(192, 192, 255);
-            btnAddComputer.Location = new Point(320, 153);
+            btnAddComputer.Location = new Point(320, 143);
             btnAddComputer.Margin = new Padding(3, 2, 3, 2);
             btnAddComputer.Name = "btnAddComputer";
-            btnAddComputer.Size = new Size(203, 90);
+            btnAddComputer.Size = new Size(203, 84);
             btnAddComputer.TabIndex = 4;
             btnAddComputer.Text = "Add New Computer";
             btnAddComputer.UseVisualStyleBackColor = false;
@@ -178,10 +178,10 @@
             // BtnComputerList
             // 
             BtnComputerList.BackColor = Color.FromArgb(128, 128, 255);
-            BtnComputerList.Location = new Point(528, 154);
+            BtnComputerList.Location = new Point(528, 144);
             BtnComputerList.Margin = new Padding(3, 2, 3, 2);
             BtnComputerList.Name = "BtnComputerList";
-            BtnComputerList.Size = new Size(242, 90);
+            BtnComputerList.Size = new Size(242, 84);
             BtnComputerList.TabIndex = 5;
             BtnComputerList.Text = "Computer List";
             BtnComputerList.UseVisualStyleBackColor = false;
@@ -190,10 +190,10 @@
             // btnUserList
             // 
             btnUserList.BackColor = Color.FromArgb(192, 192, 255);
-            btnUserList.Location = new Point(774, 153);
+            btnUserList.Location = new Point(774, 143);
             btnUserList.Margin = new Padding(3, 2, 3, 2);
             btnUserList.Name = "btnUserList";
-            btnUserList.Size = new Size(219, 90);
+            btnUserList.Size = new Size(219, 84);
             btnUserList.TabIndex = 7;
             btnUserList.Text = "User List";
             btnUserList.UseVisualStyleBackColor = false;
@@ -203,7 +203,7 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.Location = new Point(462, 565);
+            label1.Location = new Point(462, 527);
             label1.Name = "label1";
             label1.Size = new Size(318, 15);
             label1.TabIndex = 8;
@@ -212,20 +212,20 @@
             // pictureBox1
             // 
             pictureBox1.Image = Frm.photo_2025_02_13_16_41_28;
-            pictureBox1.Location = new Point(320, 38);
+            pictureBox1.Location = new Point(320, 35);
             pictureBox1.Margin = new Padding(3, 2, 3, 2);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(299, 111);
+            pictureBox1.Size = new Size(299, 104);
             pictureBox1.TabIndex = 9;
             pictureBox1.TabStop = false;
             // 
             // BtnAddHardware
             // 
             BtnAddHardware.BackColor = Color.FromArgb(192, 192, 255);
-            BtnAddHardware.Location = new Point(320, 255);
+            BtnAddHardware.Location = new Point(320, 238);
             BtnAddHardware.Margin = new Padding(3, 2, 3, 2);
             BtnAddHardware.Name = "BtnAddHardware";
-            BtnAddHardware.Size = new Size(451, 90);
+            BtnAddHardware.Size = new Size(451, 84);
             BtnAddHardware.TabIndex = 10;
             BtnAddHardware.Text = "Add Hardware";
             BtnAddHardware.UseVisualStyleBackColor = false;
@@ -234,9 +234,9 @@
             // BtnTimeSheet
             // 
             BtnTimeSheet.BackColor = Color.FromArgb(192, 192, 255);
-            BtnTimeSheet.Location = new Point(782, 260);
+            BtnTimeSheet.Location = new Point(782, 243);
             BtnTimeSheet.Name = "BtnTimeSheet";
-            BtnTimeSheet.Size = new Size(209, 85);
+            BtnTimeSheet.Size = new Size(209, 79);
             BtnTimeSheet.TabIndex = 11;
             BtnTimeSheet.Text = "Time Sheet";
             BtnTimeSheet.UseVisualStyleBackColor = false;
@@ -249,10 +249,10 @@
             // 
             // FrmMain
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(7F, 14F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(1003, 613);
+            ClientSize = new Size(1003, 572);
             Controls.Add(BtnTimeSheet);
             Controls.Add(BtnAddHardware);
             Controls.Add(pictureBox1);
@@ -263,6 +263,7 @@
             Controls.Add(statusStrip1);
             Controls.Add(treeView1);
             Controls.Add(menuStrip1);
+            Font = new Font("Tahoma", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             MainMenuStrip = menuStrip1;
             Name = "FrmMain";
             Text = "FrmMain";

@@ -59,7 +59,7 @@
             dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
             DGTimeSheet.DefaultCellStyle = dataGridViewCellStyle2;
-            DGTimeSheet.Location = new Point(0, 41);
+            DGTimeSheet.Location = new Point(0, 53);
             DGTimeSheet.Name = "DGTimeSheet";
             dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle3.BackColor = SystemColors.Control;
@@ -70,24 +70,25 @@
             dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
             DGTimeSheet.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             DGTimeSheet.RowHeadersWidth = 51;
-            DGTimeSheet.Size = new Size(800, 409);
+            DGTimeSheet.Size = new Size(802, 491);
             DGTimeSheet.TabIndex = 0;
             DGTimeSheet.CellClick += DGTimeSheet_CellClick;
             // 
             // txtSearch
             // 
-            txtSearch.Location = new Point(12, 12);
+            txtSearch.Location = new Point(12, 11);
+            txtSearch.Multiline = true;
             txtSearch.Name = "txtSearch";
-            txtSearch.Size = new Size(532, 23);
+            txtSearch.Size = new Size(493, 36);
             txtSearch.TabIndex = 1;
             txtSearch.TextChanged += txtSearch_TextChanged;
             // 
             // btnGenerateNextYearTimesheets
             // 
             btnGenerateNextYearTimesheets.BackColor = Color.FromArgb(255, 192, 192);
-            btnGenerateNextYearTimesheets.Location = new Point(655, 11);
+            btnGenerateNextYearTimesheets.Location = new Point(657, 11);
             btnGenerateNextYearTimesheets.Name = "btnGenerateNextYearTimesheets";
-            btnGenerateNextYearTimesheets.Size = new Size(133, 23);
+            btnGenerateNextYearTimesheets.Size = new Size(133, 36);
             btnGenerateNextYearTimesheets.TabIndex = 2;
             btnGenerateNextYearTimesheets.Text = "Update Time";
             btnGenerateNextYearTimesheets.UseVisualStyleBackColor = false;
@@ -95,12 +96,13 @@
             // 
             // FrmTimeSheet
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(7F, 14F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(802, 543);
             Controls.Add(btnGenerateNextYearTimesheets);
             Controls.Add(txtSearch);
             Controls.Add(DGTimeSheet);
+            Font = new Font("Tahoma", 9F, FontStyle.Bold, GraphicsUnit.Point, 178);
             Name = "FrmTimeSheet";
             Text = "FrmTimeSheet";
             Load += FrmTimeSheet_Load;

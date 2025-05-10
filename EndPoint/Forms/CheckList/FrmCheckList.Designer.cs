@@ -61,6 +61,7 @@
             ClientSize = new Size(804, 459);
             Controls.Add(btnAddItem);
             Controls.Add(DGItems);
+            Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             Name = "FrmCheckList";
             Text = "FrmCheckList";
             Load += FrmCheckList_Load;
