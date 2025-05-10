@@ -1,6 +1,8 @@
 ﻿using ApplicationIT.Database;
 using ApplicationIT.Service.CheckListService.CheckListCreate;
+using Domain.Entities;
 using EndPoint.Forms.ComputerDetail.AddHardware;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -119,6 +121,24 @@ namespace EndPoint.Forms.ComputerDetail.CheckList
             service.Create(dto);
 
             MessageBox.Show("چک‌لیست با موفقیت ذخیره شد.");
+
+            var chDate = DateTime.Now;
+
+            var from = chDate.AddDays(-15);
+            var to = chDate.AddDays(15);
+
+            var timesheetsInRange = database.Timesheets
+                .Where(t => t.ComputerId == dto.ComputerId && t.Date >= from && t.Date <= to)
+                .ToList();
+
+            foreach (var t in timesheetsInRange)
+            {
+                t.IsDone = true;
+            }
+
+            database.SaveChanges();
+
+
         }
 
         private void FrmCheckListItem_Load(object sender, EventArgs e)

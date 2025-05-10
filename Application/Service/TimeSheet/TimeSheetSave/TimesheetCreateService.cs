@@ -20,27 +20,27 @@ namespace ApplicationIT.Service.TimeSheet.TimeSheetSave
 
         public void Save(int computerId, DateTime date, bool isDone)
         {
-                var activeUserId = _context.UserComputers
-        .Where(x => x.ComputerID == computerId && !x.IsDeactive)
-        .Select(x => x.UserID)
-        .FirstOrDefault();
-            DateTime visitDay = date.Date;
-            DateTime checklistDeadline = visitDay.AddDays(30); 
+            var activeUserId = _context.UserComputers
+                 .Where(x => x.ComputerID == computerId && !x.IsDeactive)
+                 .Select(x => x.UserID)
+                 .FirstOrDefault();
 
-            bool checklistIsDone = _context.CheckLists
+            DateTime from = date.Date.AddDays(-15);
+            DateTime to = date.Date.AddDays(15);
+
+            bool checklistExists = _context.CheckLists
                 .Any(x =>
                     x.ChMain.ComputerId == computerId &&
-                    x.ChMain.CreatedAt >= visitDay &&
-                    x.ChMain.CreatedAt < checklistDeadline
+                    x.ChMain.CreatedAt >= from &&
+                    x.ChMain.CreatedAt <= to
                 );
-
 
             var timesheet = new Timesheet
             {
                 ComputerId = computerId,
                 UserId = activeUserId,
                 Date = date,
-                IsDone = checklistIsDone
+                IsDone = checklistExists
             };
 
             _context.Timesheets.Add(timesheet);

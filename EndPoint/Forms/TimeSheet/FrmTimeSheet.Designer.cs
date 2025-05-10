@@ -32,6 +32,7 @@
             bindingSource1 = new BindingSource(components);
             DGTimeSheet = new DataGridView();
             txtSearch = new TextBox();
+            btnGenerateNextYearTimesheets = new Button();
             ((System.ComponentModel.ISupportInitialize)bindingSource1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)DGTimeSheet).BeginInit();
             SuspendLayout();
@@ -39,31 +40,39 @@
             // DGTimeSheet
             // 
             DGTimeSheet.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            DGTimeSheet.Location = new Point(0, 84);
-            DGTimeSheet.Margin = new Padding(3, 4, 3, 4);
+            DGTimeSheet.Location = new Point(0, 63);
             DGTimeSheet.Name = "DGTimeSheet";
             DGTimeSheet.RowHeadersWidth = 51;
-            DGTimeSheet.Size = new Size(914, 516);
+            DGTimeSheet.Size = new Size(800, 387);
             DGTimeSheet.TabIndex = 0;
             DGTimeSheet.CellClick += DGTimeSheet_CellClick;
             // 
             // txtSearch
             // 
-            txtSearch.Location = new Point(14, 28);
-            txtSearch.Margin = new Padding(3, 4, 3, 4);
+            txtSearch.Location = new Point(12, 21);
             txtSearch.Name = "txtSearch";
-            txtSearch.Size = new Size(607, 27);
+            txtSearch.Size = new Size(532, 23);
             txtSearch.TabIndex = 1;
             txtSearch.TextChanged += txtSearch_TextChanged;
             // 
+            // btnGenerateNextYearTimesheets
+            // 
+            btnGenerateNextYearTimesheets.Location = new Point(595, 21);
+            btnGenerateNextYearTimesheets.Name = "btnGenerateNextYearTimesheets";
+            btnGenerateNextYearTimesheets.Size = new Size(75, 23);
+            btnGenerateNextYearTimesheets.TabIndex = 2;
+            btnGenerateNextYearTimesheets.Text = "button1";
+            btnGenerateNextYearTimesheets.UseVisualStyleBackColor = true;
+            btnGenerateNextYearTimesheets.Click += btnGenerateNextYearTimesheets_Click;
+            // 
             // FrmTimeSheet
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(914, 600);
+            ClientSize = new Size(800, 450);
+            Controls.Add(btnGenerateNextYearTimesheets);
             Controls.Add(txtSearch);
             Controls.Add(DGTimeSheet);
-            Margin = new Padding(3, 4, 3, 4);
             Name = "FrmTimeSheet";
             Text = "FrmTimeSheet";
             Load += FrmTimeSheet_Load;
@@ -78,5 +87,6 @@
         private BindingSource bindingSource1;
         private DataGridView DGTimeSheet;
         private TextBox txtSearch;
+        private Button btnGenerateNextYearTimesheets;
     }
 }
