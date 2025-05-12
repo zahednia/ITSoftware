@@ -45,7 +45,7 @@ A complete desktop application for managing computer hardware, user assignments,
 
 ```bash
 git clone https://github.com/zahednia/ITSoftware
-cd it-hardware-checkup
+cd ITSoftware
 
 ```
 ### 📦 3. Run database migrations
