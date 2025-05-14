@@ -6,8 +6,7 @@ A complete desktop application for managing computer hardware, user assignments,
 
 ## 📌 Features
 
-- ✅ Manage hardware types: CPU, RAM, HDD, SSD, GPU, Motherboard  
-- ✅ Support for **multiple HDDs/SSDs per system** with dynamic ComboBox UI  
+- ✅ Manage hardware types: CPU, RAM, HDD, SSD, GPU, Motherboard   
 - ✅ Assign users to computers and track **user assignment history**  
 - ✅ Record **checklists** for physical inspections  
 - ✅ Generate and manage **periodic timesheets**  
